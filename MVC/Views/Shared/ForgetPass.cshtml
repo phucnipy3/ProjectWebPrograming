@@ -1,0 +1,26 @@
+﻿@model MVC.Models.ForgetPassViewModel
+@using (Html.BeginForm("ForgetPass", "ForgetPass", FormMethod.Post, new { id = "formForgetPass" }))
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary(true,"",new { @class="alert-danger"});
+
+    <p class="text-danger">@Model.ErrorMessage</p>
+
+    <div class="row">
+        <div class="col-8 offset-1">
+            <div class="form-group">
+                <label for="InputEmailFG">Email address</label>
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "InputEmailFG", @placeholder = "Enter email" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                <small id="emailHelpSI" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-5 offset-6">
+            <button type="submit" class="btn btn-primary">Send me</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancel</button>
+        </div>
+    </div>
+}

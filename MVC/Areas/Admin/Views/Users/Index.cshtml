@@ -1,0 +1,278 @@
+﻿@model PagedList.IPagedList<MVC.Models.User>
+@using PagedList.Mvc
+@using MVC.Areas.Admin.Models;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="formDelete">
+                    @Html.Partial("ConfirmDelete", new MVC.Areas.Admin.Models.DeleteViewModel())
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add new user</h5>
+                    <button type="button" class="close" aria-label="Close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="formAddContent">
+                    @Html.Partial("Add", new MVC.Models.User())
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update user</h5>
+                    <button type="button" class="close" aria-label="Close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="formUpdateContent">
+                    @Html.Partial("Update", new MVC.Models.User())
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<h2>Users</h2>
+
+<p>
+    <div class="row">
+        <div class="col-auto">
+            <a href="#modalAdd" data-toggle="modal" class="btn btn-primary">Add new user</a>
+        </div>
+        <div class="col-8 col-lg-6 col-sm-7 mx-auto">
+            <form action="/Admin/Users/Index" class="align-items-center d-flex">
+                <input type="text" placeholder="Search..." class="form-control" value="@ViewBag.SearchString" name="searchString" />
+                <input type="submit" value="Search" class="btn btn-outline-info mx-2" />
+            </form>
+        </div>
+    </div>
+
+</p>
+<div class="row">
+    <div class="col-12" >
+        <div style="overflow:auto">
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th class="text-center">
+                            UserID
+                        </th>
+                        <th class="text-center">
+                            Password
+                        </th>
+                        <th class="text-center">
+                            Name
+                        </th>
+                        <th class="text-center">
+                            Phone
+                        </th>
+                        <th class="text-center">
+                            Sex
+                        </th>
+                        <th class="text-center">
+                            Email
+                        </th>
+                        <th class="text-center">
+                            Address
+                        </th>
+
+
+
+                        <th></th>
+                    </tr>
+                </thead>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <nobr>
+                                @Html.DisplayFor(modelItem => item.ID)
+                            </nobr>
+                        </td>
+                        <td class="text-center">
+                            <nobr>
+                                @Html.DisplayFor(modelItem => item.UserID)
+                            </nobr>
+                        </td>
+                        <td class="text-center">
+                            <nobr>
+                                @Html.DisplayFor(modelItem => item.Password)
+                            </nobr>
+                        </td>
+                        <td class="text-center">
+                            <nobr>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </nobr>
+                        </td>
+
+                        <td class="text-center">
+                            <nobr>
+                                @Html.DisplayFor(modelItem => item.Phone)
+                            </nobr>
+                        </td>
+                        <td class="text-center">
+                            <nobr>
+                                @Html.DisplayFor(modelItem => item.Sex)
+                            </nobr>
+                        </td>
+                        <td class="text-center">
+                            <nobr>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </nobr>
+                        </td>
+                        <td class="text-center">
+                            <nobr>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </nobr>
+                        </td>
+
+
+                        <td>
+                            <nobr>
+                                <a href="#" onclick="UpdateItem(@item.ID)"><i class="far fa-edit"></i></a> |
+                                <a href="#" onclick="DeleteItem(@item.ID)" class="Delete-Item"><i class="fas fa-trash-alt"></i></a>
+                            </nobr>
+                        </td>
+                    </tr>
+                }
+
+
+            </table>
+
+        </div>
+    </div>
+</div>
+
+@Html.PagedListPager(Model, page => Url.Action("Index",new { page, @searchString = @ViewBag.SearchString }), new PagedListRenderOptions {
+    LiElementClasses = new string[] { "page-item"}, UlElementClasses = new string[] { "pagination", "justify-content-center" },
+    MaximumPageNumbersToDisplay = 5,
+    Display = PagedListDisplayMode.IfNeeded,
+    ContainerDivClasses = new[] { "my-paging" },
+})
+@section scripts{
+    <script>
+        var id;
+        function DeleteItem(id) {
+            $.ajax({
+                url: '/Admin/Users/DeleteTransfer/' + id,
+                method: 'post',
+                success: function (partialView) {
+                    $("#formDelete").html(partialView);
+                    $("#modalConfirmDelete").modal();
+                }
+            });
+            return false;
+        };
+        function UpdateItem(id) {
+            $.ajax({
+                url: '/Admin/Users/UpdateTransfer/' + id,
+                method: 'post',
+                success: function (partialView) {
+                    $("#formUpdateContent").html(partialView);
+                    $("#modalUpdate").modal();
+                }
+            });
+            return false;
+        }
+        $(document).ready(function () {
+            $(".my-paging ul li a").addClass("page-link");
+            $("#modalAdd").on("submit", "#formAdd", function (e) {
+                e.preventDefault();  // prevent standard form submission
+
+                var form = $(this);
+                $.ajax({
+                    url: form.attr("action"),
+                    method: form.attr("method"),  // post
+                    data: form.serialize(),
+                    success: function (partialResult) {
+                        if (partialResult == "success") {
+                            $("#modalAdd").modal('hide');
+                            $("#TextSuccess").html('Add user successfully!');
+                            $("#modalSuccess").modal();
+                        }
+                        else
+                            $("#formAddContent").html(partialResult);
+                    }
+                });
+            });
+            $("#modalSuccess").on("hidden.bs.modal", function () {
+                window.location.reload();
+            });
+            $("#modalConfirmDelete").on("submit", "#formConfirmDelete", function (e) {
+                e.preventDefault();  // prevent standard form submission
+
+                var form = $(this);
+                $.ajax({
+                    url: form.attr("action"),
+                    method: form.attr("method"),  // post
+                    data: form.serialize(),
+                    success: function (partialResult) {
+                        $("#modalConfirmDelete").modal('hide');
+                        if (partialResult == "success") {
+                            $("#TextSuccess").html('Delete user successfully!');
+                            $("#modalSuccess").modal();
+                        }
+                        else {
+                            $("#modalDeleteFailure").modal();
+                            $("#TextFailure").html('Delete user fail!');
+                        }
+                    }
+                });
+            });
+            $("#modalUpdate").on("submit", "#formUpdate", function (e) {
+                e.preventDefault();  // prevent standard form submission
+
+                var form = $(this);
+                $.ajax({
+                    url: form.attr("action"),
+                    method: form.attr("method"),  // post 
+                    data: form.serialize(),
+                    success: function (partialResult) {
+                        $("#modalUpdate").modal('hide');
+                        if (partialResult == "success") {
+                            $("#TextSuccess").html('Update user succesfully!');
+                            $("#modalSuccess").modal();
+                        }
+                        else {
+                            $("#TextFailure").html('Update user fail!');
+                            $("#modalUpdateFailure").modal();
+                        }
+                    }
+                });
+            });
+        });
+
+    </script>
+}

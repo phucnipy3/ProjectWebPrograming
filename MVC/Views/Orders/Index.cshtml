@@ -1,0 +1,125 @@
+﻿@model PagedList.IPagedList<MVC.Models.OrderViewModel>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="navbar order-navbar  navbar-expand-md">
+    <button class="navbar-toggler bg-dark navbar-dark ml-auto" type="button" data-toggle="collapse" data-target="#navbarOrderContent" aria-controls="navbarOrderContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarOrderContent">
+        <ul class="navbar-nav mr-auto order-navbar-nav">
+            <li class="nav-item order-bar" id="All"><a class="nav-link" href="#" onclick="GoTo('All')">Tất cả</a></li>
+            <li class="nav-item order-bar" id="Ordered"><a class="nav-link" href="#" onclick="GoTo('Ordered')">Chờ xác nhận</a></li>
+            <li class="nav-item order-bar" id="Confirmed"> <a class="nav-link" href="#" onclick="GoTo('Confirmed')">Chờ lấy hàng</a></li>
+            <li class="nav-item order-bar" id="TookProducts"> <a class="nav-link" href="#" onclick="GoTo('TookProducts')">Đang giao hàng</a></li>
+            <li class="nav-item order-bar" id="Complete"> <a class="nav-link" href="#" onclick="GoTo('Complete')">Đã giao</a></li>
+            <li class="nav-item order-bar" id="Canceled"> <a class="nav-link" href="#" onclick="GoTo('Canceled')">Đã hủy</a></li>
+        </ul>
+    </div>
+</div>
+<div class="container px-5 py-4 ">
+    <form action="/Orders/Index" method="post" class="my-3" id="formOrder">
+        <div class="form-row">
+            <div class="col-3">
+                <input type="text" name="Status" value="@ViewBag.Status" hidden id="status" />
+                <input class="form-control" type="text" name="SearchString" value="@ViewBag.SearchString" placeholder="Tìm kiếm..." id="TextOrder"/>
+            </div>
+        </div>
+    </form>
+    @foreach (var item in Model)
+    {
+        <div class="container py-2 bg-dark-light my-3">
+            <div class="row">
+                <div class="col-12 px-4">
+                    <span class="text-danger float-right h6">
+                        @item.Status
+                    </span>
+                </div>
+            </div>
+            @foreach (var product in item.Products)
+            {
+                <div class="row pb-1">
+                    <div class="col-1">
+                        <div class="row">
+                            <div class="col-auto mx-auto">
+                                <img src="@product.Image" alt="Alternate Text" width="80" height="130" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-9 px-4">
+                        <span class="h5">@product.Name</span>
+                        <br />
+                        <span>x@(product.Count)</span>
+                    </div>
+                    <div class="col-2 align-self-center px-4">
+                        <span class="float-right">
+                            @if (product.PromotionPrice == 0)
+                            {
+                                <del>@(product.Price)đ</del>
+                                <span class="text-danger">@(product.PromotionPrice)đ</span>
+                            }
+                            else
+                            {
+                                <span>@(product.Price)đ</span>
+                            }
+                        </span>
+                    </div>
+                </div>
+            }
+            <div class="row mt-3">
+                <div class="col-2 offset-8">
+                    <span class="text-danger h5 float-right">Tổng tiền:</span>
+                </div>
+                <div class="col-2 px-4">
+                    <span class="text-danger h5 float-right">@(item.TotalMoney)đ</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 px-4">
+                    <a href="#" class="btn btn-info float-right ml-4">Mua lần nữa</a>
+                    <form action="/Orders/Detail" method="post">
+                        <input type="text" name="OrderID" value="@item.ID" hidden />
+                        <button type="submit" class="btn btn-info float-right">Xem chi tiết</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+    {
+            LiElementClasses = new string[] { "page-item" },
+            UlElementClasses = new string[] { "pagination", "justify-content-center" },
+            Display = PagedListDisplayMode.IfNeeded,
+        ContainerDivClasses = new[] { "my-paging" },
+            MaximumPageNumbersToDisplay = 5
+            })
+</div>
+@section scripts{
+    <script>
+        $("ul.order-navbar-nav li.super-black").removeClass("super-black");
+        $("@ViewBag.OrderActive").addClass("super-black");
+        $(document).ready(function () {
+            $(".my-paging ul li a").addClass("page-link");
+            $("#TextOrder").bind("keyup", function (event) {
+                if (event.keyCode === 13) {
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+                    // Trigger the button element with a click
+                    $("formOrder").submit();
+                }
+            });
+        });
+    </script>
+}
+
+<script>
+    function GoTo(str) {
+        $("#status").val(str);
+        $("#formOrder").submit();
+        return false;
+    }
+</script>

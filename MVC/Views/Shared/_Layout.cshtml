@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewBag.Title - Ốp xịn</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="https://kit.fontawesome.com/d2b907b6c8.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <div class="just-for-save" id="saveEmptySignUpForm" hidden>
+        @(Html.Partial("Register", new MVC.Models.RegisterViewModel()))
+    </div>
+    <div class="just-for-save" id="saveEmptyForgetPassForm" hidden>
+        @Html.Partial("ForgetPass", new MVC.Models.ForgetPassViewModel())
+    </div>
+    <div class="container-fluid">
+        <div class="modal fade" id="modalSignIn" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Sign in</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="formSignInContent">
+                        @Html.Partial("Login", new MVC.Models.LoginViewModel())
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="modal fade" id="modalForgetPass" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Forget password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="formForgetPassContent">
+                        @Html.Partial("ForgetPass", new MVC.Models.ForgetPassViewModel())
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="modal fade" id="modalSignUp" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Sign up</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="formSignUpContent">
+                        @Html.Partial("Register", new MVC.Models.RegisterViewModel())
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="modal fade" id="modalSuccess" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Success</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-auto mx-auto">
+                                <p class="text-center">
+                                    <h5 id="TextSuccess">Update user successfully!</h5>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-auto mx-auto">
+                                <a data-dismiss="modal" class="btn btn-primary ">OK</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container position-relative ">
+        <div class="background-img">
+            <div class="row">
+                <div class="col">
+                    <img src="~/Resource/logo.png" height="100" width="225" alt="Alternate Text" />
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="container sticky-top container-hard">
+
+        <nav class="navbar bg-info navbar-dark navbar-expand-lg ">
+            <a class="navbar-brand" href="#">Ốp xịn</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto topbar">
+                    <li class="nav-item" id="HomeBtn"><a class="nav-link" href="/Home/Index">Home</a></li>
+                    <li class="nav-item" id="ProductBtn"><a class="nav-link" href="/Product/Index">Product</a></li>#
+                    <li class="nav-item" id="DesignBtn"> <a class="nav-link" href="/Design/Index">Design</a></li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="~/@ViewBag.UserAvatar" alt="User's Avatar" class="rounded-circle" width="20px" />
+
+                                    <span class="text-white p-2 my-1"> @ViewBag.UserName</span>
+
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right offset-2" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#modalSignIn" data-toggle="modal">Change account</a>
+                                    <a class="dropdown-item" href="#">Profile <span class="float-right"><i class="far fa-user"></i></span></a>
+                                    <a class="dropdown-item" href="/Login/Logout">Log out <span class="float-right"><i class="fas fa-sign-out-alt"></i></span></a>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item" id="SignInBtn"><a data-toggle="modal" href="#modalSignIn" class="btn btn-success">Sign in</a></li>
+                        <li class="nav-item" id="SignUpBtn"><a data-toggle="modal" href="#modalSignUp" class="nav-link">Sign up</a></li>
+                    }
+                    <li class="nav-item" id="CartBtn"><a href="#" class="nav-link"><i class="fas fa-shopping-cart"></i> <span class="badge badge-light">9</span></a></li>
+                </ul>
+            </div>
+        </nav>
+
+
+    </div>
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <div class="py-0">
+
+                <p class="text-center font-weight-bold text-white">&copy; @DateTime.Now.Year - Web Programming - Ho Chi Minh City University of Technology and Education</p>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script>
+       
+        $(".topbar li.active").removeClass("active");
+        $("@ViewBag.Active").addClass("active");
+    </script>
+    <script>
+        var SignUpSuccess = false;
+        var SendMailSuccess = false;
+        var SignUpBySignIn = false;
+        $(document).ready(function () {
+            $("#modalSuccess").on("hidden.bs.modal", function () {
+                if (SignUpSuccess) {
+                    SignUpSucess = false;
+                    window.location.reload();
+                }
+                if (SendMailSuccess) {
+                    SendMailSuccess = false;
+                    $("#modalSignIn").modal("show");
+                }
+            });
+            $("#modalSignUp").on("hidden.bs.modal", function () {
+                if (SignUpBySignIn) {
+                    SignUpBySignIn = false;
+                    $("#modalSignIn").modal("show");
+                }
+            });
+        });
+        function ClickToSignUp() {
+            SignUpBySignIn = true;
+            $("#modalSignIn").modal("hide");
+            $("#modalSignUp").modal("show");
+            return false;
+        }
+        function ClickToForgetPass() {
+            $("#modalSignIn").modal("hide");
+            $("#modalForgetPass").modal("show");
+            return false;
+        }
+    </script>
+    <script>
+        // < !--Sign in Validation--!>
+        bootstrapValidate('#InputEmailSI', 'email:Enter a valid email adress');
+        bootstrapValidate('#InputEmailSI', 'required: Please fill this field')
+        bootstrapValidate('#InputPasswordSI', 'required: Please fill this field');
+
+        //    < !--Sign up Validation--!>
+        bootstrapValidate('#InputEmailSU', 'email:Enter a valid email adress');
+        bootstrapValidate('#InputEmailSU', 'required: Please fill this field');
+        bootstrapValidate('#InputPasswordSU', 'required: Please fill this field');
+        bootstrapValidate('#InputPasswordSU', 'max:20: Please do not enter than 20 character');
+        bootstrapValidate('#InputPasswordSU', 'min:6:Please enter more than 6 character');
+        bootstrapValidate('#InputConfirmPasswordSU', 'required: Please fill this field');
+        bootstrapValidate('#InputConfirmPasswordSU', 'matches:#InputPasswordSU: Your passwords does not match');
+        bootstrapValidate('#InputTelSU', 'startsWith:0: Phone number should start with 0');
+        bootstrapValidate('#InputTelSU', 'numeric: Please correct your phone number');
+        bootstrapValidate('#InputTelSU', 'required: Please fill this field');
+        bootstrapValidate('#InputNameSU', 'required: Please fill this field');
+        bootstrapValidate('#InputAddressSU', 'required: Please fill this field');
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#modalSignIn").on("submit", "#formLogin", function (e) {
+                e.preventDefault();  // prevent standard form submission
+
+                var form = $(this);
+                $.ajax({
+                    url: form.attr("action"),
+                    method: form.attr("method"),  // post
+                    data: form.serialize(),
+                    success: function (partialResult) {
+                        if (partialResult == "success")
+                            window.location.reload();
+                        else
+                            $("#formSignInContent").html(partialResult);
+                    }
+                });
+            });
+            $("#modalForgetPass").on("submit", "#formForgetPass", function (e) {
+                e.preventDefault();  // prevent standard form submission
+
+                var form = $(this);
+                $.ajax({
+                    url: form.attr("action"),
+                    method: form.attr("method"),  // post
+                    data: form.serialize(),
+                    success: function (partialResult) {
+                        if (partialResult == "success") {
+                            $("#formForgetPassContent").html($("#saveEmptyForgetPassForm").html());
+                            $("#modalForgetPass").modal("hide");
+                            $("#TextSuccess").html("Send email successfully!");
+                            $("#modalSuccess").modal("show");
+                            SendMailSuccess = true;
+                        }
+                        else
+                            $("#formForgetPassContent").html(partialResult);
+                    }
+                });
+            });
+            $("#modalSignUp").on("submit", "#formRegister", function (e) {
+                e.preventDefault();  // prevent standard form submission
+
+                var form = $(this);
+                $.ajax({
+                    url: form.attr("action"),
+                    method: form.attr("method"),  // post
+                    data: form.serialize(),
+                    success: function (partialResult) {
+                        if (partialResult == "success") {
+                            $("#formSignUpContent").html($("#saveEmptySignUpForm").html());
+                            $("#modalSignUp").modal("hide");
+                            $("#TextSuccess").html("Sign up successfully!");
+                            $("#modalSuccess").modal("show");
+                            SignUpSuccess = true;
+                        }
+                        else
+                            $("#formSignUpContent").html(partialResult);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

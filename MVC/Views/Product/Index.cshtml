@@ -1,0 +1,99 @@
+﻿
+@model MVC.Models.ProductViewModel
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Active = "#ProductBtn";
+}
+
+<img src="~/Resource/KhuyenMai.png" alt="Image-KhuyenMai" width="100%" />
+<div class="container pt-3">
+    <div class="row">
+        <input type="text" name="metaTitle" value="@ViewBag.Metatitle" id ="metaTitle" hidden />
+        <div class="col-12 col-lg-4 col-xl-3 pb-3">
+            <form action="/Product/Index" method="get" class="align-items-center d-flex py-3" id="formSearch">
+                <input type="text" id="TextSearch" placeholder="Search..." class="form-control" name="searchString" value="@ViewBag.SearchString"/>
+
+                <button class="btn btn-link navbar-toggler bg-white navbar-light d-lg-none pr-0" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle sidebar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            </form>
+            <nav id="sidebar-product" class="navbar-expand-lg bg-light navbar-light px-5 px-lg-4 ">
+
+                <div id="sidebar" class="collapse navbar-collapse py-3">
+
+                    <ul class="navbar-nav non-flex mr-0 h5 w-100 sidebar">
+                        <li class="nav-item"><h3>Danh mục</h3></li>
+                        <hr class="w-100" />
+                        @foreach (var item in Model.Categories)
+                        {
+                            <li class="nav-item" id="@item.MetaTitle"><a class="nav-link" href="/Product/Index" onclick="ChageMetaTitle(@item.MetaTitle)">@item.Name</a></li>
+
+                        }
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="col-12 col-lg-8 col-xl-9">
+            <div class="row">
+                @foreach (var item in Model.Products)
+                {
+                <div class="col-auto mx-auto py-3">
+                    <a href="/Product/Detail/@item.ProductID" class="text-decoration-none text-dark">
+
+                        <div class="card border-0">
+                            <img src="/@item.ImageLink" alt="Alternate Text" width="245px" height="480px" />
+                            <img src="~/Resource/price.png" alt="Alternate Text" class="card-img-overlay ml-auto p-0" />
+
+                        </div>
+                        <div class="card-body">
+                            <h3 class="text-center">@item.ProductName</h3>
+                            @if (item.PromotionPrice != 0)
+                            {
+                                <p class="text-center"><del><span>@item.Price</span>đ</del></p>
+                                <p class="text-center h4 text-danger">@item.PromotionPrice<span>đ</span></p>
+                            }
+                            else
+                            {
+                                <p><br /></p>
+                                <p class="text-center h4 text-danger"><span>@item.Price</span>đ</p>
+                            }
+                        </div>
+
+                    </a>
+                    
+                </div>
+                    
+                }
+            </div>
+            @Html.PagedListPager(Model.Products, page => Url.Action("Index",new { page }), new PagedListRenderOptions {
+            LiElementClasses = new string[] { "page-item"},
+            UlElementClasses = new string[] { "pagination", "justify-content-center" },
+            Display = PagedListDisplayMode.IfNeeded, ContainerDivClasses= new[] {"my-paging"},
+            MaximumPageNumbersToDisplay = 5
+            })
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $("ul.sidebar li.active").removeClass("active");
+        $("@ViewBag.CategoryActive").addClass("active");
+        $(document).ready(function () {
+            $(".my-paging ul li a").addClass("page-link");
+            $("#TextSearch").bind("keyup", function (evnet) {
+                if (event.keyCode === 13) {
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+                    // Trigger the button element with a click
+                    $("formSearch").submit();
+                }
+            });
+        });
+    </script>
+}
+
+

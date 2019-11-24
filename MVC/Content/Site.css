@@ -1,0 +1,90 @@
+﻿
+body {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    
+}
+.background-img{
+    background:url(../Resource/bg.png);
+    background-size:100% 100%;
+    height:100px;
+}
+
+.container-hard {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+footer {
+    background-color: #717070;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+.non-flex{
+    display:inline !important;
+}
+
+.btn-search-docs-toggle {
+    line-height: 1;
+    color: #212529;
+}
+
+.commment{
+    font-size: 14px;
+}
+.rate-point{
+    font-size: 28px;
+    font-weight:bold;
+}
+.rate-pick {
+    font-size: 18px;
+}
+.star.fas{
+    color: #ffdb00;
+}
+.star.far {
+    color: #000000;
+}
+.name{
+    font-weight:bold;
+    font-size: 15px;
+}
+
+.order-navbar{
+    background: #EFF3FF;
+}
+.order-navbar-nav .nav-link{
+    color:#717070;
+    font-size:20;
+}
+.bg-dark-light {
+    background: #E8E8E8;
+}
+.super-black{
+    color:black;
+}

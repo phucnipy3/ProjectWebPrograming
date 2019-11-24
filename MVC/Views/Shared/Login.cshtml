@@ -1,0 +1,50 @@
+﻿@model MVC.Models.LoginViewModel
+@using (Html.BeginForm("Login", "Login",new { ReturnUrl = ViewBag.ReturnUrl}, FormMethod.Post, new { id = "formLogin"}))
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary(true, "", new { @class = "alert-danger" });
+
+    <div class="row">
+        <div class="col-8 offset-1">
+            <div class="form-group">
+                <label for="InputEmailSI">Email address</label>
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "InputEmailSI", @placeholder = "Enter email" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                <small id="emailHelpSI" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-1">
+            <div class="form-group">
+                <label for="InputPasswordSI">Password</label>
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", @id = "InputPasswordSI", @placeholder = "Password" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                <small class="form-text text-muted"><a href="#" class="card-link" onclick="ClickToForgetPass()">Forgot your password?</a></small>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col offset-1">
+            <div class="form-text">
+                You don't have a account? &emsp;
+            </div>
+            <div class="row">
+                <div class="col-auto">
+                    <div class="form-text" onclick="ClickToSignUp()">
+                        <a href="#"  class="card-link">Register now!</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-5 offset-6">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+    </div>
+}

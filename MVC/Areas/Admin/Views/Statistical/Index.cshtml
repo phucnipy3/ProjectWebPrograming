@@ -1,0 +1,290 @@
+﻿@model MVC.Areas.Admin.Models.StatisticalViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Tổng số lượng bán ra: @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByMonth[0].Total)) @Model.AmountSoldAndRevenueByMonth[0].Dram</h3>
+<h3>Tổng doanh thu: @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByMonth[1].Total)) @Model.AmountSoldAndRevenueByMonth[1].Dram</h3>
+<a href="#" onclick="return ShowChartAmountSold('canvasAmountSoldAndRevenueByMonth')" class="btn btn-info m-3">Theo tháng</a>
+<a href="#" onclick="return ShowChartAmountSold('canvasAmountSoldAndRevenueByQuarters')" class="btn btn-primary m-3">Theo quý</a>
+<a href="#" onclick="return ShowChartAmountSold('canvasAmountSoldAndRevenueByYear')" class="btn btn-secondary m-3">Theo năm</a>
+<a href="#" onclick="return ShowChartAmountSold('canvasAmountSoldAndRevenueByCategory')" class="btn btn-success  m-3">Theo thể loại</a>
+<canvas id="canvasAmountSoldAndRevenueByMonth" class="chartAmountSoldAndRevenue"></canvas>
+<canvas id="canvasAmountSoldAndRevenueByQuarters" class="chartAmountSoldAndRevenue" style="display:none"></canvas>
+<canvas id="canvasAmountSoldAndRevenueByYear" class="chartAmountSoldAndRevenue" style="display:none"></canvas>
+<canvas id="canvasAmountSoldAndRevenueByCategory" class="chartAmountSoldAndRevenue" style="display:none"></canvas>
+
+<h3>Tổng số lượng hóa đơn: @Html.Raw(Json.Encode(@Model.AmountBillByMonth.Total)) @Model.AmountBillByMonth.Dram</h3>
+<a href="#" onclick="return ShowChartAmountBill('canvasAmountBillByMonth')" class="btn btn-info m-3">Theo tháng</a>
+<a href="#" onclick="return ShowChartAmountBill('canvasAmountBillByQuarters')" class="btn btn-primary m-3">Theo quý</a>
+<a href="#" onclick="return ShowChartAmountBill('canvasAmountBillByYear')" class="btn btn-secondary m-3">Theo năm</a>
+<canvas id="canvasAmountBillByMonth" class="chartAmountBill"></canvas>
+<canvas id="canvasAmountBillByQuarters" class="chartAmountBill" style="display:none"></canvas>
+<canvas id="canvasAmountBillByYear" class="chartAmountBill" style="display:none"></canvas>
+
+<script type="text/javascript">
+    function ShowChartAmountSold(str) {
+        $(".chartAmountSoldAndRevenue").hide();
+        $("#" + str).show();
+        return false;
+    }
+    function ShowChartAmountBill(str) {
+        $(".chartAmountBill").hide();
+        $("#" + str).show();
+        return false;
+    }
+    var mycv = document.getElementById("canvasAmountSoldAndRevenueByMonth").getContext("2d");
+    var chart1 = new Chart(mycv, {
+        type: 'bar',
+        data: {
+            labels:  @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByMonth[0].Labels)),
+            datasets: [{
+                label: @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByMonth[0].Name)),
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                fill: false,
+                data:  @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByMonth[0].Values)),
+                yAxisID: 'first-y-axis',
+            },
+            {
+                label: @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByMonth[1].Name)),
+                backgroundColor: 'rgb(250, 0, 0)',
+                borderColor: 'rgb(250, 0, 0)',
+                fill: false,
+                data:  @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByMonth[1].Values)),
+                yAxisID: 'second-y-axis'
+            }]
+
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    id: 'first-y-axis',
+                    type: 'linear',
+                    position: 'left'
+                },
+                {
+                    id: 'second-y-axis',
+                    type: 'linear',
+                    position: 'right'
+
+                }]
+            },
+            title: {
+                display: true,
+                position: 'bottom',
+                text: 'Biểu đồ tổng số lượng bán ra và doanh thu theo tháng',
+                fontSize: '15'
+            }
+        }
+    });
+    var mycv2 = document.getElementById("canvasAmountSoldAndRevenueByCategory").getContext("2d");
+    var chart2 = new Chart(mycv2, {
+        type: 'bar',
+        data: {
+            labels:  @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByCategory[0].Labels)),
+            datasets: [{
+                label: @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByCategory[0].Name)),
+                backgroundColor: 'rgb(99, 250, 132)',
+                borderColor: 'rgb(99, 250, 132)',
+                fill: false,
+                data:  @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByCategory[0].Values)),
+                yAxisID: 'first-y-axis',
+                positione: 'left'
+            },
+            {
+                label: @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByCategory[1].Name)),
+                backgroundColor: 'rgb(0, 250, 0)',
+                borderColor: 'rgb(0, 250, 0)',
+                fill: false,
+                data:  @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByCategory[1].Values)),
+                yAxisID: 'second-y-axis'
+            }]
+
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    id: 'first-y-axis',
+                    type: 'linear',
+                    position: 'left'
+                },
+                {
+                    id: 'second-y-axis',
+                    type: 'linear',
+                    position: 'right'
+
+                }]
+            },
+            title: {
+                display: true,
+                position: 'bottom',
+                text: 'Biểu đồ tổng số lượng bán ra và doanh thu theo loại sản phẩm',
+                fontSize: '15'
+            }
+        }
+    });
+    var mycv3 = document.getElementById("canvasAmountSoldAndRevenueByQuarters").getContext("2d");
+    var chart3 = new Chart(mycv3, {
+        type: 'bar',
+        data: {
+            labels:  @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByQuarters[0].Labels)),
+            datasets: [{
+                label: @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByQuarters[0].Name)),
+                backgroundColor: 'rgb(150, 0, 250)',
+                borderColor: 'rgb(150, 0, 250)',
+                fill: false,
+                data:  @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByQuarters[0].Values)),
+                yAxisID: 'first-y-axis',
+            },
+            {
+                label: @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByQuarters[1].Name)),
+                backgroundColor: 'rgb(0, 0, 250)',
+                borderColor: 'rgb(0, 0, 250)',
+                fill: false,
+                data:  @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByQuarters[1].Values)),
+                yAxisID: 'second-y-axis'
+            }]
+
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    id: 'first-y-axis',
+                    type: 'linear',
+                    position: 'left'
+                },
+                {
+                    id: 'second-y-axis',
+                    type: 'linear',
+                    position: 'right'
+
+                }]
+            },
+            title: {
+                display: true,
+                position: 'bottom',
+                text: 'Biểu đồ tổng số lượng bán ra và doanh thu theo quý',
+                fontSize: '15'
+            }
+        }
+    });
+    var mycv4 = document.getElementById("canvasAmountSoldAndRevenueByYear").getContext("2d");
+    var chart4 = new Chart(mycv4, {
+        type: 'bar',
+        data: {
+            labels:  @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByYear[0].Labels)),
+            datasets: [{
+                label: @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByYear[0].Name)),
+                backgroundColor: 'rgb(150, 180, 250)',
+                borderColor: 'rgb(150, 180, 250))',
+                fill: false,
+                data:  @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByYear[0].Values)),
+                yAxisID: 'first-y-axis',
+            },
+            {
+                label: @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByYear[1].Name)),
+                backgroundColor: 'rgb(190, 30, 250)',
+                borderColor: 'rgb(190, 30, 250)',
+                fill: false,
+                data:  @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByYear[1].Values)),
+                yAxisID: 'second-y-axis'
+            }]
+
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    id: 'first-y-axis',
+                    type: 'linear',
+                    position: 'left'
+                },
+                {
+                    id: 'second-y-axis',
+                    type: 'linear',
+                    position: 'right'
+
+                }]
+            },
+            title: {
+                display: true,
+                position: 'bottom',
+                text: 'Biểu đồ tổng số lượng bán ra và doanh thu theo năm',
+                fontSize: '15'
+            }
+        }
+    });
+    var mycv5 = document.getElementById("canvasAmountBillByMonth").getContext("2d");
+    var chart5 = new Chart(mycv5, {
+        type: 'bar',
+        data: {
+            labels:  @Html.Raw(Json.Encode(@Model.AmountBillByMonth.Labels)),
+            datasets: [{
+                label: @Html.Raw(Json.Encode(@Model.AmountBillByMonth.Name)),
+                backgroundColor: 'rgb(150, 180, 250)',
+                borderColor: 'rgb(150, 180, 250))',
+                fill: false,
+                data:  @Html.Raw(Json.Encode(@Model.AmountBillByMonth.Values))
+            }]
+            
+        },
+        options: {
+            title: {
+                display: true,
+                position: 'bottom',
+                text: 'Biểu đồ tổng số lượng hóa đơn theo tháng',
+                fontSize: '15' 
+            }
+        }
+    });
+    var mycv5 = document.getElementById("canvasAmountBillByQuarters").getContext("2d");
+    var chart5 = new Chart(mycv5, {
+        type: 'bar',
+        data: {
+            labels:  @Html.Raw(Json.Encode(@Model.AmountBillByQuarters.Labels)),
+            datasets: [{
+                label: @Html.Raw(Json.Encode(@Model.AmountBillByQuarters.Name)),
+                backgroundColor: 'rgb(190, 30, 250)',
+                borderColor: 'rgb(190, 30, 250)',
+                fill: false,
+                data:  @Html.Raw(Json.Encode(@Model.AmountBillByQuarters.Values))
+            }]
+            
+        },
+        options: {
+            title: {
+                display: true,
+                position: 'bottom',
+                text: 'Biểu đồ tổng số lượng hóa đơn theo quý',
+                fontSize: '15' 
+            }
+        }
+    });
+    var mycv5 = document.getElementById("canvasAmountBillByYear").getContext("2d");
+    var chart5 = new Chart(mycv5, {
+        type: 'bar',
+        data: {
+            labels:  @Html.Raw(Json.Encode(@Model.AmountBillByYear.Labels)),
+            datasets: [{
+                label: @Html.Raw(Json.Encode(@Model.AmountBillByYear.Name)),
+                backgroundColor: 'rgb(90, 0, 250)',
+                borderColor: 'rgb(90, 0, 250)',
+                fill: false,
+                data:  @Html.Raw(Json.Encode(@Model.AmountBillByYear.Values))
+            }]
+            
+        },
+        options: {
+            title: {
+                display: true,
+                position: 'bottom',
+                text: 'Biểu đồ tổng số lượng hóa đơn theo năm',
+                fontSize: '15' 
+            }
+        }
+    });
+</script>
+
+
+

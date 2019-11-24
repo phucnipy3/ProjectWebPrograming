@@ -1,0 +1,89 @@
+﻿@model MVC.Models.RegisterViewModel
+
+@using (Html.BeginForm("Register", "Register", FormMethod.Post, new { id = "formRegister" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "alert-danger" })
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputEmailSU">Full name</label>
+                @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", id = "InputNameSU", placeholder = "Enter your full name" })
+                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputPasswordSU">Password</label>
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", id = "InputPasswordSU", placeholder = "Enter your password" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputConfirmPasswordSU">Confirm password</label>
+                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", id = "InputConfirmPasswordSU", placeholder = "Confirm your password" })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                <small class="form-text text-muted"> <br /></small>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputEmailSU">Phone number</label>
+                @Html.TextBoxFor(model => model.Tel, new { @class = "form-control", id = "InputTelSU", placeholder = "Enter your phone number" })
+                @Html.ValidationMessageFor(model => model.Tel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2 offset-2">
+            <label>Sex: </label>
+        </div>
+        <div class="form-check form-check-inline">
+            @Html.RadioButtonFor(model => model.Sex, "Male", new { id = "MaleRadio", @checked = true })
+            <label class="form-check-label" for="MaleRadio">
+                Male
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            @Html.RadioButtonFor(model => model.Sex, "Female", new { id = "FemaleRadio" })
+
+            <label class="form-check-label" for="FemaleRadio">
+                Female
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputEmailSU">Email address</label>
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", id = "InputEmailSU", placeholder = "Enter your email" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputAddressSU">Address</label>
+                @Html.TextBoxFor(model => model.Address, new { @class = "form-control", id = "InputAddressSU", placeholder = "Enter your email" })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-auto ml-auto">
+            <button type="submit" class="btn btn-primary">Sign up</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+    </div>
+}

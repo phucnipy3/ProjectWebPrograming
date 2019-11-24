@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model MVC.Areas.Admin.Models.AdminViewModel
+<div class="container">
+    <div class="row">
+        <div class="col-8 mx-auto" id="AdminLogin">
+            @using (Html.BeginForm("Login", "Login", new { ReturnUrl = ViewBag.ReturnUrl},FormMethod.Post, new { id = "formAdmin" }))
+            {
+                @Html.AntiForgeryToken();
+                @Html.ValidationSummary(true);
+
+                <p class="text-danger">@ViewBag.ErrorMessage</p>
+
+                <div class="row">
+                    <div class="col-8 offset-1">
+                        <div class="form-group">
+                            <label for="InputEmailSI">Username</label>
+                            @Html.TextBoxFor(model => model.Username, new { @class = "form-control", @id = "InputEmailAD" })
+                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 offset-1">
+                        <div class="form-group">
+                            <label for="InputPasswordSI">Password</label>
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", @id = "InputPasswordAD", @placeholder = "Password" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            <small class="form-text text-muted"><a href="#" class="card-link" onclick="ClickToForgetPass()">Forgot your password?</a></small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-7 col-md-6 offset-5 offset-md-6">
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+

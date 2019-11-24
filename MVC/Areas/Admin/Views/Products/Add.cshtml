@@ -1,0 +1,58 @@
+﻿@model MVC.Models.ProductCategory
+@using (Html.BeginForm("Add", "ProductCategory", FormMethod.Post, new { id = "formAdd" }))
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary(true, "", new { @class = "alert-danger" });
+
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputNameAPC">Product category name</label>
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", id = "InputNameAPC", placeholder = "Enter name" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputMetaTitleAPC">Meta title</label>
+                @Html.TextBoxFor(model => model.MetaTitle, new { @class = "form-control", id = "InputMetaTitleAPC", placeholder = "Meta title"})
+                @Html.ValidationMessageFor(model => model.MetaTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputParentIDAPC">Parent's ID</label>
+                @Html.TextBoxFor(model => model.ParentID, new { @class = "form-control", id = "InputParentIDAPC", placeholder = "Enter parent's ID" })
+                @Html.ValidationMessageFor(model => model.ParentID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputDisplayOrderAPC">Display Order</label>
+                @Html.TextBoxFor(model => model.DisplayOrder, new { @class = "form-control", id = "InputDisplayOrderAPC", placeholder = "Enter display order", @Value = "1" })
+                @Html.ValidationMessageFor(model => model.DisplayOrder, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputSeoTitleAPC">Seo Title</label>
+                @Html.TextBoxFor(model => model.SeoTitle, new { @class = "form-control", id = "InputSeoTitleAPC", placeholder = "Enter SEO title" })
+                @Html.ValidationMessageFor(model => model.SeoTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5 offset-6">
+            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+    </div>
+}

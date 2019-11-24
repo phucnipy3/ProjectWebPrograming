@@ -1,0 +1,283 @@
+﻿@model PagedList.IPagedList<MVC.Models.Product>
+@using PagedList.Mvc
+@using MVC.Areas.Admin.Models;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Name = "product";
+}
+<div class="container-fluid">
+    <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="formDelete">
+                    @Html.Partial("ConfirmDelete", new MVC.Areas.Admin.Models.DeleteViewModel())
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add new Product</h5>
+                    <button type="button" class="close" aria-label="Close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="formAddContent">
+                    @Html.Partial("Add", new MVC.Models.Product())
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Product</h5>
+                    <button type="button" class="close" aria-label="Close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="formUpdateContent">
+                    @Html.Partial("Update", new MVC.Models.Product())
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<h2>Product </h2>
+
+<p>
+    <div class="row">
+        <div class="col-auto">
+            <a href="#modalAdd" data-toggle="modal" class="btn btn-primary">Add new Product</a>
+        </div>
+        <div class="col-8 col-lg-6 col-sm-7 mx-auto">
+            <form action="/Admin/Product/Index" class="align-items-center d-flex">
+                <input type="text" placeholder="Search..." class="form-control" value="@ViewBag.SearchString" name="searchString" />
+                <input type="submit" value="Search" class="btn btn-outline-info mx-2" />
+            </form>
+        </div>
+    </div>
+
+</p>
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                #
+            </th>
+            <th class="text-center">
+                Name
+            </th>
+            <th class="text-center">
+                Meta Title
+            </th>
+            <th class="text-center">
+                Author
+            </th>
+            <th class="text-center">
+                Price
+            </th>
+            <th class="text-center">
+                Promotion Price
+            </th>
+            <th class="text-center">
+                Included VAT
+            </th>
+            <th class="text-center">
+                Quantity
+            </th>
+            <th class="text-center">
+                Detail
+            </th>
+            <th class="text-center">
+                Warranty
+            </th>
+            <th class="text-center">
+                Created Date
+            </th>
+            <th class="text-center">
+                Created By
+            </th>
+            <th class="text-center">
+                Modify Date
+            </th>
+            <th class="text-center">
+                Modify By
+            </th>
+            <th class="text-center">
+                Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.MetaTitle)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.PromotionPrice)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.IncludedVAT)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.Warranty)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.ModifiedDate)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.ModifiedBy)
+            </td>
+            </td>
+            <td>
+                <nobr>
+                    <a href="#" onclick="UpdateItem(@item.ID)"><i class="far fa-edit"></i></a> |
+                    <a href="#" onclick="DeleteItem(@item.ID)" class="Delete-Item"><i class="fas fa-trash-alt"></i></a>
+                </nobr>
+            </td>
+        </tr>
+    }
+
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index",new { page, @searchString = @ViewBag.SearchString }), new PagedListRenderOptions {
+    LiElementClasses = new string[] { "page-item"}, UlElementClasses = new string[] { "pagination", "justify-content-center" },
+    MaximumPageNumbersToDisplay = 5,
+    Display = PagedListDisplayMode.IfNeeded,
+    ContainerDivClasses = new[] { "my-paging" },
+})
+@section scripts{
+    <script>
+        var id;
+        function DeleteItem(id) {
+            $.ajax({
+                url: '/Admin/Product/DeleteTransfer/' + id,
+                method: 'post',
+                success: function (partialView) {
+                    $("#formDelete").html(partialView);
+                    $("#modalConfirmDelete").modal();
+                }
+            });
+            return false;
+        };
+        function UpdateItem(id) {
+            $.ajax({
+                url: '/Admin/Product/UpdateTransfer/' + id,
+                method: 'post',
+                success: function (partialView) {
+                    $("#formUpdateContent").html(partialView);
+                    $("#modalUpdate").modal();
+                }
+            });
+            return false;
+        }
+        $(document).ready(function () {
+            $("#modalAdd").on("submit", "#formAdd", function (e) {
+                e.preventDefault();  // prevent standard form submission
+
+                var form = $(this);
+                $.ajax({
+                    url: form.attr("action"),
+                    method: form.attr("method"),  // post
+                    data: form.serialize(),
+                    success: function (partialResult) {
+                        if (partialResult == "success") {
+                            $("#modalAdd").modal('hide');
+                            $("#TextSuccess").html('Add product successfully!');
+                            $("#modalSuccess").modal();
+                        }
+                        else
+                            $("#formAddContent").html(partialResult);
+                    }
+                });
+            });
+            $("#modalSuccess").on("hidden.bs.modal", function () {
+                window.location.reload();
+            });
+            $("#modalConfirmDelete").on("submit", "#formConfirmDelete", function (e) {
+                e.preventDefault();  // prevent standard form submission
+
+                var form = $(this);
+                $.ajax({
+                    url: form.attr("action"),
+                    method: form.attr("method"),  // post
+                    data: form.serialize(),
+                    success: function (partialResult) {
+                        $("#modalConfirmDelete").modal('hide');
+                        if (partialResult == "success") {
+                            $("#TextSuccess").html('Delete product successfully!');
+                            $("#modalSuccess").modal();
+                        }
+                        else {
+                            $("#modalDeleteFailure").modal();
+                            $("#TextFailure").html('Delete product fail!');
+                        }
+                    }
+                });
+            });
+            $("#modalUpdate").on("submit", "#formUpdate", function (e) {
+                e.preventDefault();  // prevent standard form submission
+
+                var form = $(this);
+                $.ajax({
+                    url: form.attr("action"),
+                    method: form.attr("method"),  // post
+                    data: form.serialize(),
+                    success: function (partialResult) {
+                        $("#modalUpdate").modal('hide');
+                        if (partialResult == "success") {
+                            $("#TextSuccess").html('Update product succesfully!');
+                            $("#modalSuccess").modal();
+                        }
+                        else {
+                            $("#TextFailure").html('Update product fail!');
+                            $("#modalUpdateFailure").modal();
+                        }
+                    }
+                });
+            });
+        });
+
+    </script>
+}
