@@ -233,6 +233,8 @@
     <Content Include="Resource\logo.png" />
     <Content Include="Resource\new.gif" />
     <Content Include="Resource\OpXin.png" />
+    <Content Include="Resource\Path 1.svg" />
+    <Content Include="Resource\Path 3.svg" />
     <Content Include="Resource\price.png" />
     <Content Include="Resource\slideshow1.jpg" />
     <Content Include="Resource\slideshow2.jpg" />
