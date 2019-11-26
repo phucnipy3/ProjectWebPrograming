@@ -189,6 +189,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Resource\BANNERR_2048x.png" />
     <Content Include="Resource\bg.png" />
+    <Content Include="Resource\BGRecommend.svg" />
     <Content Include="Resource\chitiet\1.png" />
     <Content Include="Resource\chitiet\10.png" />
     <Content Include="Resource\chitiet\11.png" />

@@ -142,6 +142,7 @@ ul li{
     margin-right:auto;
     border-radius: 15px;
     box-shadow: 10px 11px 15px rgba(0,0,0,.31);
+    width:400px;
 }
 .group-text{
     padding:0px;
@@ -151,20 +152,30 @@ ul li{
 }
 .group-text li span{
     position:relative;
-    padding-left:10px;
-    top:-4px;
+    padding-left:55px;
+    display:inline-block;
 }
 .group-text li{
     padding-top:10px;
     padding-bottom:10px;
+    position:relative;
 }
 .circle-bullet {
-    color: #6ADAEC;
-    font-size: 25px;
+    background-color: #6ADAEC;
+    position:absolute;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    margin-top:auto;
+    margin-bottom:auto;
+    left:10px;
 }
-.on-carousel{
-    opacity:0;
-    background-color:aliceblue;
+.circle-bullet-2{
+    top:20px;
+}
+.on-carousel {
+    opacity: 0;
+    background-color: aliceblue;
 }
 .on-carousel:hover{
     opacity:1;
@@ -174,4 +185,17 @@ ul li{
     position:relative;
     top:-10px;
     left:-10px;
+}
+.container-recommend{
+    background:url(../Resource/BGRecommend.svg);
+    background-size:cover;
+    background-repeat:no-repeat;
+    height:450px;
+}
+.text-recommend {
+    color: #0D2A54;
+}
+.image-on-home{
+    width:150px;
+    height:310px;
 }
