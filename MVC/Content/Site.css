@@ -89,10 +89,9 @@ footer {
     color:black;
 }
 .clip-background {
-    background-image:url('../Resource/Path 3.svg');
+    background-image:url('../Resource/ClipBG.svg');
     background-size:cover;
     background-repeat:no-repeat;
-    border:none;
 }
 .clip-background .container {
     padding: 70px 1.3rem 70px 70px;
@@ -130,12 +129,49 @@ ul li{
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     text-decoration: none;
     border-radius:20px;
-    margin-top:80px;
+    margin-top:70px;
 }
 .btn-pick-your-case:hover {
     color: #0D2A54;
+    background-color: #FFEF56;
 }
 .flow-card {
     background-color: #FFFFFF;
-    padding:15px;
+    padding: 15px 15px 15px 15px;
+    margin-left:auto;
+    margin-right:auto;
+    border-radius: 15px;
+    box-shadow: 10px 11px 15px rgba(0,0,0,.31);
+}
+.group-text{
+    padding:0px;
+    margin:0px;
+    font-size:19px;
+    font-weight:600;
+}
+.group-text li span{
+    position:relative;
+    padding-left:10px;
+    top:-4px;
+}
+.group-text li{
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.circle-bullet {
+    color: #6ADAEC;
+    font-size: 25px;
+}
+.on-carousel{
+    opacity:0;
+    background-color:aliceblue;
+}
+.on-carousel:hover{
+    opacity:1;
+
+}
+.item-counter{
+    position:relative;
+    top:-10px;
+    left:-10px;
 }

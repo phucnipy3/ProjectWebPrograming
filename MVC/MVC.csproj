@@ -187,6 +187,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Resource\BANNERR_2048x.png" />
     <Content Include="Resource\bg.png" />
     <Content Include="Resource\chitiet\1.png" />
     <Content Include="Resource\chitiet\10.png" />
@@ -226,6 +227,7 @@
     <Content Include="Resource\chitiet\7.png" />
     <Content Include="Resource\chitiet\8.png" />
     <Content Include="Resource\chitiet\9.png" />
+    <Content Include="Resource\ClipBG.svg" />
     <Content Include="Resource\free.png" />
     <Content Include="Resource\hot.gif" />
     <Content Include="Resource\KhuyenMai.png" />
@@ -235,6 +237,9 @@
     <Content Include="Resource\OpXin.png" />
     <Content Include="Resource\Path 1.svg" />
     <Content Include="Resource\Path 3.svg" />
+    <Content Include="Resource\PHONE-BANNER_2000x.png" />
+    <Content Include="Resource\phone-case-banner.jpg" />
+    <Content Include="Resource\phone-cases-banner_1024x1024.gif" />
     <Content Include="Resource\price.png" />
     <Content Include="Resource\slideshow1.jpg" />
     <Content Include="Resource\slideshow2.jpg" />
