@@ -37,10 +37,10 @@ ViewBag.Active = "#HomeBtn";
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="~/Resource/BANNERR_2048x.png" class="d-block w-100" alt="SlideShow Pictures">
+                        <img src="~/Resource/BANNERR_2048x.png" class=" w-100 d-block" alt="SlideShow Pictures">
                     </div>
                     <div class="carousel-item">
-                        <img src="~/Resource/PHONE-BANNER_2000x.png" class="d-block w-100" alt="SlideShow Pictures">
+                        <img src="~/Resource/PHONE-BANNER_2000x.png" class="w-100 d-block" alt="SlideShow Pictures">
                     </div>
                     <div class="carousel-item">
                         <img src="~/Resource/phone-case-banner.jpg" class="d-block w-100" alt="SlideShow Pictures">
@@ -66,55 +66,30 @@ ViewBag.Active = "#HomeBtn";
 <div class="container px-0">
     <div class="container container-recommend">
         <a href="#" class="text-decoration-none"><h2 class="pl-4 pt-4 text-recommend">Ốp lưng đề cử</h2></a>
-        <div class="row">
-            <div class="col-12">
-                <div id="carouselRecommend" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselRecommend" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselRecommend" data-slide-to="1"></li>
-                        <li data-target="#carouselRecommend" data-slide-to="2"></li>
-                        <li data-target="#carouselRecommend" data-slide-to="3"></li>
-                    </ol>
-                    <div class="carousel-inner">
+        <div class="row mx-auto my-auto p-0">
+            <div class="col-12 p-0">
+                <div id="carouselRecommend" class="carousel slide w-100 multi-item-carousel p-0 row m-0" data-ride="carousel">
+                    <div class="carousel-inner " role="listbox">
                         <div class="carousel-item active">
-                            <div class="row">
-                                @for (int i = 1; i < 5; i++)
-                                {
-                                    var item = Model.ListBestSaler[i];
-                                    <div class="col-auto mx-auto py-3">
-                                        <a href="/Product/Detail/@item.ProductID" class="text-decoration-none text-dark">
-
-                                            <div class="card border-0">
-                                                <img src="/@item.ImageLink" alt="Alternate Text" class="image-on-home" />
-                                            </div>
-                                            @*<div class="card-body">
-                        <h3 class="text-center">@item.ProductName</h3>
-                        @if (item.PromotionPrice != 0)
-                        {
-                            <p class="text-center"><del><span>@item.Price</span>đ</del></p>
-                            <p class="text-center h4 text-danger">@item.PromotionPrice<span>đ</span></p>
-                        }
-                        else
-                        {
-                            <p><br /></p>
-                            <p class="text-center h4 text-danger"><span>@item.Price</span>đ</p>
-                        }
-                    </div>*@
-                                        </a>
-                                    </div>
-                                }
+                            <div class="col-2 d-block float-left">
+                                <img src="/@Model.ListBestSaler[0].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
                             </div>
-                            
                         </div>
-                        <div class="carousel-item">
-                            <img src="~/Resource/PHONE-BANNER_2000x.png" class="d-block w-100" alt="SlideShow Pictures">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="~/Resource/phone-case-banner.jpg" class="d-block w-100" alt="SlideShow Pictures">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="~/Resource/phone-cases-banner_1024x1024.gif" class="d-block w-100" alt="SlideShow Pictures">
-                        </div>
+                        @for (int i = 1; i < Model.ListBestSaler.Count; i++)
+                        {
+                            <div class="carousel-item ">
+                                <div class="col-2 d-block float-left">
+                                    <img src="/@Model.ListBestSaler[i].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
+                                </div>
+                            </div>
+                        }
+
+
+
+
+
+
+
                     </div>
                     <a class="carousel-control-prev" href="#carouselRecommend" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -126,6 +101,7 @@ ViewBag.Active = "#HomeBtn";
                     </a>
                 </div>
             </div>
+                
         </div>
     </div>
     
@@ -243,3 +219,36 @@ ViewBag.Active = "#HomeBtn";
         </div>
     </div>
 </div>
+@section scripts{
+    <script>
+        $('#carouselRecommend').carousel({
+            interval: false
+        });
+        $('#carouselRecommend.carousel .carousel-item').each(function () {
+            //var next = $(this).next();
+            //if (!next.length) {
+            //    next = $(this).siblings(':first');
+            //}
+            //next.children(':first-child').clone().appendTo($(this));
+
+            //if (next.next().length > 0) {
+            //    next.next().children(':first-child').clone().appendTo($(this));
+            //}
+            //else {
+            //    $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+            //}
+            appendSlide(($(this)), ($(this)).next(), 5);
+        });
+        function appendSlide(node,next, n) {
+            if (n == 0)
+                return;
+            else {
+                if (!next.length) {
+                    next = node.siblings(':first');
+                }
+                next.children(':first-child').clone().appendTo(node);
+                appendSlide(node, next.next(), n - 1);
+            }
+        }
+    </script>
+}
