@@ -83,14 +83,18 @@ ViewBag.Active = "#HomeBtn";
                     <div class="carousel-inner " role="listbox">
                         <div class="carousel-item active">
                             <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 d-block float-left">
-                                <img src="/@Model.ListBestSaler[0].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
+                                <a href="/Product/Detail/@Model.ListBestSaler[0].ProductID">
+                                    <img src="/@Model.ListBestSaler[0].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
+                                </a>    
                             </div>
                         </div>
                         @for (int i = 1; i < Model.ListBestSaler.Count; i++)
                         {
                             <div class="carousel-item ">
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 d-block float-left">
-                                    <img src="/@Model.ListBestSaler[i].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
+                                    <a href="/Product/Detail/@Model.ListBestSaler[i].ProductID">
+                                        <img src="/@Model.ListBestSaler[i].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
+                                    </a>
                                 </div>
                             </div>
                         }
@@ -121,14 +125,18 @@ ViewBag.Active = "#HomeBtn";
                     <div class="carousel-inner " role="listbox">
                         <div class="carousel-item active">
                             <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 d-block float-left">
-                                <img src="/@Model.ListNew[0].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
+                                <a href="/Product/Detail/@Model.ListNew[0].ProductID">
+                                    <img src="/@Model.ListNew[0].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
+                                </a>
                             </div>
                         </div>
                         @for (int i = 1; i < Model.ListNew.Count; i++)
                         {
                             <div class="carousel-item ">
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 d-block float-left">
-                                    <img src="/@Model.ListNew[i].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
+                                    <a href="/Product/Detail/@Model.ListNew[i].ProductID">
+                                        <img src="/@Model.ListNew[i].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
+                                    </a>
                                 </div>
                             </div>
                         }
