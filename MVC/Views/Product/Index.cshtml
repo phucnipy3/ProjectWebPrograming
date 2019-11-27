@@ -41,65 +41,68 @@
             <div class="row">
                 @foreach (var item in Model.Products)
                 {
-                <div class="col-6 col-md-4 col-xl-3 py-3">
-                    <a href="/Product/Detail/@item.ProductID" class="text-decoration-none text-dark">
-                        <div class="card border-0">
-                            <img src="/@item.ImageLink" alt="Alternate Text" class="image-on-home m-auto" />
-                        </div>
-                        <div class="card-body p-0">
-                            <div class="row">
-                                <div class="col-12 pt-2 product-name overflow-hidden">
-                                    <p>@item.ProductName</p>
+                    <div class="col-6 col-md-4 col-xl-3 py-3">
+                        <div class="view view-eighth">
+                            <a href="/Product/Detail/@item.ProductID" class="text-decoration-none text-dark product">
+                                <div class="card border-0">
+                                    <img src="/@item.ImageLink" alt="Alternate Text" class="image-on-home m-auto" />
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 pt-2 product-price">
-                                    @if (item.PromotionPrice != 0)
-                                    {
-                                        <p>
-                                            @item.PromotionPrice <u>đ</u>
-                                        </p>
-                                    }
-                                    else
-                                    {
-                                        <p>
-                                            @item.Price <u>đ</u>
-                                        </p>
-                                    }
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 pt-2 product-discount">
-                                    @if (item.PromotionPrice != 0)
-                                    {
-                                        <del>
-                                            @item.Price <u>đ</u>
-                                        </del>
-                                    }
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 pt-2 product-rate">
+                                <div class="card-body p-0">
+                                    <div class="row">
+                                        <div class="col-12 pt-2 product-name overflow-hidden">
+                                            <p>@item.ProductName</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 pt-2 product-price">
+                                            @if (item.PromotionPrice != 0)
+                                            {
+                                                <p>
+                                                    @item.PromotionPrice <u>đ</u>
+                                                </p>
+                                            }
+                                            else
+                                            {
+                                                <p>
+                                                    @item.Price <u>đ</u>
+                                                </p>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 pt-2 product-discount">
+                                            @if (item.PromotionPrice != 0)
+                                            {
+                                                <del>
+                                                    @item.Price <u>đ</u>
+                                                </del>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 pt-2 product-rate">
+
+                                        </div>
+                                    </div>
 
                                 </div>
-                            </div>
-                            @*<h3 class="text-center">@item.ProductName</h3>
-        @if (item.PromotionPrice != 0)
-        {
-            <p class="text-center"><del><span>@item.Price</span>đ</del></p>
-            <p class="text-center h4 text-danger">@item.PromotionPrice<span>đ</span></p>
-        }
-        else
-        {
-            <p><br /></p>
-            <p class="text-center h4 text-danger"><span>@item.Price</span>đ</p>
-        }*@
-                        </div>
 
-                    </a>
-                    
-                </div>
-                    
+                            </a>
+                            <div class="mask">
+                                <div class="row h-custom-40 align-content-end">
+                                    <div class="col-auto mx-auto">
+                                        <a href="#" class="add">Add To Cart</a>
+                                    </div>
+                                </div>
+                                <div class="row h-custom-12 align-content-center">
+                                    <div class="col-auto mx-auto">
+                                        <a href="/Product/Detail/@item.ProductID" class="info">View More</a>
+                                    </div>
+                                </div>
+                        
+                            </div>
+                        </div> 
+                    </div>
                 }
             </div>
             @Html.PagedListPager(Model.Products, page => Url.Action("Index",new { page }), new PagedListRenderOptions {
