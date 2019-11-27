@@ -6,12 +6,17 @@ ViewBag.Active = "#HomeBtn";
 <div class="container-fluid clip-background bg-white p-0 m-0">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
-                <p class="big-header">Ốp lưng thời trang cho riêng bạn</p>
+            <div class="col-lg-6 order-last order-lg-first">
+                <p class="big-header">Ốp lưng thời trang<br />cho riêng bạn</p>
                 <p class="smaller-header">Trùng lặp phong cách? Không còn là vấn đề</p>
-                <a class="btn-pick-your-case text-decoration-none" href="#">CHỌN NGAY ỐP LƯNG</a>
+                <div class="row w-100">
+                    <div class="col-auto mx-auto mx-lg-0">
+                        <a class="btn-pick-your-case text-decoration-none" href="#">CHỌN NGAY ỐP LƯNG</a>
+                    </div>
+                </div>
+                
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 order-first order-lg-last">
                 <div class="row align-items-center h-100">
                     <div class="col-auto flow-card">
                         <ul class="text-decoration-none group-text">
@@ -73,18 +78,18 @@ ViewBag.Active = "#HomeBtn";
             </div>
         </div>
         <div class="row mx-auto my-auto py-3">
-            <div class="col-12 p-0">
+            <div class="col-12 overflow-hidden p-0 w-100 image-on-home">
                 <div id="carouselRecommend" class="carousel slide w-100 multi-item-carousel p-0 row m-0" data-ride="carousel">
                     <div class="carousel-inner " role="listbox">
                         <div class="carousel-item active">
-                            <div class="col-2 d-block float-left">
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 d-block float-left">
                                 <img src="/@Model.ListBestSaler[0].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
                             </div>
                         </div>
                         @for (int i = 1; i < Model.ListBestSaler.Count; i++)
                         {
                             <div class="carousel-item ">
-                                <div class="col-2 d-block float-left">
+                                <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 d-block float-left">
                                     <img src="/@Model.ListBestSaler[i].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
                                 </div>
                             </div>
@@ -111,18 +116,18 @@ ViewBag.Active = "#HomeBtn";
             </div>
         </div>
         <div class="row mx-auto my-auto py-3">
-            <div class="col-12 p-0">
+            <div class="col-12 overflow-hidden p-0 w-100 image-on-home">
                 <div id="carouselLasted" class="carousel slide w-100 multi-item-carousel p-0 row m-0" data-ride="carousel">
                     <div class="carousel-inner " role="listbox">
                         <div class="carousel-item active">
-                            <div class="col-2 d-block float-left">
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 d-block float-left">
                                 <img src="/@Model.ListNew[0].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
                             </div>
                         </div>
                         @for (int i = 1; i < Model.ListNew.Count; i++)
                         {
                             <div class="carousel-item ">
-                                <div class="col-2 d-block float-left">
+                                <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 d-block float-left">
                                     <img src="/@Model.ListNew[i].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
                                 </div>
                             </div>
@@ -143,22 +148,22 @@ ViewBag.Active = "#HomeBtn";
 </div>
 <div class="container pt-5">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-12 col-sm-6 col-lg-3">
             <img src="~/Resource/support.png" alt="Support" class="rounded-circle mx-auto d-block" width="100px" height="100px"/>
             <h5 class="text-center my-3 text-info">CHĂM SÓC KHÁCH HÀNG</h5>
             <p class="text-justify">Luôn có nhân viên online thức trực 24/7 để hỗ trợ tận tình trước-trong-sau khi mua hàng. Đội ngũ chăm sóc khách hàng không ngừng nỗ lực để trở thành bạn đồng hành đáng tin cậy của khách hàng với tiêu chí phục vụ khách hàng là Thượng đế</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-12 col-sm-6 col-lg-3">
             <img src="~/Resource/price.png" alt="Price" class="rounded-circle mx-auto d-block" width="100px" height="100px" />
             <h5 class="text-center my-3 text-info">MỨC GIÁ CẠNH TRANH</h5>
             <p class="text-justify">Hơn 90% sản phẩm có mức giá rất thấp, mọi sản phẩm đều có giá thấp hơn so với thị trường. Shop luôn có những chương trình khuyến mãi lớn vào các dịp lễ sale lên đến 70%, còn có rất nhiều khuyến mãi mua 1 tặng 1 đảm bảo chất lượng lại còn vừa túi tiền khách hàng</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-12 col-sm-6 col-lg-3">
             <img src="~/Resource/free.png" alt="Free" class="rounded-circle mx-auto d-block" width="100px" height="100px" />
             <h5 class="text-center my-3 text-info">GIAO HÀNG MIỄN PHÍ</h5>
             <p class="text-justify">Giao hàng miễn phí toàn quốc với đơn hàng trên 100.000vnd, trãi nghiệm tốc độ dịch vụ với gói giao hàng nhanh trong 2h ở Hà Nội và các thành phố lớn: Tp. Hồ Chí Minh, Đà Nẵng, Cần Thơ,...</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-12 col-sm-6 col-lg-3">
             <img src="~/Resource/trust.png" alt="Trust" class="rounded-circle mx-auto d-block" width="100px" height="100px" />
             <h5 class="text-center my-3 text-info">UY TÍN VỮNG NIỀM TIN</h5>
             <p class="text-justify">Sàn giao dịch thương mại điện tử opxin.com mong muốn đem lại một tiện ích mua hàng trực tuyến tin cậy, tiết kiệm và thấu hiểu người dùng. Cam kết bảo mật thông tin cá nhân của khách hàng khi khách hàng tin vào chúng tôi cung cấp thông tin cá nhân của khách hàng cho chúng tôi khi mua sắm</p>
@@ -167,8 +172,8 @@ ViewBag.Active = "#HomeBtn";
 </div>
 @section scripts{
     <script>
-        $('#carouselRecommend').carousel({
-            interval: false
+        $('.multi-item-carousel').carousel({
+            interval: 3000
         });
         $('.multi-item-carousel .carousel-item').each(function () {
             appendSlide(($(this)), ($(this)).next(), 5);
