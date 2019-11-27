@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1088" height="402" viewBox="0 0 1088 402">
   <g id="BGRecommend" transform="translate(-149 -5)">
-    <path id="Path_6" data-name="Path 6" d="M0,0H1088V402H0Z" transform="translate(149 5)" fill="#fff"/>
+    <path id="Path_6" data-name="Path 6" d="M0,0H1088V402H0Z" transform="translate(149 5)" fill="#ebfcff"/>
     <path id="Intersection_1" data-name="Intersection 1" d="M145.713-943.689A78.888,78.888,0,0,1,105.931-933a78.9,78.9,0,0,1-47.655-15.918A78.9,78.9,0,0,1,10.62-933,79.232,79.232,0,0,1-13-936.578V-1035H321a79.075,79.075,0,0,1-79.149,79c-.176,0-.352,0-.528,0a78.969,78.969,0,0,1-55.829,23A78.885,78.885,0,0,1,145.713-943.689Z" transform="translate(162 1040)" fill="#fcf295"/>
   </g>
 </svg>

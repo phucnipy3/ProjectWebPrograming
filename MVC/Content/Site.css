@@ -190,10 +190,18 @@ ul li{
     background:url(../Resource/BGRecommend.svg);
     background-size:cover;
     background-repeat:no-repeat;
-    height:450px;
 }
 .text-recommend {
     color: #0D2A54;
+}
+.container-lasted {
+    background: url(../Resource/BGLasted.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.text-lasted {
+    color: #20BED9;
 }
 .image-on-home{
     width:150px;
