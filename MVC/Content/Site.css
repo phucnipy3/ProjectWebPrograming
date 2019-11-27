@@ -292,3 +292,17 @@ ul li{
     transform: translateX(0);
 }
 
+.product-name{
+    height:52px;
+    font-weight:600;
+}
+.product-price{
+    font-size:20px;
+    color:coral;
+    height:40px;
+}
+.product-discount{
+    height:20px;
+    font-size:12px;
+    color:#bdbdbd;
+}
