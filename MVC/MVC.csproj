@@ -163,6 +163,7 @@
       <DependentUpon>201910160713160_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Database.cs" />
     <Compile Include="Models\DetailViewModel.cs" />
     <Compile Include="Models\ForgetPassViewModel.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Models\ProductOnPage.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

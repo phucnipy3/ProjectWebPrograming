@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using MVC.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -95,6 +96,34 @@
             </div>
         </div>
     </div>
+    <div class="container-fluid">
+        <div class="modal fade" id="modalAddSuccess" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thông báo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-auto mx-auto">
+                                <p class="text-center h5" >
+                                    Thêm vào giỏ hàng thành công
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-auto mx-auto">
+                                <a data-dismiss="modal" class="btn btn-primary ">OK</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container position-relative ">
         <div class="background-img">
             <div class="row">
@@ -145,7 +174,25 @@
                         <li class="nav-item" id="SignInBtn"><a data-toggle="modal" href="#modalSignIn" class="btn btn-success">Sign in</a></li>
                         <li class="nav-item" id="SignUpBtn"><a data-toggle="modal" href="#modalSignUp" class="nav-link">Sign up</a></li>
                     }
-                    <li class="nav-item" id="CartBtn"><a href="#" class="nav-link"><i class="fas fa-shopping-cart"></i> <span class="badge badge-light item-counter">9</span></a></li>
+                    <li class="nav-item" id="CartBtn">
+                        <a href="/Cart" class="nav-link">
+                            <i class="fas fa-shopping-cart"></i> 
+                            
+                                @if(Session["ShoppingCart"]!=null)
+                                {   
+                                    <span class="badge badge-light item-counter">
+                                       @((Session["ShoppingCart"] as ShoppingCart).Count)
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-light item-counter">
+                                        0
+                                    </span>
+                                }
+                            
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -169,7 +216,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <script>
-       
+
         $(".topbar li.active").removeClass("active");
         $("@ViewBag.Active").addClass("active");
     </script>
@@ -187,6 +234,9 @@
                     SendMailSuccess = false;
                     $("#modalSignIn").modal("show");
                 }
+            });
+            $("#modalAddSuccess").on("hidden.bs.modal", function () {
+                location.reload();
             });
             $("#modalSignUp").on("hidden.bs.modal", function () {
                 if (SignUpBySignIn) {
@@ -229,6 +279,18 @@
 
     </script>
     <script>
+        function AddToCart(id) {
+            $.ajax({
+                url: '/Cart/AddToCart/' + id,
+                success: function (partialResult) {
+                    if (partialResult == "success") {
+                        $("#modalAddSuccess").modal("show");
+                        return false;
+                    }
+                }
+            });
+            
+        }
         $(document).ready(function () {
             $("#modalSignIn").on("submit", "#formLogin", function (e) {
                 e.preventDefault();  // prevent standard form submission
