@@ -4,18 +4,6 @@
     ViewBag.Active = "#ProductBtn";
 }
 
-@if (User.Identity.IsAuthenticated)
-{
-    <script>
-        SetAuthen();
-    </script>
-}
-else
-{
-    <script>
-        ClearAuthen();
-    </script>
-}
 <div class="container-fluid">
     <div class="modal fade" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
@@ -224,9 +212,9 @@ else
                     <h3>Liên quan</h3>
                 </div>
                 <div class="col-12">
-                    
+
                     <div class="view view-eighth">
-                        
+
                         <a href="/Product/Detail/1" class="text-decoration-none text-dark product">
                             <div class="row">
                                 <div class="col-6">
@@ -244,28 +232,28 @@ else
                                         <div class="row">
                                             <div class="col-12 pt-2 product-price">
                                                 @*@if (item.PromotionPrice != 0)
-                    {
-                        <p>
-                            @item.PromotionPrice <u>đ</u>
-                        </p>
-                    }
-                    else
-                    {
-                        <p>
-                            @item.Price <u>đ</u>
-                        </p>
-                    }*@
+                                                    {
+                                                        <p>
+                                                            @item.PromotionPrice <u>đ</u>
+                                                        </p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>
+                                                            @item.Price <u>đ</u>
+                                                        </p>
+                                                    }*@
                                                 <p>10000 <u>đ</u></p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-12 pt-2 product-discount">
                                                 @*@if (item.PromotionPrice != 0)
-                    {
-                        <del>
-                            @item.Price <u>đ</u>
-                        </del>
-                    }*@
+                                                    {
+                                                        <del>
+                                                            @item.Price <u>đ</u>
+                                                        </del>
+                                                    }*@
                                                 <del>12000 <u>đ</u></del>
                                             </div>
                                         </div>
@@ -279,8 +267,8 @@ else
 
                                 </div>
                             </div>
-                            
-                            
+
+
                         </a>
                         <div class="mask">
                             <div class="row h-custom-40 align-content-end">
@@ -301,6 +289,28 @@ else
         </div>
     </div>
 </div>
+<script>
+    function SetAuthen() {
+        document.getElementById("btnComment").classList.add("authen");
+    }
+    function ClearAuthen() {
+        var element = document.getElementById("btnComment");
+        if (element.classList.contains("authen"))
+            element.classList.remove("authen");
+    }
+</script>
+@if (User.Identity.IsAuthenticated)
+{
+    <script>
+        SetAuthen();
+    </script>
+}
+else
+{
+    <script>
+        ClearAuthen();
+    </script>
+}
 @section scripts{
     <script>
         $(document).ready(function () {
@@ -367,13 +377,8 @@ else
                     return false;
                 }
             });
-        });
-        function SetAuthen() {
-            $("#btnComment").addClass("authen");
-        }
-        function ClearAuthen() {
 
-            $("#btnComment").removeClass("authen");
-        }
+        });
+
     </script>
 }

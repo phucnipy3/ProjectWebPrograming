@@ -109,7 +109,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-auto mx-auto">
-                                <p class="text-center h5" >
+                                <p class="text-center h5">
                                     Thêm vào giỏ hàng thành công
                                 </p>
                             </div>
@@ -176,21 +176,21 @@
                     }
                     <li class="nav-item" id="CartBtn">
                         <a href="/Cart" class="nav-link">
-                            <i class="fas fa-shopping-cart"></i> 
-                            
-                                @if(Session["ShoppingCart"]!=null)
-                                {   
-                                    <span class="badge badge-light item-counter">
-                                       @((Session["ShoppingCart"] as ShoppingCart).Count)
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span class="badge badge-light item-counter">
-                                        0
-                                    </span>
-                                }
-                            
+                            <i class="fas fa-shopping-cart"></i>
+
+                            @if (Session["ShoppingCart"] != null)
+                            {
+                                <span class="badge badge-light item-counter">
+                                    @((Session["ShoppingCart"] as ShoppingCart).Count)
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-light item-counter">
+                                    0
+                                </span>
+                            }
+
                         </a>
                     </li>
                 </ul>
@@ -211,7 +211,6 @@
             </div>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
@@ -289,7 +288,7 @@
                     }
                 }
             });
-            
+
         }
         $(document).ready(function () {
             $("#modalSignIn").on("submit", "#formLogin", function (e) {

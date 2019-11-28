@@ -153,6 +153,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -164,6 +165,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\ChangePasswordInfo.cs" />
     <Compile Include="Models\Database.cs" />
     <Compile Include="Models\DetailViewModel.cs" />
     <Compile Include="Models\ForgetPassViewModel.cs" />
@@ -292,6 +294,7 @@
     <None Include="Areas\Admin\Views\ProductCategory\Update.cshtml" />
     <Content Include="Areas\Admin\Views\ProductCategory\ConfirmDelete.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
+    <Content Include="Scripts\infinite-scroll.pkgd.js" />
     <Content Include="SCSS\Custom.css">
       <DependentUpon>Custom.scss</DependentUpon>
     </Content>
@@ -447,6 +450,8 @@
     <Content Include="Views\Orders\Detail.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Cart\FormInfo.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

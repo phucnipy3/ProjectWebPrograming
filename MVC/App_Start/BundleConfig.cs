@@ -24,7 +24,8 @@ namespace MVC
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/umd/popper.js",
                        "~/Scripts/bootstrap-validate.js",
-                       "~/Scripts/bootstrap-input-spinner.js"));
+                       "~/Scripts/bootstrap-input-spinner.js",
+                       "~/Scripts/infinite-scroll.pkgd.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

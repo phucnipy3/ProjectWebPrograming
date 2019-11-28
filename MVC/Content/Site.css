@@ -321,7 +321,7 @@ ul li{
    overflow: hidden;
    position: relative;
    cursor: default;
-   background: #fff url(../images/bgimg.jpg) no-repeat center center;
+   background: #fff;
 }
 .view .mask,.view .content {
    width: 100%;

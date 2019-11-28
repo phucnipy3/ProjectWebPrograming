@@ -11,15 +11,15 @@
 <img src="~/Resource/KhuyenMai.png" alt="Image-KhuyenMai" width="100%" />
 <div class="container pt-3">
     <div class="row">
-        <input type="text" name="metaTitle" value="@ViewBag.Metatitle" id ="metaTitle" hidden />
+        
         <div class="col-12 col-lg-4 col-xl-3 pb-3">
             <form action="/Product/Index" method="get" class="align-items-center d-flex py-3" id="formSearch">
-                <input type="text" id="TextSearch" placeholder="Search..." class="form-control" name="searchString" value="@ViewBag.SearchString"/>
+                <input type="text" name="metaTitle" value="@ViewBag.Metatitle" id="metaTitle"  hidden/>
+                <input type="text" id="TextSearch" placeholder="Search..." class="form-control" name="searchString" value="@ViewBag.SearchString" />
 
                 <button class="btn btn-link navbar-toggler bg-white navbar-light d-lg-none pr-0" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle sidebar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
             </form>
             <nav id="sidebar-product" class="navbar-expand-lg bg-light navbar-light px-5 px-lg-4 ">
 
@@ -28,9 +28,13 @@
                     <ul class="navbar-nav non-flex mr-0 h5 w-100 sidebar">
                         <li class="nav-item"><h3>Danh mục</h3></li>
                         <hr class="w-100" />
+                        <li class="nav-item" id="Lasted"><a class="nav-link" href="/Product/Index?metaTitle=Lasted" >Mới nhất</a></li>
+                        <li class="nav-item" id="Best-Saler"><a class="nav-link" href="/Product/Index?metaTitle=Best-Saler">Bán chạy</a></li>
+                        <li class="nav-item" id="Hot "><a class="nav-link" href="/Product/Index?metaTitle=Hot"">Hot</a></li>
+
                         @foreach (var item in Model.Categories)
                         {
-                            <li class="nav-item" id="@item.MetaTitle"><a class="nav-link" href="/Product/Index" onclick="ChageMetaTitle(@item.MetaTitle)">@item.Name</a></li>
+                            <li class="nav-item" id="@item.MetaTitle"><a class="nav-link" href="/Product/Index?metaTitle=@item.MetaTitle">@item.Name</a></li>
 
                         }
                     </ul>
@@ -38,10 +42,10 @@
             </nav>
         </div>
         <div class="col-12 col-lg-8 col-xl-9">
-            <div class="row">
+            <div class="row post-feed">
                 @foreach (var item in Model.Products)
                 {
-                    <div class="col-6 col-md-4 col-xl-3 py-3">
+                    <div class="col-6 col-md-4 col-xl-3 py-3 post">
                         <div class="view view-eighth">
                             <a href="/Product/Detail/@item.ProductID" class="text-decoration-none text-dark product">
                                 <div class="card border-0">
@@ -97,11 +101,16 @@
                                         <a href="/Product/Detail/@item.ProductID" class="info">View More</a>
                                     </div>
                                 </div>
-                        
+
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 }
+            </div>
+            <div class="page-load-status text-center hide">
+                <p class="infinite-scroll-request">Loading...</p>
+                <p class="infinite-scroll-last">End of content</p>
+                <p class="infinite-scroll-error">No more pages to load</p>
             </div>
             @Html.PagedListPager(Model.Products, page => Url.Action("Index",new { page }), new PagedListRenderOptions {
             LiElementClasses = new string[] { "page-item"},
@@ -118,14 +127,22 @@
         $("@ViewBag.CategoryActive").addClass("active");
         $(document).ready(function () {
             $(".my-paging ul li a").addClass("page-link");
-            $("#TextSearch").bind("keyup", function (evnet) {
+            $("#TextSearch").bind("keyup", function (event) {
                 if (event.keyCode === 13) {
                     // Cancel the default action, if needed
                     event.preventDefault();
                     // Trigger the button element with a click
-                    $("formSearch").submit();
+                    $("#formSearch").submit();
                 }
             });
+        });
+        $('.post-feed').infiniteScroll({
+            // options
+            path: '.PagedList-skipToNext a',
+            append: '.post',
+            status: '.page-load-status',
+            hideNav: '.pagination',
+            history: 'false'
         });
     </script>
 }
