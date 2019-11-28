@@ -4,6 +4,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="container-fluid">
+    <div class="modal fade" id="modalOrderSuccess" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thông báo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-auto mx-auto">
+                            <p class="text-center">
+                                <h5 id="TextSuccess">Bạn đã đặt hàng thành công!</h5>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto mx-auto">
+                            <a data-dismiss="modal" class="btn btn-primary ">OK</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <h2 class="m-5">Giỏ hàng của bạn</h2>
 <div class="mx-5">
             <div class="cart table-responsive-lg">
@@ -90,22 +118,8 @@
                         <tr >
                             <td colspan="6">
                                 <div id="checkOut" class="collapse row">
-                                    <div class="col-12 col-md-8">
-                                        <form action="/" method="post">
-                                            <label>Họ và tên</label>
-                                            <input type="text" placeholder="Nhập họ tên" class="form-control" />
-                                            <label>Số điện thoại</label>
-                                            <input type="text" placeholder="Nhập số điện thoại" class="form-control" />
-                                            <label>Email</label>
-                                            <input type="text" placeholder="Nhập e-mail" class="form-control" />
-                                            <label>Địa chỉ</label>
-                                            <input type="text" placeholder="Nhập địa chỉ" class="form-control" />
-                                            <div class="row pt-4">
-                                                <div class="col-auto ml-auto">
-                                                    <a href="#" class="btn btn-info">Đặt hàng</a>
-                                                </div>
-                                            </div>
-                                        </form>
+                                    <div class="col-12 col-md-8" id="containerInfo">
+                                        @Html.Partial("FormInfo",new MVC.Models.OrderInfomation())
                                     </div>
                                 </div>
                             </td>
@@ -119,6 +133,27 @@
 @section scripts{
     <script>
         $("input[type='number']").inputSpinner();
+        $(document).ready(function () {
+            $("#modalOrderSuccess").on("hidden.bs.modal", function () {
+                window.open("/Home", '_self');
+            });
+            $("#containerInfo").on("submit", "#formInfo", function (e) {
+                e.preventDefault();  // prevent standard form submission
+
+                var form = $(this);
+                $.ajax({
+                    url: form.attr("action"),
+                    method: form.attr("method"),  // post
+                    data: form.serialize(),
+                    success: function (partialResult) {
+                        if (partialResult == "success")
+                            $("#modalOrderSuccess").modal("show");
+                        else
+                            $("#containerInfo").html(partialResult);
+                    }
+                });
+            });
+        });
     </script>
 
 }

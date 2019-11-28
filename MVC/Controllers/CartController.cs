@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,16 @@ namespace MVC.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult Order(OrderInfomation model)
+        {
+            if(ModelState.IsValid)
+            {
+                // Order
+                return Content("success");
+            }
+            return PartialView("FormInfo", model);
         }
     }
 }

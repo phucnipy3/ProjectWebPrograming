@@ -137,9 +137,7 @@ ul li{
 }
 @media (min-width:768px) {
 
-    .clip-background .container {
-        padding: 70px 1.3rem 70px 70px;
-    }
+
     .big-header{
         font-size:55px;
     }
@@ -148,6 +146,9 @@ ul li{
     }
 }
 @media (min-width:992px){
+    .clip-background .container {
+        padding: 70px 1.3rem 70px 70px;
+    }
     .big-header, .smaller-header{
         text-align:start;
     }

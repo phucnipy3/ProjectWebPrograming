@@ -169,6 +169,7 @@
     <Compile Include="Models\Helper.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\OrderInfomation.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\ProductOnPage.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
@@ -443,6 +444,7 @@
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\Detail.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\FormInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

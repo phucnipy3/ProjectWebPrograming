@@ -15,7 +15,7 @@ using MVC.Controllers;
 
 namespace MVC.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class UsersController : ApplicationController, IAdminController
     {
         private DatabaseDetailsContext db = new DatabaseDetailsContext();
