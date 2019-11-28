@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="m-5">Giỏ hàng của bạn</h2>
+<div class="mx-5 cart">
+    <table class="table">
+
+        <thead class="bg-info text-white">
+            <tr>
+                <th scope="col"class="first-cell"> </th>
+                <th scope="col" colspan="2">Tên sản phẩm</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row"  class="first-cell">
+                    <div class="row">
+                        <div class="col-auto align-self-center">
+                            <button class="close float-left">
+                                x
+                            </button>
+                        </div>
+
+                        <div class="col-8 h-100">
+                            <img src="~/Resource/chitiet/1.png" alt="Alternate Text" class="image-on-cart" />
+                        </div>
+                    </div>
+                </td>
+                <td class="name-cell my-auto" colspan="2">Ốp lưng siêu đẹp siêu khủng siêu to khổng lồ</td>
+                <td class="price-cell">3000 <u>đ</u></td>
+                <td class="quantity-cell"><input type="number" name="name" value="1" min="1" /></td>
+                <td class="sub-total-cell">3000 <u>đ</u></td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <div class="row">
+                        <div class="col-auto ml-auto pr-4">
+                            <a href="#" class="btn btn-success">Cập nhật giỏ hàng</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <div class="row text-total">
+                        <div class="col-auto ml-auto pr-4">
+                            Tổng tiền
+                        </div>
+                        <div class="col-auto pr-4">
+                            100000 <u>đ</u>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <div class="row">
+                        <div class="col-auto ml-auto pr-4">
+                            <a href="#" class="btn btn-primary btn-checkout">Thanh toán <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
