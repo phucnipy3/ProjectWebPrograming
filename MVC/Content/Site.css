@@ -575,9 +575,6 @@ ul li{
 .cart td,.cart th{
     vertical-align:middle;
 }
-.cart th{
-    text-align:center;
-}
 .btn-checkout{
     font-size:19px;
     padding: 15px 25px 15px 25px;
@@ -585,10 +582,22 @@ ul li{
 .first-cell{
     display:none;
 }
-@media (min-width:992px)
-{
+.quantity-cell {
+    width: 160px;
+}
+.name-cell{
+    width:250px;
+}
+.price-cell, .sub-total-cell{
+    width:120px;
+}
+@media (min-width:992px) {
     .first-cell {
         display: table-cell;
+        width:160px;
+    }
+    .name-cell{
+        width:initial;
     }
 }
 .text-total{
@@ -596,3 +605,4 @@ ul li{
     color:#ff370a;
     font-weight:700;
 }
+
