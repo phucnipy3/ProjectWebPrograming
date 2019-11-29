@@ -473,15 +473,20 @@ namespace MVC.Models
             return Search(GetBestSalerProducts(), x => x.ProductName, searchString);
         }
 
-        //public static ProductDetailViewModel GetProductDetail(int id)
-        //{
-        //    ProductDetailViewModel productDetailViewModel = new ProductDetailViewModel();
-        //    productDetailViewModel.Product = GetProductByID(id);
-        //    productDetailViewModel.RelatedProducts = new List<Product>();
-        //    productDetailViewModel.Rate = new _Rate();
-        //    productDetailViewModel.Comments = new List<_Comment>();
-        //    return productDetailViewModel;
-        //}
+        public static DetailViewModel GetProductDetail(int productId)
+        {
+            DetailViewModel detailViewModel = new DetailViewModel();
+            detailViewModel.MainProduct = GetProductByID(productId);
+            detailViewModel.Rate = RateHelper.GetRateView(productId);
+            detailViewModel.Comments = CommentHelper.GetCommentView(productId).ToList();
+            detailViewModel.RelateProducts = GetRalateProduct(productId).ToList();
+            return detailViewModel;
+        }
+
+        public static IEnumerable<ProductOnPage> GetRalateProduct(int productId)
+        {
+            return GetProductOnPages(GetProductByID(productId).Name);
+        }
 
         public static Product GetProductByID(int id)
         {
@@ -1133,6 +1138,28 @@ namespace MVC.Models
             return keySelector(GetRateByID(id));
         }
 
+        public static double? GetRatePoint(int productId)
+        {
+            return GetRates().Where(x => x.ProductID == productId).Average(x => x.RatePoint);
+        }
+
+        public static double? GetRatePoint(int point, int productId)
+        {
+            return (double?)GetRates().Where(x => x.ProductID == productId && x.RatePoint == point).Count() / GetRates().Where(x => x.ProductID == productId).Count();
+        }
+
+        public static RateView GetRateView(int productId)
+        {
+            RateView rateView = new RateView();
+            rateView.RatePoint = GetRatePoint(productId);
+            rateView.PercentOnePoint = GetRatePoint(1, productId);
+            rateView.PercentTwoPoint = GetRatePoint(2, productId);
+            rateView.PercentThreePoint = GetRatePoint(3, productId);
+            rateView.PercentFourPoint = GetRatePoint(4, productId);
+            rateView.PercentFivePoint = GetRatePoint(5, productId);
+            return rateView;
+        }
+
         public static bool AddRate(Order order)
         {
             try
@@ -1231,6 +1258,18 @@ namespace MVC.Models
         public static TKey GetPropertyValue<TKey>(int id, Func<Comment, TKey> keySelector)
         {
             return keySelector(GetCommentByID(id));
+        }
+
+        public static IEnumerable<CommentView> GetCommentView(int productId)
+        {
+            return GetComments().Where(x => x.ProductID == productId && x.ParentID == null).Select(x => new CommentView()
+            {
+                Comment = x,
+                ReplyComment = GetComments().Where(y => y.ProductID == productId && y.ParentID == x.ID).Select(y => new CommentView()
+                {
+                    Comment = y
+                }).ToList()
+            });
         }
 
         public static bool AddComment(Comment comment)
