@@ -9,8 +9,8 @@ namespace MVC.Models
     {
         public int ProductID { get; set; }
         public string ProductName { get; set; }
-        public decimal? Price { get; set; }
-        public decimal? PromotionPrice { get; set; }
+        public string Price { get; set; }
+        public string PromotionPrice { get; set; }
         public string ImageLink { get; set; }
 
         public string Tag { get; set; }
