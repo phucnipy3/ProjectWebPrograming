@@ -24,5 +24,12 @@ namespace MVC.Models
             }
             return sum;
         }
+        public string StringGrantTotal
+        {
+            get
+            {
+                return ((decimal)GrantTotal()).ToString("N0");
+            }
+        }
     }
 }

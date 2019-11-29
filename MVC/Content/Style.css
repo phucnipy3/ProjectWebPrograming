@@ -102,7 +102,7 @@ a {
 	z-index: 200;
 	overflow: hidden;
 }
-.sidebar{
+.sidebar-in-design{
 	float: right;
     position: absolute;
     right: 50px;

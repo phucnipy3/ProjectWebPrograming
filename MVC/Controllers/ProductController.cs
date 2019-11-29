@@ -37,7 +37,7 @@ namespace MVC.Controllers
         
         public ActionResult Detail(int id)
         {
-
+            ProductHelper.GetProductDetail(id);
             return View();
         }
     }

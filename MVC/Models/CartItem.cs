@@ -12,10 +12,26 @@ namespace MVC.Models
        
         public decimal? SubTotal()
         {
-            if (Product.PromotionPrice != 0)
+            if (Product.PromotionPrice != Product.Price)
                 return Count * Product.PromotionPrice;
             else
                 return Count * Product.Price;
+        }
+        public string StringSubTotal
+        {
+            get
+            {
+                return ((decimal)SubTotal()).ToString("N0");
+            }
+        }
+        public string ProductPrice {
+            get
+            {
+                if (Product.PromotionPrice != Product.Price)
+                    return ((Decimal)Product.PromotionPrice).ToString("N0");
+                else
+                    return ((Decimal)Product.Price).ToString("N0");
+            }
         }
     }
 }
