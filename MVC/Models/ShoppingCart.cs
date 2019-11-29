@@ -8,6 +8,7 @@ namespace MVC.Models
     public class ShoppingCart
     {
         public List<CartItem> Items { get; set; }
+
         public int Count
         {
             get
@@ -15,15 +16,12 @@ namespace MVC.Models
                 return Items.Count;
             }
         }
+
         public decimal? GrantTotal()
         {
-            decimal? sum = 0;
-            foreach(var item in Items)
-            {
-                sum += item.SubTotal();
-            }
-            return sum;
+            return Items.Sum(x => x.Count * x.Product.PromotionPrice);
         }
+
         public string StringGrantTotal
         {
             get
