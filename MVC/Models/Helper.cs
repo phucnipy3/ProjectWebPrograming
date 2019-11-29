@@ -394,15 +394,15 @@ namespace MVC.Models
             return Search(GetProducts(), searchString);
         }
 
-        public static IEnumerable<ProductOnPage> SearchProductsByName(string searchString)
-        {
-            return Search(GetProductOnPages(), x => x.ProductName, searchString);
-        }
-
         public static IEnumerable<ProductOnPage> GetProductsByCategoryID(int id)
         {
             var productIDs = ProductDetailHelper.GetProductIDsByProductCategoryID(id);
             return GetProductOnPages().Where(x => productIDs.Contains(x.ProductID)).ToList();
+        }
+
+        public static IEnumerable<ProductOnPage> GetProductsByCategoryID(int id, string searchString)
+        {
+            return Search(GetProductsByCategoryID(id), x => x.ProductName, searchString);
         }
 
         public static IEnumerable<TKey> GetPropertyValue<TKey>(Func<Product, TKey> keySelector)
@@ -428,24 +428,49 @@ namespace MVC.Models
             }).ToList();
         }
 
+        public static IEnumerable<ProductOnPage> GetProductOnPages(string searchString)
+        {
+            return Search(GetProductOnPages(), x => x.ProductName, searchString);
+        }
+
         public static IEnumerable<ProductOnPage> GetProductsByCategoryMetaTitle(string metaTitle)
         {
             return GetProductOnPages().Where(x => ProductDetailHelper.GetProductIDsByProductCategoryID(ProductCategoryHelper.GetProductCategoryIDByMetaTitle(metaTitle)).Contains(x.ProductID)).ToList();
         }
 
+        public static IEnumerable<ProductOnPage> GetProductsByCategoryMetaTitle(string metaTitle, string searchString)
+        {
+            return Search(GetProductsByCategoryMetaTitle(metaTitle), x => x.ProductName, searchString);
+        }
+
         public static IEnumerable<ProductOnPage> GetNewProducts()
         {
-            return GetProductOnPages().Where(x => x.Tag == "new").ToList();
+            return GetProductOnPages().Where(x => x.Tag.ToLower() == "new").ToList();
+        }
+
+        public static IEnumerable<ProductOnPage> GetNewProducts(string searchString)
+        {
+            return Search(GetNewProducts(), x => x.ProductName, searchString);
         }
 
         public static IEnumerable<ProductOnPage> GetHotProducts()
         {
-            return GetProductOnPages().Where(x => x.Tag == "hot").ToList();
+            return GetProductOnPages().Where(x => x.Tag.ToLower() == "hot").ToList();
+        }
+
+        public static IEnumerable<ProductOnPage> GetHotProducts(string searchString)
+        {
+            return Search(GetHotProducts(), x => x.ProductName, searchString);
         }
 
         public static IEnumerable<ProductOnPage> GetBestSalerProducts()
         {
             return GetProductOnPages().OrderByDescending(x => OrderDetailHelper.AmountSoldOfProduct(x.ProductID)).ToList();
+        }
+
+        public static IEnumerable<ProductOnPage> GetBestSalerProducts(string searchString)
+        {
+            return Search(GetBestSalerProducts(), x => x.ProductName, searchString);
         }
 
         //public static ProductDetailViewModel GetProductDetail(int id)
