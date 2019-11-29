@@ -509,11 +509,28 @@ namespace MVC.Models
         public static DetailViewModel GetProductDetail(int productId)
         {
             DetailViewModel detailViewModel = new DetailViewModel();
-            detailViewModel.MainProduct = GetProductByID(productId);
+            detailViewModel.MainProduct = GetMainProductDetail(productId);
             detailViewModel.Rate = RateHelper.GetRateView(productId);
             detailViewModel.Comments = CommentHelper.GetCommentView(productId).ToList();
             detailViewModel.RelateProducts = GetRalateProduct(productId).ToList();
             return detailViewModel;
+        }
+
+        public static MainProductDetail GetMainProductDetail(int productId)
+        {
+            var product = GetProductByID(productId);
+            MainProductDetail mainProduct = new MainProductDetail();
+            mainProduct.ID = product.ID;
+            mainProduct.Author = product.Author;
+            mainProduct.Image = product.Image;
+            mainProduct.IncludedVAT = product.IncludedVAT;
+            mainProduct.Name = product.Name;
+            mainProduct.Price = ((decimal)product.Price).ToString("N0");
+            mainProduct.PromotionPrice = ((decimal)product.PromotionPrice).ToString("N0");
+            mainProduct.Quantity = product.Quantity;
+            mainProduct.SavePersent = (int)(100 - product.PromotionPrice * 100 / product.Price) + "%";
+            mainProduct.Detail = String.IsNullOrEmpty(product.Detail) ? new List<string>() : product.Detail.Split(';').ToList();
+            return mainProduct;
         }
 
         public static IEnumerable<ProductOnPage> GetRalateProduct(int productId)
@@ -1180,6 +1197,8 @@ namespace MVC.Models
 
         public static int GetRatePoint(int point, int productId)
         {
+            if (GetRates().Where(x => x.ProductID == productId).Count() == 0)
+                return 0;
             return GetRates().Where(x => x.ProductID == productId && x.RatePoint == point).Count() * 100 / GetRates().Where(x => x.ProductID == productId).Count();
         }
 

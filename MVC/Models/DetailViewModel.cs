@@ -13,17 +13,30 @@ namespace MVC.Models
 
         public List<ProductOnPage> RelateProducts { get; set; }
 
-        public Product MainProduct { get; set; }
+        public MainProductDetail MainProduct { get; set; }
+    }
 
-        public List<string> DetailOfMainProduct { get { return MainProduct.Detail.Split(';').ToList(); } }
+    public class MainProductDetail
+    {
+        public int ID { get; set; }
 
-        public string SavePersent
-        {
-            get
-            {
-                return (100 - MainProduct.PromotionPrice * 100 / MainProduct.Price) + "%";
-            }
-        }
+        public string Name { get; set; }
+
+        public string Author { get; set; }
+
+        public string Image { get; set; }
+
+        public string Price { get; set; }
+
+        public string PromotionPrice { get; set; }
+
+        public bool? IncludedVAT { get; set; }
+
+        public int? Quantity { get; set; }
+
+        public List<string> Detail { get; set; }
+
+        public string SavePersent { get; set; }
     }
 
     public class RateView

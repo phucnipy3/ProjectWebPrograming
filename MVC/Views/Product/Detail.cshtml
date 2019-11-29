@@ -51,9 +51,9 @@
                     <hr />
                     <h3>Thông tin kèm theo</h3>
                     <ul>
-                        @for (int i = 0; i < 4; i++)
+                        @for (int i = 0; i < Model.MainProduct.Detail.Count; i++)
                         {
-                            <li>Infomation @i</li>
+                            <li>@Model.MainProduct.Detail[i]</li>
                         }
                     </ul>
                 </div>
@@ -64,7 +64,7 @@
                     {
                         <p>Giá gốc: <del>@Model.MainProduct.Price</del></p>
                         <p>Giá bán: <span class="h2 text-danger">@Model.MainProduct.PromotionPrice</span></p>
-                        <p>Tiết kiệm: @Model.SavePersent</p>
+                        <p>Tiết kiệm: @Model.MainProduct.SavePersent</p>
                     }
                     else
                     {
@@ -89,7 +89,7 @@
                             5 <i class="fas fa-star text-warning"></i>
                             <div style="width:80%" class="float-right pt-1">
                                 <div class="progress bg">
-                                    <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:@(Model.Rate.PercentFivePoint)%"></div>
+                                    <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:@(Model.Rate.PercentPoint[0])%"></div>
                                 </div>
                             </div>
                         </li>
@@ -97,7 +97,7 @@
                             4 <i class="fas fa-star text-warning"></i>
                             <div style="width:80%" class="float-right pt-1">
                                 <div class="progress bg">
-                                    <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:@(Model.Rate.PercentFourPoint)%"></div>
+                                    <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:@(Model.Rate.PercentPoint[1])%"></div>
                                 </div>
                             </div>
 
@@ -106,7 +106,7 @@
                             3 <i class="fas fa-star text-warning"></i>
                             <div style="width:80%" class="float-right pt-1">
                                 <div class="progress bg">
-                                    <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:@(Model.Rate.PercentThreePoint)%"></div>
+                                    <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:@(Model.Rate.PercentPoint[2])%"></div>
                                 </div>
                             </div>
 
@@ -115,7 +115,7 @@
                             2 <i class="fas fa-star text-warning"></i>
                             <div style="width:80%" class="float-right pt-1">
                                 <div class="progress bg">
-                                    <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:@(Model.Rate.PercentTwoPoint)%"></div>
+                                    <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:@(Model.Rate.PercentPoint[3])%"></div>
                                 </div>
                             </div>
 
@@ -124,7 +124,7 @@
                             1 <i class="fas fa-star text-warning"></i>
                             <div style="width:80%" class="float-right pt-1">
                                 <div class="progress bg">
-                                    <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:@(Model.Rate.PercentOnePoint)%"></div>
+                                    <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:@(Model.Rate.PercentPoint[4])%"></div>
                                 </div>
                             </div>
 
