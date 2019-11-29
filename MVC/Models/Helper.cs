@@ -8,6 +8,7 @@ using System.Text;
 using System.Configuration;
 using System.Reflection;
 using MVC.Areas.Admin.Models;
+using System.Text.RegularExpressions;
 
 namespace MVC.Models
 {
@@ -58,6 +59,15 @@ namespace MVC.Models
             for (int i = 0; i < hash.Length; i++)
                 sb.Append(hash[i].ToString("x2"));
             return sb.ToString();
+        }
+
+        public static string ConvertMetaTitle(string stringMetaTitle)
+        {
+            Regex ConvertToUnsign_rg = null;
+            if (ReferenceEquals(ConvertToUnsign_rg, null))
+                ConvertToUnsign_rg = new Regex("p{IsCombiningDiacriticalMarks}+");
+            var temp = stringMetaTitle.ToLower().Normalize(NormalizationForm.FormD);
+            return ConvertToUnsign_rg.Replace(temp, string.Empty).Replace("đ", "d").Replace(" ", "-").ToLower();
         }
 
         public static StatisticalViewModel Statistical()
