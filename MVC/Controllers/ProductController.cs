@@ -37,8 +37,14 @@ namespace MVC.Controllers
         
         public ActionResult Detail(int id = 1)
         {
-
+            ViewBag.RatePoint = 2;
             return View(ProductHelper.GetProductDetail(id));
+        }
+
+        [HttpPost]
+        public ActionResult Rate(int point)
+        {
+            return Content("success");
         }
     }
 }
