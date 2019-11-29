@@ -1,0 +1,232 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+.wapper{
+	width: 100%;
+	height:auto;
+	position: relative;
+	top: 20px;
+}
+.designer{
+	width: 95%;
+	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}	
+.col-left{
+	width: 300px;
+	height: auto;
+	position: absolute;
+	left: 50px;
+	top: 50px;
+}
+.box ul li a {
+	font-size: 23px;
+}
+.col-right{
+	width: 210px;
+	height: auto;
+	position: absolute;
+	right: 50px;
+	top: 100px;
+}
+.color-header{
+	border-bottom: 1px solid;
+}
+.color-pick{
+	width: 80%;
+	margin: auto;
+	height: auto;
+}
+.color-button{
+	width:20px;
+	height: 20px;
+	margin: 5px;
+}
+.box{
+	background-color: #FFFFFF;
+	display: inline-block;
+	border: 1px solid #CCCCCC;
+	border-radius: 4px;
+	margin-bottom: 12px;
+}
+.menu-left {
+	list-style: none outside none;
+	margin: 0;
+	padding: 0;
+}
+.menu-left li a {
+	color: #000000;
+	display: block;
+	font-family: Garamond;
+	font-size: 16px;
+	line-height: 20px;
+	outline: medium none;
+	padding: 8px 10px;
+	text-decoration: none;
+	text-shadow: 1px 1px 1px #CCCCCC;
+}
+a {
+	color: #428bca;
+	text-decoration: none;
+}
+.viewer{
+	width: 300px;
+	height: 700px;
+	position: relative;
+	margin: auto;
+}
+.case-color{
+	width: 100%;
+	height: 100%;
+	border-radius: 50px;
+	position: absolute;
+}
+.product{
+	float: left;
+    height: 100%;
+    position: static;
+	margin: auto;
+    width: 100%;
+	z-index: auto;
+}
+.design-area{
+	border: 1px dashed #000000;
+    float: left;
+    position: absolute;
+	height: 580px; 
+	width: 280px; 
+	left: 10px; 
+	top: 10px; 
+	border-radius: 0px; 
+	z-index: 200;
+	overflow: hidden;
+}
+.sidebar{
+	float: right;
+    position: absolute;
+    right: 50px;
+    top: 20px;
+    z-index: 2;
+}
+.btn-sm, .btn-xs {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid #000000;
+    border-radius: 4px;
+}
+.cover-area{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top:0px;
+	opacity: 1;
+	background-color:rgba(0,0,0,0.61);
+	z-index: 2500;
+	visibility: hidden;
+}
+.dialog{
+	width: 600px;
+	opacity: 1;
+	height: auto;
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.dialog-content{
+	width: 100%;
+	height: auto;
+	display: block;
+	border-radius: 4px;
+	background-color: rgba(244,240,240,1.00);
+}
+.dialog-header{
+	min-height: 16.42857143px;
+	height: 50px;
+    border-bottom: 1px solid;
+}
+.dialog-input{
+	width: 66.6%;
+	padding: 15px;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: 27px;
+    padding: 6px 12px;
+    font-size: 15px;
+    line-height: 1.2;
+    color: #555;
+    vertical-align: middle;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.dialog-footer{
+	min-height: 16.42857143px;
+    border-top: 1px solid;
+}
+.size-dialog{
+	width: 220px;
+	opacity: 1;
+	height: auto;
+	position: absolute;
+	left: 80px;
+	top: 50px;
+	visibility: hidden;
+}
+.box-font {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #666666;
+    cursor: pointer;
+    display: inline-block;
+    float: left;
+    font-size: 11px;
+    margin: 4px;
+    min-height: 62px;
+	height: 70px;
+    padding: 4px 0;
+    text-align: center;
+    width: 146px;
+}
+.font-alot{
+	display: inline-block;
+    max-height: 350px;
+    overflow: auto;
+	width: 100%;
+}
+a.box-font:hover,a.box-img:hover {
+    text-decoration: underline;
+}
+
+.box-img{
+	display: inline-block;
+	margin: 4px;
+	width: 150px;
+	height: 150px;
+	padding: 4px 0;
+}

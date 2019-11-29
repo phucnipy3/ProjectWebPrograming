@@ -148,6 +148,7 @@
     <Compile Include="Areas\Admin\Models\StatisticalViewModel.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\DesignController.cs" />
     <Compile Include="Controllers\ForgetPassController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -190,6 +191,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\jquery.min.js" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -242,6 +244,12 @@
     <Content Include="Resource\laser.png" />
     <Content Include="Resource\logo.png" />
     <Content Include="Resource\new.gif" />
+    <Content Include="Resource\OpTrong\Op1.png" />
+    <Content Include="Resource\OpTrong\Op2.png" />
+    <Content Include="Resource\OpTrong\Op3.png" />
+    <Content Include="Resource\OpTrong\Op4.png" />
+    <Content Include="Resource\OpTrong\Op5.png" />
+    <Content Include="Resource\OpTrong\Op6.png" />
     <Content Include="Resource\OpXin.png" />
     <Content Include="Resource\Path 1.svg" />
     <Content Include="Resource\Path 3.svg" />
@@ -255,12 +263,22 @@
     <Content Include="Resource\slideshow4.jpg" />
     <Content Include="Resource\support.png" />
     <Content Include="Resource\trust.png" />
+    <Content Include="Resource\WaterColor\water1.jpg" />
+    <Content Include="Resource\WaterColor\water2.jpg" />
+    <Content Include="Resource\WaterColor\water3.jpg" />
+    <Content Include="Resource\WaterColor\water4.jpg" />
+    <Content Include="Resource\WaterColor\water5.jpg" />
+    <Content Include="Resource\WaterColor\water6.jpg" />
+    <Content Include="Resource\WaterColor\water7.jpg" />
+    <Content Include="Resource\WaterColor\water8.jpg" />
+    <Content Include="Resource\WaterColor\water9.jpg" />
     <Content Include="Scripts\bootstrap-input-spinner.js" />
     <Content Include="Scripts\bootstrap-validate.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Design.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -452,6 +470,7 @@
     <Content Include="Views\Cart\FormInfo.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\ChangePassword.cshtml" />
+    <Content Include="Views\Design\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
