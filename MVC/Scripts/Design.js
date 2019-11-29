@@ -46,15 +46,15 @@ $(document).ready(function(){
 			 this.value = this.value.replace(/[^0-9]/g, '');
 		 }
 	});
-    $("#Update").click(function () {
-        currentElement.html(document.getElementsByClassName("EnterText").value);
-		currentElement.css("font-size",document.getElementsByClassName("Size").value +"px");
-        currentElement.css("color", document.getElementsByClassName("EnterColor").value);
-        currentElement.css("font-family", document.getElementsByClassName("EnterFont").value);
+	$("#Update").click(function(){
+		currentElement.html(document.getElementById("EnterText").value);
+		currentElement.css("font-size",document.getElementById("Size").value +"px");
+		currentElement.css("color",document.getElementById("EnterColor").value);
+		currentElement.css("font-family",document.getElementById("EnterFont").value);
 	});
 	$("#UpdateImg").click(function(){
-		currentElement.css("width",$(".ChieuRong").val()+"px");
-		currentElement.css("height",$(".ChieuCao").val()+"px");
+		currentElement.css("width",$("#ChieuRong").val()+"px");
+		currentElement.css("height",$("#ChieuCao").val()+"px");
 	});
 	$(document).on("mousedown",".UIDraggable",function(){
 			isDown = true;
@@ -67,14 +67,18 @@ $(document).ready(function(){
 			
 		});
 	$(document).on("mousedown","span.UIDraggable",function(){
-		$(".EnterText").val(currentElement.html());
-		$(".Size").val(currentElement.css("font-size").replace(/[^0-9]/g, ''));
-		$(".EnterColor").val(rgbToHex($(currentElement).css("color")));
-		$(".EnterFont").val(currentElement.css("font-family"));
+		$("#SizeText").css("visibility","visible");
+		$("#SizeImg").css("visibility","hidden");
+		$("#EnterText").val(currentElement.html());
+		$("#Size").val(currentElement.css("font-size").replace(/[^0-9]/g, ''));
+		$("#EnterColor").val(rgbToHex($(currentElement).css("color")));
+		$("#EnterFont").val(currentElement.css("font-family"));
 	});
 	$(document).on("mousedown","div.UIDraggable",function(){
-		$(".ChieuRong").val($(currentElement).css("width").replace(/[^0-9]/g, ''));
-		$(".ChieuCao").val($(currentElement).css("height").replace(/[^0-9]/g, ''));
+		$("#SizeText").css("visibility","hidden");
+		$("#SizeImg").css("visibility","visible");
+		$("#ChieuRong").val($(currentElement).css("width").replace(/[^0-9]/g, ''));
+		$("#ChieuCao").val($(currentElement).css("height").replace(/[^0-9]/g, ''));
 	});
 	$(document).on("mouseup",".UIDraggable",function(){
 		isDown = false;
@@ -100,15 +104,14 @@ return true;
 }
 function ResetSizeText()
 {
-    document.getElementsByClassName("EnterText").value = "Hello";
-    document.getElementsByClassName("EnterColor").value = "#000000";
-    document.getElementsByClassName("Size").value = "30";
-    document.getElementsByClassName("EnterFont").value = "arial";
+    document.getElementById("EnterText").value = "Hello";
+    document.getElementById("EnterColor").value = "#000000";
+    document.getElementById("Size").value = "30";
+    document.getElementById("EnterFont").value = "arial";
 }
-
 function SetFont(st)
 {
-    document.getElementsByClassName("EnterFont").value = st;
+    document.getElementById("EnterFont").value = st;
     return true;
 }
 function ChangeColor(str)
@@ -147,6 +150,8 @@ function AddImg(str)
     currentElement.css("background-image","url("+str+")");
     $(".UIDraggable").css("border","0px dashed #72C3AB");
     $("#DesignArea").append(img);
+    CloseDialog('SizeText');
+    ShowDialog('SizeImg');
     ResetSizeImg();
     return true;
 }
@@ -158,14 +163,36 @@ function ThemHinhTuLink()
 }
 function ResetSizeImg()
 {
-    document.getElementsByClassName("ChieuCao").value = "200";
-    document.getElementsByClassName("ChieuRong").value = "200";
+    document.getElementById("ChieuCao").value = "200";
+    document.getElementById("ChieuRong").value = "200";
     return true;
 }
-
+function MoChiTiet()
+{
+    window.open('trangbanhang/thongtin.html');
+}
 function ChangeBackground(str)
 {
     document.getElementById("CaseColor").style.backgroundImage = "url('/Resource/WaterColor/" + str + "')";
     document.getElementById("CaseColor").style.backgroundColor = "#FFFFFF";
     return true;
+}
+function loginClick()
+{
+    CloseDialog("login");
+inforlogin();
+}
+function signinClick()
+{
+    CloseDialog("signin");
+    alert("Bạn đã đăng ký thành công!");
+return true;
+}
+function inforlogin()
+{
+    alert("Bạn đã đăng nhập thành công!");
+}
+function GioHangClick()
+{
+    alert("Giỏ hàng của bạn đang trống");
 }
