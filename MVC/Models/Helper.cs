@@ -17,6 +17,8 @@ namespace MVC.Models
 
         protected static IEnumerable<T> Search<T>(IEnumerable<T> items, string searchString)
         {
+            if (String.IsNullOrEmpty(searchString))
+                return items;
             List<string> searchStrings = searchString.ToLower().Split(' ').ToList();
             List<T> result = new List<T>();
             foreach (string str in searchStrings)
@@ -29,23 +31,23 @@ namespace MVC.Models
                     return false;
                 }).ToList());
             }
-            return result.GroupBy(x => x.GetType().GetProperty("ID").GetValue(x)).Select(y => y.First());
+            return result.Distinct();
         }
 
         protected static IEnumerable<T> Search<T, TKey>(IEnumerable<T> items, Func<T, TKey> keySelector, string searchString)
         {
-            foreach (var item in items)
-                if (keySelector(item).ToString().Contains(searchString))
-                    yield return item;
+            if (String.IsNullOrEmpty(searchString))
+                return items;
+            List<string> searchStrings = searchString.ToLower().Split(' ').ToList();
+            List<T> result = new List<T>();
+            foreach (string str in searchStrings)
+                result.AddRange(items.Where(x => keySelector(x).ToString().Contains(str)).ToList());
+            return result.Distinct();
         }
 
         protected static IEnumerable<TKey> GetPropertyValue<T, TKey>(IEnumerable<T> items, Func<T, TKey> keySelector)
         {
-            List<TKey> keys = new List<TKey>();
-            foreach (T item in items)
-                if (!keys.Contains(keySelector(item)))
-                    keys.Add(keySelector(item));
-            return keys;
+            return items.Select(keySelector).Distinct();
         }
 
         protected static string EncodePassword(string password)
@@ -368,7 +370,28 @@ namespace MVC.Models
                     if (GetUsers().Where(x => x.UserID == user.UserID).Count() > 0)
                         return false;
                     user.Status = true;
-                    user.Password = EncodePassword(user.Password);
+                    db.Users.AddOrUpdate(x => x.ID, user);
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool ChangePassword(int userId, string oldPass, string newPass)
+        {
+            try
+            {
+                var user = GetUserByID(userId);
+                if (user != null)
+                {
+                    if (user.Password != EncodePassword(oldPass))
+                        return false;
+                    user.Password = EncodePassword(newPass);
                     db.Users.AddOrUpdate(x => x.ID, user);
                     db.SaveChanges();
                     return true;
@@ -421,8 +444,8 @@ namespace MVC.Models
             {
                 ProductID = x.ID,
                 ProductName = x.Name,
-                Price = ((decimal)x.Price).ToString("N"),
-                PromotionPrice = ((decimal)x.PromotionPrice).ToString("N"),
+                Price = ((decimal)x.Price).ToString("N0"),
+                PromotionPrice = ((decimal)x.PromotionPrice).ToString("N0"),
                 ImageLink = x.Image,
                 Tag = GetTag(x)
             }).ToList();
@@ -756,17 +779,19 @@ namespace MVC.Models
             List<Order> orders = GetOrdersOf(userId).ToList();
             foreach (Order order in orders)
             {
+                decimal totalProductMoney = (decimal)OrderDetailHelper.TotalMoneyOfOrder(order.ID);
+                decimal totalMoney = (decimal)order.TransportationFee + totalProductMoney;
                 OrderViewModel orderViewModel = new OrderViewModel();
                 orderViewModel.ID = order.ID;
                 orderViewModel.ShipName = order.ShipName;
                 orderViewModel.ShipMobile = order.ShipMobile;
                 orderViewModel.ShipAddress = order.ShipAddress;
                 orderViewModel.Status = GetStatus(order.ID);
-                orderViewModel.TotalProductMoney = OrderDetailHelper.TotalMoneyOfOrder(order.ID);
+                orderViewModel.TotalProductMoney = totalProductMoney.ToString("N0");
                 orderViewModel.Transport = order.Transport;
-                orderViewModel.TransportationFee = order.TransportationFee;
+                orderViewModel.TransportationFee = ((decimal)order.TransportationFee).ToString("N0");
                 orderViewModel.PaymentMethods = order.PaymentMethods;
-                orderViewModel.TotalMoney = orderViewModel.TotalProductMoney + orderViewModel.TransportationFee;
+                orderViewModel.TotalMoney = totalMoney.ToString("N0");
                 orderViewModel.Products = OrderDetailHelper.GetProductOnOrder(order.ID).ToList();
                 orderViewModel.TimeLogs = GetTimeLogs(order.ID).ToList();
                 yield return orderViewModel;
@@ -928,8 +953,8 @@ namespace MVC.Models
                 Image = ProductHelper.GetPropertyValue(x.ProductID, y => y.Image),
                 Name = ProductHelper.GetPropertyValue(x.ProductID, y => y.Name),
                 Count = x.Count,
-                Price = x.Price,
-                PromotionPrice = x.PromotionPrice
+                Price = ((decimal)x.Price).ToString("N0"),
+                PromotionPrice = ((decimal)x.PromotionPrice).ToString("N0")
             }).ToList();
         }
 
@@ -1262,10 +1287,10 @@ namespace MVC.Models
 
         public static IEnumerable<CommentView> GetCommentView(int productId)
         {
-            return GetComments().Where(x => x.ProductID == productId && x.ParentID == null).Select(x => new CommentView()
+            return GetComments().Where(x => x.ProductID == productId && x.ParentID == null).OrderByDescending(x => x.CreateDate).Select(x => new CommentView()
             {
                 Comment = x,
-                ReplyComment = GetComments().Where(y => y.ProductID == productId && y.ParentID == x.ID).Select(y => new CommentView()
+                ReplyComment = GetComments().Where(y => y.ProductID == productId && y.ParentID == x.ID).OrderByDescending(y => y.CreateDate).Select(y => new CommentView()
                 {
                     Comment = y
                 }).ToList()

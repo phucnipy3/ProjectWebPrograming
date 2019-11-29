@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12 pt-2 product-price">
-                                            @if (item.PromotionPrice != 0)
+                                            @if (item.PromotionPrice != item.Price)
                                             {
                                                 <p>
                                                     @item.PromotionPrice <u>đ</u>
@@ -75,7 +75,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12 pt-2 product-discount">
-                                            @if (item.PromotionPrice != 0)
+                                            @if (item.PromotionPrice != item.Price)
                                             {
                                                 <del>
                                                     @item.Price <u>đ</u>

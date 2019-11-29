@@ -64,7 +64,7 @@
                 </div>
                 <div class="col-2 align-self-center px-4">
                     <span class="float-right">
-                        @if (product.PromotionPrice == 0)
+                        @if (product.PromotionPrice != product.Price)
                         {
                             <del>@(product.Price)đ</del>
                             <span class="text-danger">@(product.PromotionPrice)đ</span>
