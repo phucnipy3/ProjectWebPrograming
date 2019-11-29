@@ -370,7 +370,28 @@ namespace MVC.Models
                     if (GetUsers().Where(x => x.UserID == user.UserID).Count() > 0)
                         return false;
                     user.Status = true;
-                    user.Password = EncodePassword(user.Password);
+                    db.Users.AddOrUpdate(x => x.ID, user);
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool ChangePassword(int userId, string oldPass, string newPass)
+        {
+            try
+            {
+                var user = GetUserByID(userId);
+                if (user != null)
+                {
+                    if (user.Password != EncodePassword(oldPass))
+                        return false;
+                    user.Password = EncodePassword(newPass);
                     db.Users.AddOrUpdate(x => x.ID, user);
                     db.SaveChanges();
                     return true;
