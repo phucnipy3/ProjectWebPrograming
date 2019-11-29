@@ -244,14 +244,13 @@ namespace MVC.Models
         [DefaultDateTimeValue()]
         public DateTime? CreateDate { get; set; }
 
+        public DateTime? LastModify { get; set; }
+
         public int? CreateBy { get; set; }
 
         public int? ProductID { get; set; }
 
         public int? ParentID { get; set; }
-
-        [DefaultValue("true")]
-        public bool? Status { get; set; }
     }
 
     public partial class DatabaseDetailsContext : DbContext

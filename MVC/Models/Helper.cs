@@ -1168,29 +1168,31 @@ namespace MVC.Models
             return GetRates().Where(x => x.ProductID == productId).Average(x => x.RatePoint);
         }
 
-        public static double? GetRatePoint(int point, int productId)
+        public static int GetRatePoint(int point, int productId)
         {
-            return (double?)GetRates().Where(x => x.ProductID == productId && x.RatePoint == point).Count() / GetRates().Where(x => x.ProductID == productId).Count();
+            return GetRates().Where(x => x.ProductID == productId && x.RatePoint == point).Count() * 100 / GetRates().Where(x => x.ProductID == productId).Count();
+        }
+
+        public static int? GetRatePoint(string userId, int productId)
+        {
+            return GetRates().Where(x => x.CreateBy == UserHelper.GetUserByUserID(userId).ID && x.ProductID == productId).SingleOrDefault().RatePoint;
         }
 
         public static RateView GetRateView(int productId)
         {
             RateView rateView = new RateView();
             rateView.RatePoint = GetRatePoint(productId);
-            rateView.PercentOnePoint = GetRatePoint(1, productId);
-            rateView.PercentTwoPoint = GetRatePoint(2, productId);
-            rateView.PercentThreePoint = GetRatePoint(3, productId);
-            rateView.PercentFourPoint = GetRatePoint(4, productId);
-            rateView.PercentFivePoint = GetRatePoint(5, productId);
+            rateView.PercentPoint = new List<int>();
+            for (int i = 0; i < 5; i++)
+                rateView.PercentPoint.Add(GetRatePoint(i, productId));
             return rateView;
         }
 
-        public static bool AddRate(Order order)
+        public static bool AddRate(Rate rate)
         {
             try
             {
-                order.Status = true;
-                db.Orders.Add(order);
+                db.Rates.Add(rate);
                 db.SaveChanges();
                 return true;
             }
@@ -1207,6 +1209,7 @@ namespace MVC.Models
                 var rate = GetRateByID(id);
                 if (rate != null)
                 {
+                    rate.CreateDate = DateTime.Now;
                     db.Rates.Remove(rate);
                     db.SaveChanges();
                     return true;
@@ -1245,6 +1248,7 @@ namespace MVC.Models
                 var oldRate = GetRateByID(rate.ID);
                 if (oldRate != null)
                 {
+                    rate.CreateDate = DateTime.Now;
                     db.Rates.AddOrUpdate(x => x.ID, rate);
                     db.SaveChanges();
                     return true;
@@ -1262,7 +1266,7 @@ namespace MVC.Models
     {
         public static IEnumerable<Comment> GetComments()
         {
-            return db.Comments.Where(x => x.Status == true).ToList();
+            return db.Comments.ToList();
         }
 
         public static IEnumerable<Comment> GetComments(string searchString)
@@ -1272,7 +1276,7 @@ namespace MVC.Models
 
         public static Comment GetCommentByID(int id)
         {
-            return db.Comments.Where(x => x.ID == id && x.Status == true).SingleOrDefault();
+            return db.Comments.Where(x => x.ID == id).SingleOrDefault();
         }
 
         public static IEnumerable<TKey> GetPropertyValue<TKey>(Func<Comment, TKey> keySelector)
@@ -1301,7 +1305,7 @@ namespace MVC.Models
         {
             try
             {
-                comment.Status = true;
+                comment.CreateDate = DateTime.Now;
                 db.Comments.Add(comment);
                 db.SaveChanges();
                 return true;
@@ -1357,6 +1361,7 @@ namespace MVC.Models
                 var oldComment = GetCommentByID(comment.ID);
                 if (oldComment != null)
                 {
+                    comment.LastModify = DateTime.Now;
                     db.Comments.AddOrUpdate(x => x.ID, comment);
                     db.SaveChanges();
                     return true;
