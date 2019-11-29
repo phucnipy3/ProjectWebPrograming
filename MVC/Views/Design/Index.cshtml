@@ -139,7 +139,7 @@
                         Màu:
                     </label>
                     <input id="EnterColor" type="color" style="position: absolute; right: 15px;top:172px;">
-                    <input id="EnterFont" type="text" readonly value="arial" style="width: 120px; margin-top: 5px;margin-bottom: 5px;" onClick="ShowDialog('ChonFont')">
+                    <input id="EnterFont" type="text" readonly value="arial" style="width: 120px; margin-top: 5px;margin-bottom: 5px;" onClick="ShowModalChonFont()">
                     <label for="">
                         Nhập kích thước:
                     </label>
@@ -249,157 +249,7 @@
                         Close
                     </button>
                 </div>
-                <div class="font-alot">
-                    <a href="#none" class="box-font" onClick="SetFont('ABeeZee')&&CloseDialog('ChonFont')">
-                        <h2 style="font-family:'ABeeZee'">
-                            abc xyz
-                        </h2>
-                        "ABeeZee"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Abril Fatface')">
-                        <h2 style="font-family:Abril Fatface">
-                            abc xyz
-                        </h2>
-                        "Abril Fatface"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Aclonica')">
-                        <h2 style="font-family:Aclonica">
-                            abc xyz
-                        </h2>
-                        "Aclonica"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Acme')">
-                        <h2 style="font-family:Acme">
-                            abc xyz
-                        </h2>
-                        "Acme"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Akronim')">
-                        <h2 style="font-family:Akronim">
-                            abc xyz
-                        </h2>
-                        "Akronim"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Aldrich')">
-                        <h2 style="font-family:Aldrich">
-                            abc xyz
-                        </h2>
-                        "Aldrich"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Alice')">
-                        <h2 style="font-family:Alice">
-                            abc xyz
-                        </h2>
-                        "Alice"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Allura')">
-                        <h2 style="font-family:Allura">
-                            abc xyz
-                        </h2>
-                        "Allura"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Almendra Display')">
-                        <h2 style="font-family:Almendra Display">
-                            abc xyz
-                        </h2>
-                        "Almendra Display"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Aguafina Script')">
-                        <h2 style="font-family:Aguafina Script">
-                            abc xyz
-                        </h2>
-                        "Aguafina Script"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Annie Use Your Telescope')">
-                        <h2 style="font-family:Annie Use Your Telescope">
-                            abc xyz
-                        </h2>
-                        "Annie Use Your Telescope"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Arbutus')">
-                        <h2 style="font-family:Arbutus">
-                            abc xyz
-                        </h2>
-                        "Arbutus"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Arizonia')">
-                        <h2 style="font-family:Arizonia">
-                            abc xyz
-                        </h2>
-                        "Arizonia"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Asset')">
-                        <h2 style="font-family:Asset">
-                            abc xyz
-                        </h2>
-                        "Asset"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Barrio')">
-                        <h2 style="font-family:Barrio">
-                            abc xyz
-                        </h2>
-                        "Barrio"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Bigelow Rules')">
-                        <h2 style="font-family:Bigelow Rules">
-                            abc xyz
-                        </h2>
-                        "Bigelow Rules"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Bonbon')">
-                        <h2 style="font-family:Bonbon">
-                            abc xyz
-                        </h2>
-                        "Bonbon"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Condiment')">
-                        <h2 style="font-family:Condiment">
-                            abc xyz
-                        </h2>
-                        "Condiment"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Chewy')">
-                        <h2 style="font-family:Chewy">
-                            abc xyz
-                        </h2>
-                        "Chewy"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Codystar')">
-                        <h2 style="font-family:Codystar">
-                            abc xyz
-                        </h2>
-                        "Codystar"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Creepster')">
-                        <h2 style="font-family:Creepster">
-                            abc xyz
-                        </h2>
-                        "Creepster"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Caesar Dressing')">
-                        <h2 style="font-family:Caesar Dressing">
-                            abc xyz
-                        </h2>
-                        "Caesar Dressing"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Dawning of a New Day')">
-                        <h2 style="font-family:Dawning of a New Day">
-                            abc xyz
-                        </h2>
-                        "Dawning of a New Day"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Eater')">
-                        <h2 style="font-family:Eater">
-                            abc xyz
-                        </h2>
-                        "Eater"
-                    </a>
-                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Ewert')">
-                        <h2 style="font-family:Ewert">
-                            abc xyz
-                        </h2>
-                        "Ewert"
-                    </a>
+                
                 </div>
             </div>
         </div>
@@ -460,25 +310,180 @@
             </div>
         </div>
     </div>
-    <div id="TaiAnhLen" class="cover-area">
-        <div class="dialog">
-            <div class="dialog-content">
-                <div class="dialog-header">
-                    <button style="float: right; margin: 20px;" onClick="CloseDialog('TaiAnhLen')">
-                        Close
-                    </button>
-                    <h3 style="float: left; position: absolute; padding-left: 20px; ">
-                        Ảnh từ nguồn khác
-                    </h3>
-                </div>
-                <div class="dialog-input">
-                    
+    <div class="container-fluid">
+        <div class="modal fade" id="modalChonFont" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Chọn font chữ</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-auto mx-auto">
+                                <div class="font-alot">
+                                    <a href="#none" class="box-font" onClick="SetFont('ABeeZee')&&CloseDialog('ChonFont')">
+                                        <h2 style="font-family:'ABeeZee'">
+                                            abc xyz
+                                        </h2>
+                                        "ABeeZee"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Abril Fatface')">
+                                        <h2 style="font-family:Abril Fatface">
+                                            abc xyz
+                                        </h2>
+                                        "Abril Fatface"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Aclonica')">
+                                        <h2 style="font-family:Aclonica">
+                                            abc xyz
+                                        </h2>
+                                        "Aclonica"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Acme')">
+                                        <h2 style="font-family:Acme">
+                                            abc xyz
+                                        </h2>
+                                        "Acme"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Akronim')">
+                                        <h2 style="font-family:Akronim">
+                                            abc xyz
+                                        </h2>
+                                        "Akronim"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Aldrich')">
+                                        <h2 style="font-family:Aldrich">
+                                            abc xyz
+                                        </h2>
+                                        "Aldrich"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Alice')">
+                                        <h2 style="font-family:Alice">
+                                            abc xyz
+                                        </h2>
+                                        "Alice"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Allura')">
+                                        <h2 style="font-family:Allura">
+                                            abc xyz
+                                        </h2>
+                                        "Allura"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Almendra Display')">
+                                        <h2 style="font-family:Almendra Display">
+                                            abc xyz
+                                        </h2>
+                                        "Almendra Display"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Aguafina Script')">
+                                        <h2 style="font-family:Aguafina Script">
+                                            abc xyz
+                                        </h2>
+                                        "Aguafina Script"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Annie Use Your Telescope')">
+                                        <h2 style="font-family:Annie Use Your Telescope">
+                                            abc xyz
+                                        </h2>
+                                        "Annie Use Your Telescope"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Arbutus')">
+                                        <h2 style="font-family:Arbutus">
+                                            abc xyz
+                                        </h2>
+                                        "Arbutus"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Arizonia')">
+                                        <h2 style="font-family:Arizonia">
+                                            abc xyz
+                                        </h2>
+                                        "Arizonia"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Asset')">
+                                        <h2 style="font-family:Asset">
+                                            abc xyz
+                                        </h2>
+                                        "Asset"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Barrio')">
+                                        <h2 style="font-family:Barrio">
+                                            abc xyz
+                                        </h2>
+                                        "Barrio"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Bigelow Rules')">
+                                        <h2 style="font-family:Bigelow Rules">
+                                            abc xyz
+                                        </h2>
+                                        "Bigelow Rules"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Bonbon')">
+                                        <h2 style="font-family:Bonbon">
+                                            abc xyz
+                                        </h2>
+                                        "Bonbon"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Condiment')">
+                                        <h2 style="font-family:Condiment">
+                                            abc xyz
+                                        </h2>
+                                        "Condiment"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Chewy')">
+                                        <h2 style="font-family:Chewy">
+                                            abc xyz
+                                        </h2>
+                                        "Chewy"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Codystar')">
+                                        <h2 style="font-family:Codystar">
+                                            abc xyz
+                                        </h2>
+                                        "Codystar"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Creepster')">
+                                        <h2 style="font-family:Creepster">
+                                            abc xyz
+                                        </h2>
+                                        "Creepster"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Caesar Dressing')">
+                                        <h2 style="font-family:Caesar Dressing">
+                                            abc xyz
+                                        </h2>
+                                        "Caesar Dressing"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Dawning of a New Day')">
+                                        <h2 style="font-family:Dawning of a New Day">
+                                            abc xyz
+                                        </h2>
+                                        "Dawning of a New Day"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Eater')">
+                                        <h2 style="font-family:Eater">
+                                            abc xyz
+                                        </h2>
+                                        "Eater"
+                                    </a>
+                                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Ewert')">
+                                        <h2 style="font-family:Ewert">
+                                            abc xyz
+                                        </h2>
+                                        "Ewert"
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-</div>
+    
 
 @section scripts{
     <script>
@@ -490,5 +495,8 @@
                 
             });
         });
+        function ShowModalChonFont() {
+            $('#modalChonFont').modal('show');
+        }
     </script>
 }

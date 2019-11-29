@@ -94,7 +94,7 @@ $(document).ready(function(){
 
 function CloseDialog(str)
 {
-    document.getElementById(str).style.visibility = "hidden";
+    $("#modal"+str).modal("hide")
 return true;
 }
 function ShowDialog(str)
