@@ -21,9 +21,7 @@ namespace MVC.Models
         {
             get
             {
-                float persent = 1 - (float)(MainProduct.PromotionPrice / MainProduct.Price);
-                int persentInt = (int)persent * 100;
-                return persentInt.ToString() + "%";
+                return (1 - MainProduct.PromotionPrice * 100 / MainProduct.Price) + "%";
             }
         }
     }
