@@ -21,7 +21,7 @@ namespace MVC.Models
         {
             get
             {
-                return (1 - MainProduct.PromotionPrice * 100 / MainProduct.Price) + "%";
+                return (100 - MainProduct.PromotionPrice * 100 / MainProduct.Price) + "%";
             }
         }
     }
