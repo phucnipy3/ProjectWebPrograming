@@ -125,9 +125,12 @@ a {
 	opacity: 1;
 	height: auto;
 	position: absolute;
-	left: 80px;
-	top: 50px;
+    left:150px;
+    background:#bdbdbd;
 	visibility: hidden;
+    z-index:300;
+    top: -10px;
+    border-radius:10px;
 }
 .box-font {
     border: 1px solid #ccc;
@@ -158,4 +161,36 @@ a.box-font:hover,a.box-img:hover {
 	width: 150px;
 	height: 150px;
 	padding: 4px 0;
+}
+
+
+#SizeText::before {
+    content: " ";
+    position: absolute;
+    left: -12px;
+    top:50px;
+    border-right: 15px solid #CCCCCC;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+}
+.img-dialog {
+    width: 240px;
+    opacity: 1;
+    height: auto;
+    position: absolute;
+    left: 170px;
+    background: #bdbdbd;
+    visibility: hidden;
+    z-index: 300;
+    top: 30px;
+    border-radius: 10px;
+}
+#SizeImg::before {
+    content: " ";
+    position: absolute;
+    left: -12px;
+    top: 50px;
+    border-right: 15px solid #CCCCCC;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
 }

@@ -94,7 +94,7 @@ $(document).ready(function(){
 
 function CloseDialog(str)
 {
-    $("#modal"+str).modal("hide")
+    document.getElementById(str).style.visibility = "hidden";
 return true;
 }
 function ShowDialog(str)
@@ -176,23 +176,4 @@ function ChangeBackground(str)
     document.getElementById("CaseColor").style.backgroundImage = "url('/Resource/WaterColor/" + str + "')";
     document.getElementById("CaseColor").style.backgroundColor = "#FFFFFF";
     return true;
-}
-function loginClick()
-{
-    CloseDialog("login");
-inforlogin();
-}
-function signinClick()
-{
-    CloseDialog("signin");
-    alert("Bạn đã đăng ký thành công!");
-return true;
-}
-function inforlogin()
-{
-    alert("Bạn đã đăng nhập thành công!");
-}
-function GioHangClick()
-{
-    alert("Giỏ hàng của bạn đang trống");
 }
