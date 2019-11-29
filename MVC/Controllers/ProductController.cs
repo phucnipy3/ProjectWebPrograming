@@ -35,10 +35,10 @@ namespace MVC.Controllers
         }
 
         
-        public ActionResult Detail(int id)
+        public ActionResult Detail(int id = 1)
         {
-            ProductHelper.GetProductDetail(id);
-            return View();
+
+            return View(ProductHelper.GetProductDetail(id));
         }
     }
 }
