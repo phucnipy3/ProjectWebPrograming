@@ -86,7 +86,7 @@
                 <div class="col-5">
                     <ul class="navbar-nav">
                         <li class="">
-                            5 <i class="fas fa-star"></i>
+                            5 <i class="fas fa-star text-warning"></i>
                             <div style="width:80%" class="float-right pt-1">
                                 <div class="progress bg">
                                     <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:@(Model.Rate.PercentFivePoint)%"></div>
@@ -94,7 +94,7 @@
                             </div>
                         </li>
                         <li class="">
-                            4 <i class="fas fa-star"></i>
+                            4 <i class="fas fa-star text-warning"></i>
                             <div style="width:80%" class="float-right pt-1">
                                 <div class="progress bg">
                                     <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:@(Model.Rate.PercentFourPoint)%"></div>
@@ -103,7 +103,7 @@
 
                         </li>
                         <li class="">
-                            3 <i class="fas fa-star"></i>
+                            3 <i class="fas fa-star text-warning"></i>
                             <div style="width:80%" class="float-right pt-1">
                                 <div class="progress bg">
                                     <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:@(Model.Rate.PercentThreePoint)%"></div>
@@ -112,7 +112,7 @@
 
                         </li>
                         <li class="">
-                            2 <i class="fas fa-star"></i>
+                            2 <i class="fas fa-star text-warning"></i>
                             <div style="width:80%" class="float-right pt-1">
                                 <div class="progress bg">
                                     <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:@(Model.Rate.PercentTwoPoint)%"></div>
@@ -121,7 +121,7 @@
 
                         </li>
                         <li class="">
-                            1 <i class="fas fa-star"></i>
+                            1 <i class="fas fa-star text-warning"></i>
                             <div style="width:80%" class="float-right pt-1">
                                 <div class="progress bg">
                                     <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:@(Model.Rate.PercentOnePoint)%"></div>
@@ -137,12 +137,11 @@
                 <div class="col-12 offset-lg-1 rate-pick p-3 collapse" id="RateBar">
                     <span class="mr-3">Please rate us</span>
                     <span>
-                        <a href="/Product/Rate?point=1" id="star1" class="text-decoration-none star-link"><i class="far fa-star star " id="iconStart1"></i> </a>
-                        <a href="/Product/Rate?point=2" id="star2" class="text-decoration-none star-link"><i class="far fa-star star " id="iconStart2"></i> </a>
-                        <a href="/Product/Rate?point=3" id="star3" class="text-decoration-none star-link"><i class="far fa-star star " id="iconStart3"></i> </a>
-                        <a href="/Product/Rate?point=4" id="star4" class="text-decoration-none star-link"><i class="far fa-star star " id="iconStart4"></i> </a>
-                        <a href="/Product/Rate?point=5" id="star5" class="text-decoration-none star-link"><i class="far fa-star star " id="iconStart5"></i> </a>
-
+                        <a href="#" id="star1" class="text-decoration-none star-link" data-point="1"><i class="far fa-star star " id="iconstar1"></i> </a>
+                        <a href="#" id="star2" class="text-decoration-none star-link" data-point="2"><i class="far fa-star star " id="iconstar2"></i> </a>
+                        <a href="#" id="star3" class="text-decoration-none star-link" data-point="3"><i class="far fa-star star " id="iconstar3"></i> </a>
+                        <a href="#" id="star4" class="text-decoration-none star-link" data-point="4"> <i class="far fa-star star " id="iconstar4"></i> </a>
+                        <a href="#" id="star5" class="text-decoration-none star-link" data-point="5"><i class="far fa-star star " id="iconstar5"></i> </a>
                     </span>
                 </div>
             </div>
@@ -317,7 +316,62 @@ else
 }
 @section scripts{
     <script>
+        function starDefault() {
+            var x = @ViewBag.RatePoint;
+            switch (x) {
+                case 5:
+                    $(".star").removeClass("fas");
+                    $(".star").removeClass("far");
+                    $("#iconstar1").addClass("fas");
+                    $("#iconstar2").addClass("fas");
+                    $("#iconstar3").addClass("fas");
+                    $("#iconstar4").addClass("fas");
+                    $("#iconstar5").addClass("fas");
+                    break;
+                case 4:
+                    $(".star").removeClass("fas");
+                    $(".star").removeClass("far");
+                    $("#iconstar1").addClass("fas");
+                    $("#iconstar2").addClass("fas");
+                    $("#iconstar3").addClass("fas");
+                    $("#iconstar4").addClass("fas");
+                    $("#iconstar5").addClass("far");
+                    break;
+                case 3:
+                    $(".star").removeClass("fas");
+                    $(".star").removeClass("far");
+                    $("#iconstar1").addClass("fas");
+                    $("#iconstar2").addClass("fas");
+                    $("#iconstar3").addClass("fas");
+                    $("#iconstar4").addClass("far");
+                    $("#iconstar5").addClass("far");
+                    break;
+                case 2:
+                    $(".star").removeClass("fas");
+                    $(".star").removeClass("far");
+                    $("#iconstar1").addClass("fas");
+                    $("#iconstar2").addClass("fas");
+                    $("#iconstar3").addClass("far");
+                    $("#iconstar4").addClass("far");
+                    $("#iconstar5").addClass("far");
+                    break;
+                case 1:
+                    $(".star").removeClass("fas");
+                    $(".star").removeClass("far");
+                    $("#iconstar1").addClass("fas");
+                    $("#iconstar2").addClass("far");
+                    $("#iconstar3").addClass("far");
+                    $("#iconstar4").addClass("far");
+                    $("#iconstar5").addClass("far");
+                    break;
+                default:
+                    $(".star").removeClass("fas");
+                    $(".star").removeClass("far");
+                    break;
+            }
+        }
         $(document).ready(function () {
+            starDefault();
             $("#OpenRate").click(function () {
                 if ($("#OpenRate").html() == "Rate your point")
                     $("#OpenRate").html('Close');
@@ -328,52 +382,53 @@ else
 
                 $(".star").removeClass("fas");
                 $(".star").removeClass("far");
-                $("#iconStart1").addClass("fas");
-                $("#iconStart2").addClass("fas");
-                $("#iconStart3").addClass("fas");
-                $("#iconStart4").addClass("fas");
-                $("#iconStart5").addClass("fas");
+                $("#iconstar1").addClass("fas");
+                $("#iconstar2").addClass("fas");
+                $("#iconstar3").addClass("fas");
+                $("#iconstar4").addClass("fas");
+                $("#iconstar5").addClass("fas");
                 return false;
             });
             $("#star4").hover(function () {
                 $(".star").removeClass("fas");
                 $(".star").removeClass("far");
-                $("#iconStart1").addClass("fas");
-                $("#iconStart2").addClass("fas");
-                $("#iconStart3").addClass("fas");
-                $("#iconStart4").addClass("fas");
-                $("#iconStart5").addClass("far");
+                $("#iconstar1").addClass("fas");
+                $("#iconstar2").addClass("fas");
+                $("#iconstar3").addClass("fas");
+                $("#iconstar4").addClass("fas");
+                $("#iconstar5").addClass("far");
             });
             $("#star3").hover(function () {
                 $(".star").removeClass("fas");
                 $(".star").removeClass("far");
-                $("#iconStart1").addClass("fas");
-                $("#iconStart2").addClass("fas");
-                $("#iconStart3").addClass("fas");
-                $("#iconStart4").addClass("far");
-                $("#iconStart5").addClass("far");
+                $("#iconstar1").addClass("fas");
+                $("#iconstar2").addClass("fas");
+                $("#iconstar3").addClass("fas");
+                $("#iconstar4").addClass("far");
+                $("#iconstar5").addClass("far");
             });
             $("#star2").hover(function () {
                 $(".star").removeClass("fas");
                 $(".star").removeClass("far");
-                $("#iconStart1").addClass("fas");
-                $("#iconStart2").addClass("fas");
-                $("#iconStart3").addClass("far");
-                $("#iconStart4").addClass("far");
-                $("#iconStart5").addClass("far");
+                $("#iconstar1").addClass("fas");
+                $("#iconstar2").addClass("fas");
+                $("#iconstar3").addClass("far");
+                $("#iconstar4").addClass("far");
+                $("#iconstar5").addClass("far");
             });
             $("#star1").hover(function () {
                 $(".star").removeClass("fas");
                 $(".star").removeClass("far");
-                $("#iconStart1").addClass("fas");
-                $("#iconStart2").addClass("far");
-                $("#iconStart3").addClass("far");
-                $("#iconStart4").addClass("far");
-                $("#iconStart5").addClass("far");
+                $("#iconstar1").addClass("fas");
+                $("#iconstar2").addClass("far");
+                $("#iconstar3").addClass("far");
+                $("#iconstar4").addClass("far");
+                $("#iconstar5").addClass("far");
             });
             $(".star-link").mouseleave(function () {
                 $(".star").removeClass("fas");
                 $(".star").addClass("far");
+                starDefault();
             });
             $("#btnComment").click(function (e) {
                 if (!$(this).hasClass('authen')) {
@@ -381,8 +436,24 @@ else
                     return false;
                 }
             });
-
+            $(".star-link").click(function () {
+                if (!$("#btnComment").hasClass('authen')) {
+                    $("#modalMessage").modal('show');
+                    return false;
+                }
+                var star = $(this);
+                var point = star.attr("data-point");
+                $.ajax({
+                    url: '/Product/Rate/?Point=' + point,
+                    method: 'post',
+                    success: function (result) {
+                        if (result == "success")
+                            alert("rated");
+                    }
+                })
+                return false;
+            });
         });
-
+        
     </script>
 }
