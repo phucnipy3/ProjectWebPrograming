@@ -82,7 +82,7 @@ a {
 	border-radius: 50px;
 	position: absolute;
 }
-.product{
+.product-design{
 	float: left;
     height: 100%;
     position: static;
@@ -109,31 +109,6 @@ a {
     top: 20px;
     z-index: 2;
 }
-.btn-sm, .btn-xs {
-    padding: 5px 10px;
-    font-size: 12px;
-    line-height: 1.5;
-    border-radius: 3px;
-}
-.btn-default {
-    color: #333;
-    background-color: #fff;
-    border-color: #ccc;
-}
-.btn {
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 1.428571429;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    cursor: pointer;
-    border: 1px solid #000000;
-    border-radius: 4px;
-}
 .cover-area{
 	width: 100%;
 	height: 100%;
@@ -144,51 +119,7 @@ a {
 	z-index: 2500;
 	visibility: hidden;
 }
-.dialog{
-	width: 600px;
-	opacity: 1;
-	height: auto;
-	margin-top: 30px;
-	margin-left: auto;
-	margin-right: auto;
-}
-.dialog-content{
-	width: 100%;
-	height: auto;
-	display: block;
-	border-radius: 4px;
-	background-color: rgba(244,240,240,1.00);
-}
-.dialog-header{
-	min-height: 16.42857143px;
-	height: 50px;
-    border-bottom: 1px solid;
-}
-.dialog-input{
-	width: 66.6%;
-	padding: 15px;
-}
-.form-control {
-    display: block;
-    width: 100%;
-    height: 27px;
-    padding: 6px 12px;
-    font-size: 15px;
-    line-height: 1.2;
-    color: #555;
-    vertical-align: middle;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-}
-.dialog-footer{
-	min-height: 16.42857143px;
-    border-top: 1px solid;
-}
+
 .size-dialog{
 	width: 220px;
 	opacity: 1;
