@@ -82,14 +82,7 @@ else
                                 </td>
                                 <td>
                                     <div class="price-cell">
-                                        @if (item.Product.PromotionPrice != 0)
-                                        {
-                                            @item.Product.PromotionPrice
-                                        }
-                                        else
-                                        {
-                                            @item.Product.Price
-                                        } <u>đ</u>
+                                        @item.ProductPrice <u>đ</u>
                                     </div>
                                 </td>
                                 <td>
@@ -99,7 +92,7 @@ else
                                 </td>
                                 <td>
                                     <div class="sub-total-cell">
-                                        @item.SubTotal() <u>đ</u>
+                                        @item.StringSubTotal <u>đ</u>
                                     </div>
                                 </td>
                             </tr>
@@ -120,7 +113,7 @@ else
                                         Tổng tiền
                                     </div>
                                     <div class="col-auto pr-4">
-                                        @Model.GrantTotal() <u>đ</u>
+                                        @Model.StringGrantTotal <u>đ</u>
                                     </div>
                                 </div>
                             </td>

@@ -16,6 +16,16 @@ namespace MVC.Models
         public Product MainProduct { get; set; }
 
         public List<string> DetailOfMainProduct { get { return MainProduct.Detail.Split(';').ToList(); } }
+
+        public string SavePersent
+        {
+            get
+            {
+                float persent = 1 - (float)(MainProduct.PromotionPrice / MainProduct.Price);
+                int persentInt = (int)persent * 100;
+                return persentInt.ToString() + "%";
+            }
+        }
     }
 
     public class RateView

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace MVC.Controllers
 {
-    public class DesignController : Controller
+    public class DesignController : ApplicationController
     {
         // GET: Design
         public ActionResult Index()
