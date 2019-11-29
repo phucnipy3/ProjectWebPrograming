@@ -1,0 +1,494 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wapper" style="">
+    <div class="designer">
+        <div class="col-left d-none d-lg-block">
+            <div class="box">
+                <ul class="menu-left">
+                    <li>
+                        <a href="#modalChonSanPham" data-toggle="modal" style="border-bottom: 1px solid #CCCCCC;">Chọn sản phẩm</a>
+                    </li>
+                    <li>
+                        <a id="AddText" href="#none" style="border-bottom: 1px solid #CCCCCC;" onClick="CloseDialog('SizeImg')&&ShowDialog('SizeText')&&ResetSizeText()"> Thêm Text</a>
+                    </li>
+                    <li>
+                        <a href="#modalChonHinhMau" data-toggle="modal" style="border-bottom: 1px solid #CCCCCC;"> Thêm hình mẫu</a>
+                    </li>
+                    <li>
+                        <a href="#modalTaiHinhLen" style="border-bottom: 1px solid #CCCCCC;" data-toggle="modal"> Tải ảnh lên </a>
+                    </li>
+                    <li>
+                        <a href="#none" onClick="ShowDialog('ShowThietKe')"> Thiết kế của tôi</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-right d-none d-lg-block">
+            <div class="box">
+                <div class="color-header">
+                    <div class="w-auto text-center">
+                        <span> Chọn màu cho ốp</span>
+
+                    </div>
+                </div>
+                <div style="border-bottom: 1px solid">
+                    <div class="color-pick">
+                        <button class="color-button" style="background-color: black" onClick="ChangeColor('black')"></button>
+                        <button class="color-button" style="background-color:white" onClick="ChangeColor('white')"></button>
+                        <button class="color-button" style="background-color:aqua" onClick="ChangeColor('aqua')"></button>
+                        <button class="color-button" style="background-color:blue" onClick="ChangeColor('blue')"></button>
+                        <button class="color-button" style="background-color:brown" onClick="ChangeColor('brown')"></button>
+                        <button class="color-button" style="background-color:burlywood" onClick="ChangeColor('burlywood')"></button>
+                        <button class="color-button" style="background-color:blueviolet" onClick="ChangeColor('blueviolet')"></button>
+                        <button class="color-button" style="background-color:chartreuse" onClick="ChangeColor('chartreuse')"></button>
+                        <button class="color-button" style="background-color:chocolate" onClick="ChangeColor('chocolate')"></button>
+                        <button class="color-button" style="background-color:cornflowerblue" onClick="ChangeColor('cornflowerblue')"></button>
+                        <button class="color-button" style="background-color:cyan" onClick="ChangeColor('cyan')"></button>
+                        <button class="color-button" style="background-color:yellowgreen" onClick="ChangeColor('yellowgreen')"></button>
+                        <button class="color-button" style="background-color:darkgreen" onClick="ChangeColor('darkgreen')"></button>
+                        <button class="color-button" style="background-color:goldenrod" onClick="ChangeColor('goldenrod')"></button>
+                        <button class="color-button" style="background-color:darkslategrey" onClick="ChangeColor('darkslategrey')"></button>
+                        <button class="color-button" style="background-color:darkmagenta" onClick="ChangeColor('darkmagenta')"></button>
+                        <button class="color-button" style="background-color:lime" onClick="ChangeColor('lime')"></button>
+                        <button class="color-button" style="background-color:lightpink" onClick="ChangeColor('lightpink')"></button>
+                        <button class="color-button" style="background-color:dodgerblue" onClick="ChangeColor('dodgerblue')"></button>
+                        <button class="color-button" style="background-color:mintcream" onClick="ChangeColor('mintcream')"></button>
+                    </div>
+                </div>
+                <div class="color-header">
+                    <div class="w-auto text-center">
+                        <span> Chọn background</span>
+                    </div>
+                </div>
+                <div style="border-bottom: 1px solid">
+                    <div class="color-pick">
+
+                        <button class="color-button" style="background-image:url(/Resource/WaterColor/water6.jpg);background-size: 100% 100%" onClick="ChangeBackground('water6.jpg')"></button>
+                        <button class="color-button" style="background-image:url(/Resource/WaterColor/water1.jpg);background-size: 100% 100%" onClick="ChangeBackground('water1.jpg')"></button>
+                        <button class="color-button" style="background-image:url(/Resource/WaterColor/water2.jpg);background-size: 100% 100%" onClick="ChangeBackground('water2.jpg')"></button>
+                        <button class="color-button" style="background-image:url(/Resource/WaterColor/water3.jpg);background-size: 100% 100%" onClick="ChangeBackground('water3.jpg')"></button>
+                        <button class="color-button" style="background-image:url(/Resource/WaterColor/water4.jpg);background-size: 100% 100%" onClick="ChangeBackground('water4.jpg')"></button>
+                        <button class="color-button" style="background-image:url(/Resource/WaterColor/water4.jpg);background-size: 100% 100%" onClick="ChangeBackground('water4.jpg')"></button>
+                        <button class="color-button" style="background-image:url(/Resource/WaterColor/water5.jpg);background-size: 100% 100%" onClick="ChangeBackground('water5.jpg')"></button>
+                        <button class="color-button" style="background-image:url(/Resource/WaterColor/water6.jpg);background-size: 100% 100%" onClick="ChangeBackground('water6.jpg')"></button>
+                        <button class="color-button" style="background-image:url(/Resource/WaterColor/water7.jpg);background-size: 100% 100%" onClick="ChangeBackground('water7.jpg')"></button>
+                        <button class="color-button" style="background-image:url(/Resource/WaterColor/water8.jpg);background-size: 100% 100%" onClick="ChangeBackground('water8.jpg')"></button>
+                        <button class="color-button" style="background-image:url(/Resource/WaterColor/water9.jpg);background-size: 100% 100%" onClick="ChangeBackground('water9.jpg')"></button>
+
+                    </div>
+                </div>
+
+                <div class="p-2">
+
+                    <button id="Delete" class="btn btn-secondary" onClick="CloseDialog('SizeText')&&CloseDialog('SizeImg')">
+                        Xóa layer
+                    </button>
+                    <button id="Refresh" class="btn btn-secondary float-right" onClick="CloseDialog('SizeText')&&CloseDialog('SizeImg')">
+                        Refresh
+                    </button>
+                </div>
+
+            </div>
+            <div style="margin-top: 50px">
+                <button style="margin-left: 40px; font-size: 30px" class="btn btn-success" onClick="MoChiTiet()">
+                    Đặt ngay
+                </button>
+            </div>
+        </div>
+        <div class="viewer">
+            <div class="product-design">
+                <div id="CaseColor" class="case-color">
+                    <img id="Img" src="~/Resource/OpTrong/Op3.png" style="width: 300px; position: absolute" alt="Case">
+                    <script>ChangeHeight();</script>
+                </div>
+
+            </div>
+            <div id="DesignArea" class="design-area">
+
+            </div>
+        </div>
+        <div class="sidebar d-none d-lg-block">
+            <button class="btn btn-info btn-sm" onClick="ShowDialog('LuuThietKe')"> Lưu</button>
+            <button class="btn btn-info btn-sm"> Xem</button>
+            <button class="btn btn-info btn-sm"> Zoom</button>
+            <button class="btn btn-info btn-sm"> Share</button>
+        </div>
+        <div id="SizeText" class="size-dialog">
+            <div class="dialog-content">
+                <div class="dialog-header">
+
+                    <button style="float: right; margin: 20px;" onClick="CloseDialog('SizeText')">
+                        Close
+                    </button>
+                    <h3 style="float: left; position: absolute; padding-left: 20px; ">
+                        Cỡ và vị trí
+                    </h3>
+                </div>
+                <div class="dialog-input">
+                    <textarea name="" id="EnterText" cols="24" rows="5">
+							
+						</textarea>
+                    <label>
+                        Chọn font:
+                    </label>
+                    <label for="" style="position: absolute;right: 23px;">
+                        Màu:
+                    </label>
+                    <input id="EnterColor" type="color" style="position: absolute; right: 15px;top:172px;">
+                    <input id="EnterFont" type="text" readonly value="arial" style="width: 120px; margin-top: 5px;margin-bottom: 5px;" onClick="ShowDialog('ChonFont')">
+                    <label for="">
+                        Nhập kích thước:
+                    </label>
+                    <input id="Size" type="text" style="margin-top: 5px;width: 185px">
+                    <button id="Update" class="btn" style="margin-left: 50px;margin-right: auto;margin-top: 10px">
+                        Cập nhật
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="SizeImg" class="size-dialog">
+            <div class="dialog-content">
+                <div class="dialog-header">
+
+                    <button style="float: right; margin: 20px;" onClick="CloseDialog('SizeImg')">
+                        Close
+                    </button>
+                    <h3 style="float: left; position: absolute; padding-left: 20px; ">
+                        Cỡ và vị trí
+                    </h3>
+                </div>
+                <div class="dialog-input" style="width: 90%;margin: auto">
+                    <label for="">Chiều rộng:</label>
+                    <input id="ChieuRong" class="number" type="text" style="width: 90px; margin-left: 10px">
+                    <br />
+                    <br />
+                    <label for="">Chiều cao:</label>
+                    <input id="ChieuCao" class="number" type="text" style="width: 90px; margin-left: 17px">
+                    <button id="UpdateImg" class="btn" style="margin-left: 50px;margin-right: auto;margin-top: 10px">
+                        Cập nhật
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="LuuThietKe" class="cover-area">
+        <div class="dialog">
+            <div class="dialog-content">
+                <div class="dialog-header">
+                    <button style="float: right; margin: 20px;" onClick="CloseDialog('LuuThietKe')">
+                        Close
+                    </button>
+                    <h3 style="float: left; position: absolute; padding-left: 20px; ">
+                        Lưu thiết kế của bạn
+                    </h3>
+                </div>
+                <div class="dialog-input">
+                    <form action="ThietKe.html">
+                        <label for="">Nhập địa chỉ email của bạn:</label> <br />
+                        <input type="email" required class="form-control" placeholder="Nhập địa chỉ email của bạn!" style="margin-top: 5px;margin-bottom: 10px">
+                        <label for="">Chúng tôi sẽ gửi thiết kế đến email của bạn!</label>
+                        <br />
+                        <button type="submit" style="margin-top:10px ">
+                            Gửi
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ShowThietKe" class="cover-area">
+        <div class="dialog">
+            <div class="dialog-content">
+                <div class="dialog-header">
+                    <button style="float: right; margin: 20px;" onClick="CloseDialog('ShowThietKe')">
+                        Close
+                    </button>
+                    <h3 style="float: left; position: absolute; padding-left: 20px; ">
+                        Lưu thiết kế của bạn
+                    </h3>
+                </div>
+                <div class="dialog-input">
+                    <label for="">Không có thiết kế nào!</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="modal fade" id="modalChonSanPham" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Chọn sản phẩm</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            @for (int i = 1; i <= 6; i++)
+                            {
+                                <div class="col-2">
+                                    <img src="/Resource/OpTrong/Op@(i).png" class="img-fluid" alt="OpTrong@(i)" onClick="ChangeCase('Op@(i).png')" data-dismiss="modal">
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ChonFont" class="cover-area" style="visibility: hidden">
+        <div class="dialog" style="width:800px">
+            <div class="dialog-content">
+                <div class="dialog-header">
+                    <button style="float: right; margin: 20px;" onClick="CloseDialog('ChonFont')">
+                        Close
+                    </button>
+                </div>
+                <div class="font-alot">
+                    <a href="#none" class="box-font" onClick="SetFont('ABeeZee')&&CloseDialog('ChonFont')">
+                        <h2 style="font-family:'ABeeZee'">
+                            abc xyz
+                        </h2>
+                        "ABeeZee"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Abril Fatface')">
+                        <h2 style="font-family:Abril Fatface">
+                            abc xyz
+                        </h2>
+                        "Abril Fatface"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Aclonica')">
+                        <h2 style="font-family:Aclonica">
+                            abc xyz
+                        </h2>
+                        "Aclonica"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Acme')">
+                        <h2 style="font-family:Acme">
+                            abc xyz
+                        </h2>
+                        "Acme"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Akronim')">
+                        <h2 style="font-family:Akronim">
+                            abc xyz
+                        </h2>
+                        "Akronim"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Aldrich')">
+                        <h2 style="font-family:Aldrich">
+                            abc xyz
+                        </h2>
+                        "Aldrich"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Alice')">
+                        <h2 style="font-family:Alice">
+                            abc xyz
+                        </h2>
+                        "Alice"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Allura')">
+                        <h2 style="font-family:Allura">
+                            abc xyz
+                        </h2>
+                        "Allura"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Almendra Display')">
+                        <h2 style="font-family:Almendra Display">
+                            abc xyz
+                        </h2>
+                        "Almendra Display"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Aguafina Script')">
+                        <h2 style="font-family:Aguafina Script">
+                            abc xyz
+                        </h2>
+                        "Aguafina Script"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Annie Use Your Telescope')">
+                        <h2 style="font-family:Annie Use Your Telescope">
+                            abc xyz
+                        </h2>
+                        "Annie Use Your Telescope"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Arbutus')">
+                        <h2 style="font-family:Arbutus">
+                            abc xyz
+                        </h2>
+                        "Arbutus"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Arizonia')">
+                        <h2 style="font-family:Arizonia">
+                            abc xyz
+                        </h2>
+                        "Arizonia"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Asset')">
+                        <h2 style="font-family:Asset">
+                            abc xyz
+                        </h2>
+                        "Asset"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Barrio')">
+                        <h2 style="font-family:Barrio">
+                            abc xyz
+                        </h2>
+                        "Barrio"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Bigelow Rules')">
+                        <h2 style="font-family:Bigelow Rules">
+                            abc xyz
+                        </h2>
+                        "Bigelow Rules"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Bonbon')">
+                        <h2 style="font-family:Bonbon">
+                            abc xyz
+                        </h2>
+                        "Bonbon"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Condiment')">
+                        <h2 style="font-family:Condiment">
+                            abc xyz
+                        </h2>
+                        "Condiment"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Chewy')">
+                        <h2 style="font-family:Chewy">
+                            abc xyz
+                        </h2>
+                        "Chewy"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Codystar')">
+                        <h2 style="font-family:Codystar">
+                            abc xyz
+                        </h2>
+                        "Codystar"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Creepster')">
+                        <h2 style="font-family:Creepster">
+                            abc xyz
+                        </h2>
+                        "Creepster"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Caesar Dressing')">
+                        <h2 style="font-family:Caesar Dressing">
+                            abc xyz
+                        </h2>
+                        "Caesar Dressing"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Dawning of a New Day')">
+                        <h2 style="font-family:Dawning of a New Day">
+                            abc xyz
+                        </h2>
+                        "Dawning of a New Day"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Eater')">
+                        <h2 style="font-family:Eater">
+                            abc xyz
+                        </h2>
+                        "Eater"
+                    </a>
+                    <a href="#none" class="box-font" onClick="CloseDialog('ChonFont')&&SetFont('Ewert')">
+                        <h2 style="font-family:Ewert">
+                            abc xyz
+                        </h2>
+                        "Ewert"
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="modal fade" id="modalChonHinhMau" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Chọn hình mẫu</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            @for (int i = 1; i <= 24; i++)
+                            {
+                                <div class="col-3">
+                                    <img src="/Resource/HinhMau/Mau@(i).png" onClick="ThemHinh('Mau@(i).png')" class="img-fluid box-img" alt="HinhMau" data-dismiss="modal">
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="modal fade" id="modalTaiHinhLen" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thêm hình từ link</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <form onsubmit="JavaScript:ThemHinhTuLink()" class="w-100" id="formGetImage" >
+                                <div class="row w-100">
+                                    <div class="col-8 offset-1">
+                                        <label for="">Nhập đường link của ảnh:</label> <br />
+                                        <input id="LinkAnh" type="text" required class="form-control" placeholder="Nhập đường link ảnh!">
+                                        <br />
+                                        <button type="submit" class="btn btn-success" >
+                                            Lấy ảnh
+                                        </button>
+                                        
+                                    </div>
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="TaiAnhLen" class="cover-area">
+        <div class="dialog">
+            <div class="dialog-content">
+                <div class="dialog-header">
+                    <button style="float: right; margin: 20px;" onClick="CloseDialog('TaiAnhLen')">
+                        Close
+                    </button>
+                    <h3 style="float: left; position: absolute; padding-left: 20px; ">
+                        Ảnh từ nguồn khác
+                    </h3>
+                </div>
+                <div class="dialog-input">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#modalTaiHinhLen").on("submit", "#formGetImage", function (e) {
+
+                $('#modalTaiHinhLen').modal('hide');
+                
+                
+            });
+        });
+    </script>
+}
