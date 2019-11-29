@@ -17,6 +17,8 @@ namespace MVC.Models
 
         protected static IEnumerable<T> Search<T>(IEnumerable<T> items, string searchString)
         {
+            if (String.IsNullOrEmpty(searchString))
+                return items;
             List<string> searchStrings = searchString.ToLower().Split(' ').ToList();
             List<T> result = new List<T>();
             foreach (string str in searchStrings)
@@ -29,23 +31,23 @@ namespace MVC.Models
                     return false;
                 }).ToList());
             }
-            return result.GroupBy(x => x.GetType().GetProperty("ID").GetValue(x)).Select(y => y.First());
+            return result.Distinct();
         }
 
         protected static IEnumerable<T> Search<T, TKey>(IEnumerable<T> items, Func<T, TKey> keySelector, string searchString)
         {
-            foreach (var item in items)
-                if (keySelector(item).ToString().Contains(searchString))
-                    yield return item;
+            if (String.IsNullOrEmpty(searchString))
+                return items;
+            List<string> searchStrings = searchString.ToLower().Split(' ').ToList();
+            List<T> result = new List<T>();
+            foreach (string str in searchStrings)
+                result.AddRange(items.Where(x => keySelector(x).ToString().Contains(str)).ToList());
+            return result.Distinct();
         }
 
         protected static IEnumerable<TKey> GetPropertyValue<T, TKey>(IEnumerable<T> items, Func<T, TKey> keySelector)
         {
-            List<TKey> keys = new List<TKey>();
-            foreach (T item in items)
-                if (!keys.Contains(keySelector(item)))
-                    keys.Add(keySelector(item));
-            return keys;
+            return items.Select(keySelector).Distinct();
         }
 
         protected static string EncodePassword(string password)
@@ -1264,10 +1266,10 @@ namespace MVC.Models
 
         public static IEnumerable<CommentView> GetCommentView(int productId)
         {
-            return GetComments().Where(x => x.ProductID == productId && x.ParentID == null).Select(x => new CommentView()
+            return GetComments().Where(x => x.ProductID == productId && x.ParentID == null).OrderByDescending(x => x.CreateDate).Select(x => new CommentView()
             {
                 Comment = x,
-                ReplyComment = GetComments().Where(y => y.ProductID == productId && y.ParentID == x.ID).Select(y => new CommentView()
+                ReplyComment = GetComments().Where(y => y.ProductID == productId && y.ParentID == x.ID).OrderByDescending(y => y.CreateDate).Select(y => new CommentView()
                 {
                     Comment = y
                 }).ToList()
