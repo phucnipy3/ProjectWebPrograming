@@ -421,8 +421,8 @@ namespace MVC.Models
             {
                 ProductID = x.ID,
                 ProductName = x.Name,
-                Price = ((decimal)x.Price).ToString("N"),
-                PromotionPrice = ((decimal)x.PromotionPrice).ToString("N"),
+                Price = ((decimal)x.Price).ToString("N0"),
+                PromotionPrice = ((decimal)x.PromotionPrice).ToString("N0"),
                 ImageLink = x.Image,
                 Tag = GetTag(x)
             }).ToList();
