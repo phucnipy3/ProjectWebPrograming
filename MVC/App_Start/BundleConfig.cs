@@ -21,8 +21,8 @@ namespace MVC
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
                       "~/Scripts/umd/popper.js",
+                      "~/Scripts/bootstrap.js",
                        "~/Scripts/bootstrap-validate.js",
                        "~/Scripts/bootstrap-input-spinner.js",
                        "~/Scripts/infinite-scroll.pkgd.js"));

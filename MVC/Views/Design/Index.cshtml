@@ -13,7 +13,7 @@
                         <a href="#modalChonSanPham" data-toggle="modal" style="border-bottom: 1px solid #CCCCCC;">Chọn sản phẩm</a>
                     </li>
                     <li>
-                        <a id="AddText" href="#none" style="border-bottom: 1px solid #CCCCCC;" onClick="CloseDialog('SizeImg')&&ShowDialog('SizeText')&&ResetSizeText()"> Thêm Text</a>
+                        <a id="AddText" href="#none" data-toggle="popover" data-popover-content="#SizeText" title="Màu sắc và kích thước" style="border-bottom: 1px solid #CCCCCC;" onclick=" ResetSizeText()"> Thêm Text</a>
                     </li>
                     <li>
                         <a href="#modalChonHinhMau" data-toggle="modal" style="border-bottom: 1px solid #CCCCCC;"> Thêm hình mẫu</a>
@@ -117,38 +117,53 @@
             <button class="btn btn-info btn-sm"> Zoom</button>
             <button class="btn btn-info btn-sm"> Share</button>
         </div>
-        <div id="SizeText" class="size-dialog">
-            <div class="dialog-content">
-                <div class="dialog-header">
+        <div id="SizeText" class="d-none">
+                <div class="popover-body">
+                    <form class="w-100 p-2">
+                        <div class="row w-100">
+                            <div class="col-12">
+                                <textarea name="EnterText" id="EnterText" class="form-control" rows="4" placeholder="Text go here"></textarea>
+                            </div>
+                        </div>
+                        <div class="row w-100">
+                            <div class="col-8">
+                                <label>
+                                    Chọn font:
+                                </label>
+                                <input name="EnterFont" id="EnterFont" type="text" class="form-control" readonly value="arial" onClick="ShowModalChonFont()">
 
-                    <button style="float: right; margin: 20px;" onClick="CloseDialog('SizeText')">
-                        Close
-                    </button>
-                    <h3 style="float: left; position: absolute; padding-left: 20px; ">
-                        Cỡ và vị trí
-                    </h3>
+                            </div>
+                            <div class="col-4">
+                                <label>
+                                    Màu:
+                                </label>
+                                <input name="EnterColor" id="EnterColor" type="color" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row w-100">
+                            <div class="col-12">
+                                <label for="">
+                                    Nhập kích thước:
+                                </label>
+                                <input name="Size" id="Size" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row w-100">
+                            <div class="col-auto mx-auto">
+                                <button name="Update" id="Update" class="btn btn-info mt-3">
+                                    Cập nhật
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </form>
+                    
+                    
+                    
+                    
+                    
                 </div>
-                <div class="dialog-input">
-                    <textarea name="" id="EnterText" cols="24" rows="5">
-							
-						</textarea>
-                    <label>
-                        Chọn font:
-                    </label>
-                    <label for="" style="position: absolute;right: 23px;">
-                        Màu:
-                    </label>
-                    <input id="EnterColor" type="color" style="position: absolute; right: 15px;top:172px;">
-                    <input id="EnterFont" type="text" readonly value="arial" style="width: 120px; margin-top: 5px;margin-bottom: 5px;" onClick="ShowModalChonFont()">
-                    <label for="">
-                        Nhập kích thước:
-                    </label>
-                    <input id="Size" type="text" style="margin-top: 5px;width: 185px">
-                    <button id="Update" class="btn" style="margin-left: 50px;margin-right: auto;margin-top: 10px">
-                        Cập nhật
-                    </button>
-                </div>
-            </div>
+            
         </div>
         <div id="SizeImg" class="size-dialog">
             <div class="dialog-content">
@@ -163,12 +178,12 @@
                 </div>
                 <div class="dialog-input" style="width: 90%;margin: auto">
                     <label for="">Chiều rộng:</label>
-                    <input id="ChieuRong" class="number" type="text" style="width: 90px; margin-left: 10px">
+                    <input id="ChieuRong" name ="ChieuRong"class="number" type="text" style="width: 90px; margin-left: 10px">
                     <br />
                     <br />
                     <label for="">Chiều cao:</label>
-                    <input id="ChieuCao" class="number" type="text" style="width: 90px; margin-left: 17px">
-                    <button id="UpdateImg" class="btn" style="margin-left: 50px;margin-right: auto;margin-top: 10px">
+                    <input id="ChieuCao" name="ChieuCao" class="number" type="text" style="width: 90px; margin-left: 17px">
+                    <button id="UpdateImg" name="UpdateImg" class="btn" style="margin-left: 50px;margin-right: auto;margin-top: 10px">
                         Cập nhật
                     </button>
                 </div>
@@ -237,19 +252,6 @@
                             }
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="ChonFont" class="cover-area" style="visibility: hidden">
-        <div class="dialog" style="width:800px">
-            <div class="dialog-content">
-                <div class="dialog-header">
-                    <button style="float: right; margin: 20px;" onClick="CloseDialog('ChonFont')">
-                        Close
-                    </button>
-                </div>
-                
                 </div>
             </div>
         </div>
@@ -498,5 +500,13 @@
         function ShowModalChonFont() {
             $('#modalChonFont').modal('show');
         }
+        $("[data-toggle=popover]").popover({
+            html: true,
+            content: function () {
+                var content = $(this).attr("data-popover-content");
+                return $(content).children("div").clone();
+            }
+        });
+
     </script>
 }
