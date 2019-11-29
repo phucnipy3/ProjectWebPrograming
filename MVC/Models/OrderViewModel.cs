@@ -21,15 +21,15 @@ namespace MVC.Models
 
         public List<TimeLogs> TimeLogs { get; set; }
 
-        public decimal? TotalProductMoney { get; set; }
+        public string TotalProductMoney { get; set; }
 
         public string Transport { get; set; }
 
-        public decimal? TransportationFee { get; set; }
+        public string TransportationFee { get; set; }
 
         public string PaymentMethods { get; set; }
 
-        public decimal? TotalMoney { get; set; }
+        public string TotalMoney { get; set; }
 
     }
 
@@ -41,9 +41,9 @@ namespace MVC.Models
 
         public int Count { get; set; }
 
-        public decimal? Price { get; set; }
+        public string Price { get; set; }
 
-        public decimal? PromotionPrice { get; set; }
+        public string PromotionPrice { get; set; }
     }
 
     public class TimeLogs

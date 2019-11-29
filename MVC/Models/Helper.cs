@@ -756,17 +756,19 @@ namespace MVC.Models
             List<Order> orders = GetOrdersOf(userId).ToList();
             foreach (Order order in orders)
             {
+                decimal totalProductMoney = (decimal)OrderDetailHelper.TotalMoneyOfOrder(order.ID);
+                decimal totalMoney = (decimal)order.TransportationFee + totalProductMoney;
                 OrderViewModel orderViewModel = new OrderViewModel();
                 orderViewModel.ID = order.ID;
                 orderViewModel.ShipName = order.ShipName;
                 orderViewModel.ShipMobile = order.ShipMobile;
                 orderViewModel.ShipAddress = order.ShipAddress;
                 orderViewModel.Status = GetStatus(order.ID);
-                orderViewModel.TotalProductMoney = OrderDetailHelper.TotalMoneyOfOrder(order.ID);
+                orderViewModel.TotalProductMoney = totalProductMoney.ToString("N0");
                 orderViewModel.Transport = order.Transport;
-                orderViewModel.TransportationFee = order.TransportationFee;
+                orderViewModel.TransportationFee = ((decimal)order.TransportationFee).ToString("N0");
                 orderViewModel.PaymentMethods = order.PaymentMethods;
-                orderViewModel.TotalMoney = orderViewModel.TotalProductMoney + orderViewModel.TransportationFee;
+                orderViewModel.TotalMoney = totalMoney.ToString("N0");
                 orderViewModel.Products = OrderDetailHelper.GetProductOnOrder(order.ID).ToList();
                 orderViewModel.TimeLogs = GetTimeLogs(order.ID).ToList();
                 yield return orderViewModel;
@@ -928,8 +930,8 @@ namespace MVC.Models
                 Image = ProductHelper.GetPropertyValue(x.ProductID, y => y.Image),
                 Name = ProductHelper.GetPropertyValue(x.ProductID, y => y.Name),
                 Count = x.Count,
-                Price = x.Price,
-                PromotionPrice = x.PromotionPrice
+                Price = ((decimal)x.Price).ToString("N0"),
+                PromotionPrice = ((decimal)x.PromotionPrice).ToString("N0")
             }).ToList();
         }
 
