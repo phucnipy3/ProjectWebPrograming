@@ -42,7 +42,18 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Rate(int point)
+        public ActionResult Rate(int id, int point)
+        {
+
+            return Content("success");
+        }
+        [HttpPost]
+        public ActionResult Comment(int idProduct, string content)
+        {
+            return Content("success");
+        }
+        [HttpPost]
+        public ActionResult Reply(int idProduct, string content,int idParent)
         {
             return Content("success");
         }

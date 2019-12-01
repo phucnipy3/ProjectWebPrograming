@@ -35,7 +35,7 @@
 <div class="container pt-5">
     <div class="row">
         <div class="col-lg-3 col-6 mx-auto">
-            <img src="~/Resource/chitiet/1.png" alt="Alternate Text" width="100% " />
+            <img src="/@Model.MainProduct.Image" alt="Alternate Text" width="100% " />
         </div>
         <div class="">
 
@@ -145,66 +145,98 @@
                     </span>
                 </div>
             </div>
-
-            <div class="row comment-create">
-                <div class="col-12">
-                    <textarea style="width:100%" rows="4"></textarea>
+            <div class="row">
+                <div class="col-auto">
+                    <button class="btn btn-info mb-3" id="newComment" data-toggle="collapse" data-target="#create-new">New Comment</button>
                 </div>
-                <div class="col-auto ml-auto">
-                    <a href="#" id="btnComment" class="btn btn-secondary">comment</a>
-                </div>
+            </div>
+            <div class="row comment-create collapse " id="create-new">
+                <form action="/Product/Comment" method="post" class="w-100">
+                    <input type="text" name="idProduct" value="@Model.MainProduct.ID" hidden/>
+                    <div class="col-12">
+                        <textarea style="width:100%" rows="4" name="content"></textarea>
+                    </div>
+                    <div class="row w-100">
+                        <div class="col-auto ml-auto p-0">
+                            <button href="#" id="btnComment" class="btn btn-secondary" type="submit">comment</button>
+                        </div>
+                    </div>
+                    
+                </form>
             </div>
             <div class="row comment-section text-justify">
                 <div class="col-12">
-                    <div class="row comment">
-                        <div class="col-auto">
-                            <img src="~/Resource/support.png" alt="Alternate Text" class="rounded-circle comment-image d-block" />
-                        </div>
-                        <div class="col pl-0 comment-body">
-                            <div class="row">
-                                <div class="col-12 comment-name">
-                                    <span>dfghdfgdf</span>
-                                </div>
-                                <div class="col-12 comment-text">
-                                    <p>sdfhsdfgjfkjshkjscnvjcvn nkxcjvnksn kdjfn kjn kjdfg kjsjf s dfg d dfg s</p>
-                                </div>
-                                <div class="col-12 comment-tools">
-                                    <ul class="p-0">
-                                        <li class="d-inline-block"><i class="fa fa-clock-o"></i> 13:94 &emsp;</li>
-                                        <li class="d-inline-block"><i class="fa fa-calendar"></i> 04/01/2015 &emsp;</li>
-                                        <li class="d-inline-block"><a href="#" class="text-decoration-none text-info">reply</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-12 comment-replies">
-                                    <div class="row comment">
-                                        <div class="col-auto">
-                                            <img src="~/Resource/support.png" alt="Alternate Text" class="rounded-circle comment-image d-block" />
-                                        </div>
-                                        <div class="col pl-0 comment-body">
-                                            <div class="row">
-                                                <div class="col-12 comment-name">
-                                                    <span>dfghdfgdf</span>
-                                                </div>
-                                                <div class="col-12 comment-text">
-                                                    <p>sdfhsdfgjfkjshkjscnvjcvn nkxcjvnksn kdjfn kjn kjdfg kjsjf s dfg d dfg s</p>
-                                                </div>
-                                                <div class="col-12 comment-tools">
-                                                    <a href="#" class="text-decoration-none text-info">reply</a>
-                                                </div>
-                                                <div class="col-12 comment-replies">
+                    @foreach (var comment in Model.Comments)
+                    {
 
+                        <div class="row comment">
+                            <div class="col-auto">
+                                <img src="/" alt="Alternate Text" class="rounded-circle comment-image d-block" />
+                            </div>
+                            <div class="col pl-0 comment-body">
+                                <div class="row">
+                                    <div class="col-12 comment-name">
+                                        <span>dfghdfgdf</span>
+                                    </div>
+                                    <div class="col-12 comment-text">
+                                        <p>@comment.Comment.Content</p>
+                                    </div>
+                                    <div class="col-12 comment-tools">
+                                        <ul class="p-0">
+                                            <li class="d-inline-block"><i class="fa fa-clock-o"></i> 13:94 &emsp;</li>
+                                            <li class="d-inline-block"><i class="fa fa-calendar"></i> 04/01/2015 &emsp;</li>
+                                            <li class="d-inline-block"><a href="#create-new-@comment.Comment.ID" class="text-decoration-none text-info reply" data-parent-id="@comment.Comment.ID" data-toggle="collapse" >reply</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-12 comment-replies">
+                                        @foreach (var reply in comment.ReplyComment)
+                                        {
+                                            <div class="row comment">
+                                                <div class="col-auto">
+                                                    <img src="/" alt="Alternate Text" class="rounded-circle comment-image d-block" />
                                                 </div>
+                                                <div class="col pl-0 comment-body">
+                                                    <div class="row">
+                                                        <div class="col-12 comment-name">
+                                                            <span>dfghdfgdf</span>
+                                                        </div>
+                                                        <div class="col-12 comment-text">
+                                                            <p>@reply.Comment.Content</p>
+                                                        </div>
+                                                        <div class="col-12 comment-tools">
+                                                            <ul class="p-0">
+                                                                <li class="d-inline-block"><i class="fa fa-clock-o"></i> 13:94 &emsp;</li>
+                                                                <li class="d-inline-block"><i class="fa fa-calendar"></i> 04/01/2015 &emsp;</li>
+                                                                <li class="d-inline-block"><a href="#create-new-@comment.Comment.ID" class="text-decoration-none text-info reply" data-parent-id="@comment.Comment.ID" data-toggle="collapse">reply</a></li>
+                                                            </ul>
+                                                        </div>
 
+                                                    </div>
+                                                </div>
                                             </div>
-
-                                        </div>
+                                        }
+                                            <div class="row comment-create collapse " id="create-new-@comment.Comment.ID">
+                                                <form action="/Product/Reply" method="post" class="w-100">
+                                                    <input type="text" name="idProduct" value="@Model.MainProduct.ID" hidden />
+                                                    <input type="text" name="idParent" value="@comment.Comment.ID" hidden/>
+                                                    <div class="col-12">
+                                                        <textarea style="width:100%" rows="4" name="content"></textarea>
+                                                    </div>
+                                                    <div class="row w-100">
+                                                        <div class="col-auto ml-auto p-0">
+                                                            <button href="#" id="btnComment" class="btn btn-secondary btn-reply" type="submit">comment</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                               
+                                            </div>
                                     </div>
 
                                 </div>
-
                             </div>
                         </div>
-                    </div>
+
+                    }
                 </div>
             </div>
 
@@ -214,27 +246,30 @@
                 <div class="col-auto mr-auto">
                     <h3>Liên quan</h3>
                 </div>
-                <div class="col-12">
+                @for(int i = 0;i<5;i++)
+                {
+                    var item = Model.RelateProducts[i];
+                    <div class="col-12">
 
-                    <div class="view view-eighth">
+                        <div class="view view-eighth">
 
-                        <a href="/Product/Detail/1" class="text-decoration-none text-dark product">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="card border-0">
-                                        <img src="~/Resource/chitiet/1.png" alt="Alternate Text" class="image-on-home m-auto" />
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="card-body p-0">
-                                        <div class="row">
-                                            <div class="col-12 pt-2 product-name overflow-hidden">
-                                                <p>Ốp lưng siêu xịn xò siêu to khổng lồ bla bla bla bal bla</p>
-                                            </div>
+                            <a href="/Product/Detail/@item.ProductID" class="text-decoration-none text-dark product">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="card border-0">
+                                            <img src="/@item.ImageLink" alt="Alternate Text" class="image-on-home m-auto" />
                                         </div>
-                                        <div class="row">
-                                            <div class="col-12 pt-2 product-price">
-                                                @*@if (item.PromotionPrice != 0)
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="card-body p-0">
+                                            <div class="row">
+                                                <div class="col-12 pt-2 product-name overflow-hidden">
+                                                    <p>@item.ProductName</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 pt-2 product-price">
+                                                    @if (item.PromotionPrice != item.Price)
                                                     {
                                                         <p>
                                                             @item.PromotionPrice <u>đ</u>
@@ -245,49 +280,49 @@
                                                         <p>
                                                             @item.Price <u>đ</u>
                                                         </p>
-                                                    }*@
-                                                <p>10000 <u>đ</u></p>
+                                                    }
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12 pt-2 product-discount">
-                                                @*@if (item.PromotionPrice != 0)
+                                            <div class="row">
+                                                <div class="col-12 pt-2 product-discount">
+                                                    @if (item.PromotionPrice != item.Price)
                                                     {
                                                         <del>
                                                             @item.Price <u>đ</u>
                                                         </del>
-                                                    }*@
-                                                <del>12000 <u>đ</u></del>
+                                                    }
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12 pt-2 product-rate">
+                                            <div class="row">
+                                                <div class="col-12 pt-2 product-rate">
 
+                                                </div>
                                             </div>
+
                                         </div>
 
                                     </div>
-
                                 </div>
-                            </div>
 
 
-                        </a>
-                        <div class="mask">
-                            <div class="row h-custom-40 align-content-end">
-                                <div class="col-auto mx-auto">
-                                    <a href="#" class="add">Add To Cart</a>
+                            </a>
+                            <div class="mask">
+                                <div class="row h-custom-40 align-content-end">
+                                    <div class="col-auto mx-auto">
+                                        <a href="#" class="add">Add To Cart</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row h-custom-15 align-content-center">
-                                <div class="col-auto mx-auto">
-                                    <a href="/Product/Detail/1" class="info">View More</a>
+                                <div class="row h-custom-15 align-content-center">
+                                    <div class="col-auto mx-auto">
+                                        <a href="/Product/Detail/1" class="info">View More</a>
+                                    </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
+
             </div>
         </div>
     </div>
@@ -316,6 +351,15 @@ else
 }
 @section scripts{
     <script>
+
+        @if(@User.Identity.IsAuthenticated)
+        {
+            <text>var authen = true;</text>
+        }
+        else
+        {
+            <text>var authen = false;</text>
+        }
         function starDefault() {
             var x = @ViewBag.RatePoint;
             switch (x) {
@@ -431,29 +475,36 @@ else
                 starDefault();
             });
             $("#btnComment").click(function (e) {
-                if (!$(this).hasClass('authen')) {
+                if (!authen) {
                     $("#modalMessage").modal('show');
                     return false;
                 }
             });
             $(".star-link").click(function () {
-                if (!$("#btnComment").hasClass('authen')) {
+                if (!authen) {
                     $("#modalMessage").modal('show');
                     return false;
                 }
                 var star = $(this);
                 var point = star.attr("data-point");
                 $.ajax({
-                    url: '/Product/Rate/?Point=' + point,
+                    url: '/Product/Rate/?id=@(Model.MainProduct.ID)&&Point=' + point,
                     method: 'post',
                     success: function (result) {
                         if (result == "success")
-                            alert("rated");
+                            location.reload();
                     }
                 })
                 return false;
             });
+            $(".btn-reply")
+            {
+                if (!authen) {
+                    $("#modalMessage").modal('show');
+                    return false;
+                }
+            }
         });
-        
+
     </script>
 }
