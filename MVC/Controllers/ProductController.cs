@@ -37,7 +37,13 @@ namespace MVC.Controllers
         
         public ActionResult Detail(int id = 1)
         {
+
             ViewBag.RatePoint = 2;
+            List<ProductOnPage> recentProducts = HttpContext.Session["RecentProducts"] as List<ProductOnPage>;
+            if (recentProducts == null)
+                recentProducts = new List<ProductOnPage>();
+            recentProducts.Add(ProductHelper.GetProductOnPages().Where(x => x.ProductID == id).SingleOrDefault());
+            HttpContext.Session["RecentProducts"] = recentProducts;
             return View(ProductHelper.GetProductDetail(id));
         }
 

@@ -1,4 +1,5 @@
 ﻿@model MVC.Models.DetailViewModel
+@using MVC.Models;
 @{
     ViewBag.Title = "Detail";
     ViewBag.Active = "#ProductBtn";
@@ -152,7 +153,7 @@
             </div>
             <div class="row comment-create collapse " id="create-new">
                 <form action="/Product/Comment" method="post" class="w-100">
-                    <input type="text" name="idProduct" value="@Model.MainProduct.ID" hidden/>
+                    <input type="text" name="idProduct" value="@Model.MainProduct.ID" hidden />
                     <div class="col-12">
                         <textarea style="width:100%" rows="4" name="content"></textarea>
                     </div>
@@ -161,7 +162,7 @@
                             <button href="#" id="btnComment" class="btn btn-secondary" type="submit">comment</button>
                         </div>
                     </div>
-                    
+
                 </form>
             </div>
             <div class="row comment-section text-justify">
@@ -185,7 +186,7 @@
                                         <ul class="p-0">
                                             <li class="d-inline-block"><i class="fa fa-clock-o"></i> 13:94 &emsp;</li>
                                             <li class="d-inline-block"><i class="fa fa-calendar"></i> 04/01/2015 &emsp;</li>
-                                            <li class="d-inline-block"><a href="#create-new-@comment.Comment.ID" class="text-decoration-none text-info reply" data-parent-id="@comment.Comment.ID" data-toggle="collapse" >reply</a></li>
+                                            <li class="d-inline-block"><a href="#create-new-@comment.Comment.ID" class="text-decoration-none text-info" data-parent-id="@comment.Comment.ID" data-toggle="collapse">reply</a></li>
                                         </ul>
                                     </div>
                                     <div class="col-12 comment-replies">
@@ -207,7 +208,7 @@
                                                             <ul class="p-0">
                                                                 <li class="d-inline-block"><i class="fa fa-clock-o"></i> 13:94 &emsp;</li>
                                                                 <li class="d-inline-block"><i class="fa fa-calendar"></i> 04/01/2015 &emsp;</li>
-                                                                <li class="d-inline-block"><a href="#create-new-@comment.Comment.ID" class="text-decoration-none text-info reply" data-parent-id="@comment.Comment.ID" data-toggle="collapse">reply</a></li>
+                                                                <li class="d-inline-block"><a href="#create-new-@comment.Comment.ID" class="text-decoration-none text-info" data-parent-id="@comment.Comment.ID" data-toggle="collapse">reply</a></li>
                                                             </ul>
                                                         </div>
 
@@ -215,21 +216,21 @@
                                                 </div>
                                             </div>
                                         }
-                                            <div class="row comment-create collapse " id="create-new-@comment.Comment.ID">
-                                                <form action="/Product/Reply" method="post" class="w-100">
-                                                    <input type="text" name="idProduct" value="@Model.MainProduct.ID" hidden />
-                                                    <input type="text" name="idParent" value="@comment.Comment.ID" hidden/>
-                                                    <div class="col-12">
-                                                        <textarea style="width:100%" rows="4" name="content"></textarea>
+                                        <div class="row comment-create collapse " id="create-new-@comment.Comment.ID">
+                                            <form action="/Product/Reply" method="post" class="w-100">
+                                                <input type="text" name="idProduct" value="@Model.MainProduct.ID" hidden />
+                                                <input type="text" name="idParent" value="@comment.Comment.ID" hidden />
+                                                <div class="col-12">
+                                                    <textarea style="width:100%" rows="4" name="content"></textarea>
+                                                </div>
+                                                <div class="row w-100">
+                                                    <div class="col-auto ml-auto p-0">
+                                                        <button href="#" id="btnComment" class="btn btn-secondary btn-reply" type="submit">comment</button>
                                                     </div>
-                                                    <div class="row w-100">
-                                                        <div class="col-auto ml-auto p-0">
-                                                            <button href="#" id="btnComment" class="btn btn-secondary btn-reply" type="submit">comment</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                               
-                                            </div>
+                                                </div>
+                                            </form>
+
+                                        </div>
                                     </div>
 
                                 </div>
@@ -246,7 +247,7 @@
                 <div class="col-auto mr-auto">
                     <h3>Liên quan</h3>
                 </div>
-                @for(int i = 0;i<5;i++)
+                @for (int i = 0; i < 5; i++)
                 {
                     var item = Model.RelateProducts[i];
                     <div class="col-12">
@@ -309,12 +310,12 @@
                             <div class="mask">
                                 <div class="row h-custom-40 align-content-end">
                                     <div class="col-auto mx-auto">
-                                        <a href="#" class="add">Add To Cart</a>
+                                        <a href="/Cart/AddToCart/@item.ProductID" class="add">Add To Cart</a>
                                     </div>
                                 </div>
                                 <div class="row h-custom-15 align-content-center">
                                     <div class="col-auto mx-auto">
-                                        <a href="/Product/Detail/1" class="info">View More</a>
+                                        <a href="/Product/Detail/@item.ProductID" class="info">View More</a>
                                     </div>
                                 </div>
 
@@ -326,6 +327,49 @@
             </div>
         </div>
     </div>
+</div>
+<div class="container container-recommend">
+    <div class="row w-100 pr-0">
+        <a href="#" class="text-decoration-none"><h2 class="pl-4 pt-3 text-recommend">Ốp lưng đã xem</h2></a>
+
+    </div>
+
+    @{
+        List<ProductOnPage> lst = Session["RecentProducts"] as List<ProductOnPage>;
+        <div class="row mx-auto my-auto py-3">
+            <div class="col-12 overflow-hidden p-0 w-100 image-on-home">
+                <div id="carouselRecommend" class="carousel slide w-100 multi-item-carousel p-0 row m-0" data-ride="carousel">
+                    <div class="carousel-inner " role="listbox">
+                        <div class="carousel-item active">
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 d-block float-left">
+                                <a href="/Product/Detail/@lst[0].ProductID">
+                                    <img src="/@lst[0].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
+                                </a>
+                            </div>
+                        </div>
+                        @for (int i = 1; i < lst.Count; i++)
+                        {
+                            <div class="carousel-item ">
+                                <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 d-block float-left">
+                                    <a href="/Product/Detail/@lst[i].ProductID">
+                                        <img src="/@lst[i].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselRecommend" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselRecommend" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 <script>
     function SetAuthen() {
@@ -350,6 +394,25 @@ else
     </script>
 }
 @section scripts{
+    <script>
+        $('.multi-item-carousel').carousel({
+            interval: 3000
+        });
+        $('.multi-item-carousel .carousel-item').each(function () {
+            appendSlide(($(this)), ($(this)).next(), 5);
+        });
+        function appendSlide(node, next, n) {
+            if (n == 0)
+                return;
+            else {
+                if (!next.length) {
+                    next = node.siblings(':first');
+                }
+                next.children(':first-child').clone().appendTo(node);
+                appendSlide(node, next.next(), n - 1);
+            }
+        }
+    </script>
     <script>
 
         @if(@User.Identity.IsAuthenticated)
@@ -497,13 +560,14 @@ else
                 })
                 return false;
             });
-            $(".btn-reply")
-            {
+            $(".btn-reply").click(function () {
                 if (!authen) {
                     $("#modalMessage").modal('show');
                     return false;
+
                 }
-            }
+            });
+
         });
 
     </script>
