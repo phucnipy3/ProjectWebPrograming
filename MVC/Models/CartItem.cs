@@ -9,20 +9,10 @@ namespace MVC.Models
     {
         public Product Product { get; set; }
 
-        public int Count { get; set; }
-       
-        public string StringSubTotal
-        {
-            get
-            {
-                return ((decimal)(Count * Product.PromotionPrice)).ToString("N0");
-            }
-        }
-        public string ProductPrice {
-            get
-            {
-                return ((decimal)Product.PromotionPrice).ToString("N0");
-            }
-        }
+        public int? Count { get; set; }
+
+        public string StringSubTotal { get { return ((decimal)(Count * Product.PromotionPrice)).ToString("N0"); } }
+
+        public string ProductPrice { get { return ((decimal)Product.PromotionPrice).ToString("N0"); } }
     }
 }
