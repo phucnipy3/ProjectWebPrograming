@@ -307,7 +307,7 @@ namespace MVC.Models
 
         public static string GetNameByUserID(string userId)
         {
-            return GetUsers().Where(x => x.UserID == userId).SingleOrDefault().Name;
+            return GetPropertyValue(userId, x => x.Name);
         }
 
         public static User GetUserByUserID(string userId)
@@ -317,10 +317,7 @@ namespace MVC.Models
 
         public static string GetUserRole(string userId)
         {
-            var user = db.Users.Where(x => x.UserID == userId).SingleOrDefault();
-            if (user != null)
-                return user.Role;
-            return null;
+            return GetPropertyValue(userId, x => x.Role);
         }
         public static bool IsValidUser(string userId, string password)
         {
@@ -331,6 +328,7 @@ namespace MVC.Models
         public static void ModifyActive(string userId, bool active)
         {
             GetUserByUserID(userId).Active = active;
+            db.SaveChanges();
         }
 
         public static bool UserIDExisted(string userId)
@@ -1218,7 +1216,7 @@ namespace MVC.Models
 
         public static int? GetRatePoint(string userId, int productId)
         {
-            return GetRates().Where(x => x.CreateBy == UserHelper.GetUserByUserID(userId).ID && x.ProductID == productId).SingleOrDefault().RatePoint;
+            return GetRates().Where(x => x.CreateBy == UserHelper.GetPropertyValue(userId, y => y.ID) && x.ProductID == productId).SingleOrDefault().RatePoint;
         }
 
         public static RateView GetRateView(int productId)
