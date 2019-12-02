@@ -76,7 +76,7 @@ namespace MVC.Models
         public int ProductID { get; set; }
 
         [DefaultValue(0)]
-        public int Count { get; set; }
+        public int? Count { get; set; }
 
         [DefaultValue(0)]
         public decimal? Price { get; set; }
