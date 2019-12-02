@@ -56,17 +56,22 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult Rate(int id, int point)
         {
-
+            Rate rate = new Rate() { ProductID = id, RatePoint = point };
+            RateHelper.AddRate(rate);
             return Content("success");
         }
         [HttpPost]
         public ActionResult Comment(int idProduct, string content)
         {
+            Comment cmt = new Comment() { ProductID = idProduct, Content = content };
+            CommentHelper.AddComment(cmt);
             return Content("success");
         }
         [HttpPost]
         public ActionResult Reply(int idProduct, string content,int idParent)
         {
+            Comment cmt = new Comment() { ProductID = idProduct, Content = content,ParentID = idParent };
+            CommentHelper.AddComment(cmt);
             return Content("success");
         }
     }

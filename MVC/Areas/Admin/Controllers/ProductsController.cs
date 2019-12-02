@@ -16,8 +16,15 @@ namespace MVC.Areas.Admin.Controllers
     {
         public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
-            IPagedList<Product> model = ProductHelper.GetProducts().OrderBy(x => x.ID).ToPagedList(page, pageSize);
-            return View(model);
+            IEnumerable<ProductOnPage> models;
+            if (String.IsNullOrEmpty(searchString))
+                models = ProductHelper.GetProductOnPages();
+            else
+            {
+                models = ProductHelper.GetProductOnPages(searchString);
+            }
+            ViewBag.SearchString = searchString;
+            return View(models.OrderByDescending(x => x.ProductID).ToPagedList(page, pageSize));
         }
         [HttpPost]
         public ActionResult Add(Product model)
