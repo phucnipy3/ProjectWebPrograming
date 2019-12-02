@@ -856,6 +856,17 @@ namespace MVC.Models
             return GetOrderViewModelsByUserID(userId).Where(x => status == "All" || x.Status == status);
         }
 
+        public static ShoppingCart GetShoppingCart(string userId)
+        {
+            ShoppingCart shoppingCart = new ShoppingCart();
+            shoppingCart.Items = OrderDetailHelper.GetOrderDetailByOrderID(GetOrdersOf(userId).SingleOrDefault(y => !y.Ordered.HasValue).ID).Select(x => new CartItem()
+            {
+                Product = ProductHelper.GetProductByID(x.ProductID),
+                Count = x.Count
+            }).ToList();
+            return shoppingCart;
+        }
+
         private static IEnumerable<TimeLogs> GetTimeLogs(int orderId)
         {
             var order = GetOrderByID(orderId);
@@ -987,7 +998,7 @@ namespace MVC.Models
 
         public static IEnumerable<ProductOnOrder> GetProductOnOrder(int orderId)
         {
-            return GetProductIDByOrderID(orderId).Select(x => new ProductOnOrder()
+            return GetOrderDetailByOrderID(orderId).Select(x => new ProductOnOrder()
             {
                 Image = ProductHelper.GetPropertyValue(x.ProductID, y => y.Image),
                 Name = ProductHelper.GetPropertyValue(x.ProductID, y => y.Name),
@@ -997,12 +1008,12 @@ namespace MVC.Models
             }).ToList();
         }
 
-        public static IEnumerable<OrderDetail> GetProductIDByOrderID(int id)
+        public static IEnumerable<OrderDetail> GetOrderDetailByOrderID(int id)
         {
             return db.OrderDetails.Where(x => x.OrderID == id).ToList();
         }
 
-        public static IEnumerable<OrderDetail> GetOrderIDByProductID(int id)
+        public static IEnumerable<OrderDetail> GetOrderDetailByProductID(int id)
         {
             return db.OrderDetails.Where(x => x.ProductID == id).ToList();
         }
@@ -1034,7 +1045,7 @@ namespace MVC.Models
 
         public static decimal? AmountSoldOfOrder(int orderId)
         {
-            return GetPropertyValue(GetProductIDByOrderID(orderId), x => x.Count).Sum();
+            return GetPropertyValue(GetOrderDetailByOrderID(orderId), x => x.Count).Sum();
         }
 
         public static decimal? TotalMoneyOfOrder(int orderId)

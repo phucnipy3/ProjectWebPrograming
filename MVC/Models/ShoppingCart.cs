@@ -9,25 +9,10 @@ namespace MVC.Models
     {
         public List<CartItem> Items { get; set; }
 
-        public int Count
-        {
-            get
-            {
-                return Items.Count;
-            }
-        }
+        public int Count { get { return Items.Count; } }
 
-        public decimal? GrantTotal()
-        {
-            return Items.Sum(x => x.Count * x.Product.PromotionPrice);
-        }
+        public decimal? GrantTotal() { return Items.Sum(x => x.Count * x.Product.PromotionPrice); }
 
-        public string StringGrantTotal
-        {
-            get
-            {
-                return ((decimal)GrantTotal()).ToString("N0");
-            }
-        }
+        public string StringGrantTotal { get { return ((decimal)GrantTotal()).ToString("N0"); } }
     }
 }
