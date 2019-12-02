@@ -300,6 +300,11 @@ namespace MVC.Models
             return keySelector(GetUserByID(id));
         }
 
+        public static TKey GetPropertyValue<TKey>(string userId, Func<User, TKey> keySelector)
+        {
+            return keySelector(GetUserByUserID(userId));
+        }
+
         public static string GetNameByUserID(string userId)
         {
             return GetUsers().Where(x => x.UserID == userId).SingleOrDefault().Name;
@@ -506,11 +511,11 @@ namespace MVC.Models
             return Search(GetBestSalerProducts(), x => x.ProductName, searchString);
         }
 
-        public static DetailViewModel GetProductDetail(int productId, string userId)
+        public static DetailViewModel GetProductDetail(int productId)
         {
             DetailViewModel detailViewModel = new DetailViewModel();
             detailViewModel.MainProduct = GetMainProductDetail(productId);
-            detailViewModel.Rate = RateHelper.GetRateView(productId, userId);
+            detailViewModel.Rate = RateHelper.GetRateView(productId);
             detailViewModel.Comments = CommentHelper.GetCommentView(productId).ToList();
             detailViewModel.RelateProducts = GetRalateProduct(productId).ToList();
             return detailViewModel;
@@ -1216,10 +1221,9 @@ namespace MVC.Models
             return GetRates().Where(x => x.CreateBy == UserHelper.GetUserByUserID(userId).ID && x.ProductID == productId).SingleOrDefault().RatePoint;
         }
 
-        public static RateView GetRateView(int productId, string userId)
+        public static RateView GetRateView(int productId)
         {
             RateView rateView = new RateView();
-            rateView.RateMain = GetRatePoint(userId, productId);
             rateView.RatePoint = GetRatePoint(productId);
             rateView.PercentPoint = new List<int>();
             for (int i = 0; i < 5; i++)
@@ -1231,6 +1235,25 @@ namespace MVC.Models
         {
             try
             {
+                rate.CreateDate = DateTime.Now;
+                db.Rates.Add(rate);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool AddRate(string userId, int productId, int ratePoint)
+        {
+            try
+            {
+                Rate rate = new Rate();
+                rate.CreateBy = UserHelper.GetPropertyValue(userId, x => x.ID);
+                rate.RatePoint = ratePoint;
+                rate.ProductID = productId;
                 rate.CreateDate = DateTime.Now;
                 db.Rates.Add(rate);
                 db.SaveChanges();
