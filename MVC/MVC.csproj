@@ -140,6 +140,7 @@
     <Compile Include="Areas\Admin\Code\IAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductDetailsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
@@ -505,6 +506,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Orders\" />
     <Folder Include="Views\Application\" />
     <Folder Include="Views\ForgetPass\" />
     <Folder Include="Views\Login\" />
