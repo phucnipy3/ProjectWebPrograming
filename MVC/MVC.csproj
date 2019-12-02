@@ -141,9 +141,11 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductDetailsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\StatisticalController.cs" />
     <Compile Include="Areas\Admin\Models\AdminViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\DeleteProductDetailViewModel.cs" />
     <Compile Include="Areas\Admin\Models\DeleteViewModel.cs" />
     <Compile Include="Areas\Admin\Models\StatisticalViewModel.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
@@ -437,6 +439,10 @@
     <Content Include="Areas\Admin\Views\Products\ConfirmDelete.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductDetails\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductDetails\ConfirmDelete.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductDetails\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductDetails\Update.cshtml" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
