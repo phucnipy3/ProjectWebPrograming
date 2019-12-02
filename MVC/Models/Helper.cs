@@ -277,7 +277,7 @@ namespace MVC.Models
 
         public static IEnumerable<User> GetUsersExcludeAdmins()
         {
-            return db.Users.Where(x => x.Status == true && x.Role.ToLower() != "admin");
+            return GetUsers().Where(x => x.Role.ToLower() != "admin");
         }
 
         public static IEnumerable<User> GetUsersExcludeAdmins(string searchString)
@@ -287,7 +287,7 @@ namespace MVC.Models
 
         public static User GetUserByID(int id)
         {
-            return db.Users.Where(x => x.ID == id && x.Status == true).SingleOrDefault();
+            return GetUsers().SingleOrDefault(x => x.ID == id && x.Status == true);
         }
 
         public static IEnumerable<TKey> GetPropertyValue<TKey>(Func<User, TKey> keySelector)
@@ -312,7 +312,7 @@ namespace MVC.Models
 
         public static User GetUserByUserID(string userId)
         {
-            return GetUsers().Where(x => x.UserID == userId).SingleOrDefault();
+            return GetUsers().SingleOrDefault(x => x.UserID == userId);
         }
 
         public static string GetUserRole(string userId)
@@ -543,7 +543,7 @@ namespace MVC.Models
 
         public static Product GetProductByID(int id)
         {
-            return db.Products.Where(x => x.ID == id && x.Status == true).SingleOrDefault();
+            return GetProducts().SingleOrDefault(x => x.ID == id);
         }
 
         public IEnumerable<int> GetProductCategoryIDsByProductID(int id)
@@ -681,7 +681,7 @@ namespace MVC.Models
         {
             try
             {
-                var productDetail = db.ProductDetails.Where(x => x.ProductID == productId && x.ProductCategoryID == productCategoryId).SingleOrDefault();
+                var productDetail = GetProductDetails().SingleOrDefault(x => x.ProductID == productId && x.ProductCategoryID == productCategoryId);
                 if (productDetail != null)
                 {
                     db.ProductDetails.Remove(productDetail);
@@ -700,7 +700,7 @@ namespace MVC.Models
         {
             try
             {
-                var oldProductDetail = db.ProductDetails.Where(x => x.ProductID == productDetail.ProductID && x.ProductCategoryID == productDetail.ProductCategoryID).SingleOrDefault();
+                var oldProductDetail = GetProductDetails().SingleOrDefault(x => x.ProductID == productDetail.ProductID && x.ProductCategoryID == productDetail.ProductCategoryID);
                 if (oldProductDetail != null)
                 {
                     db.ProductDetails.Remove(oldProductDetail);
@@ -730,7 +730,7 @@ namespace MVC.Models
 
         public static ProductCategory GetProductCategoryByID(int id)
         {
-            return GetProductCategories().Where(x => x.ID == id).SingleOrDefault();
+            return GetProductCategories().SingleOrDefault(x => x.ID == id);
         }
 
         public static int GetProductCategoryIDByMetaTitle(string metaTitle)
@@ -849,7 +849,7 @@ namespace MVC.Models
 
         public static OrderViewModel GetOrderViewModels(string userId, int orderId)
         {
-            return GetOrderViewModelsByUserID(userId).Where(x => x.ID == orderId).SingleOrDefault();
+            return GetOrderViewModelsByUserID(userId).SingleOrDefault(x => x.ID == orderId);
         }
 
         public static IEnumerable<OrderViewModel> GetOrderViewModels(string userId, string searchString, string status)
@@ -915,7 +915,7 @@ namespace MVC.Models
 
         public static Order GetOrderByID(int id)
         {
-            return db.Orders.Where(x => x.ID == id && x.Status == true).SingleOrDefault();
+            return GetOrders().SingleOrDefault(x => x.ID == id);
         }
 
         public static IEnumerable<Order> GetOrdersOf(string userId)
@@ -1031,7 +1031,7 @@ namespace MVC.Models
 
         public static OrderDetail GetOrderDetailByID(int orderId, int productId)
         {
-            return db.OrderDetails.Where(x => x.OrderID == orderId && x.ProductID == productId).SingleOrDefault();
+            return GetOrderDetails().SingleOrDefault(x => x.OrderID == orderId && x.ProductID == productId);
         }
 
         public static IEnumerable<TKey> GetPropertyValue<TKey>(Func<OrderDetail, TKey> keySelector)
@@ -1046,7 +1046,7 @@ namespace MVC.Models
 
         public static decimal? AmountSoldOfProduct(int productId)
         {
-            return db.OrderDetails.Where(x => x.ProductID == productId).Sum(x => x.Count);
+            return GetOrderDetails().Where(x => x.ProductID == productId).Sum(x => x.Count);
         }
 
         public static decimal? AmountSoldOfOrder(int orderId)
@@ -1056,7 +1056,7 @@ namespace MVC.Models
 
         public static decimal? TotalMoneyOfOrder(int orderId)
         {
-            return db.OrderDetails.Where(x => x.OrderID == orderId).Sum(x => x.PromotionPrice * x.Count);
+            return GetOrderDetails().Where(x => x.OrderID == orderId).Sum(x => x.PromotionPrice * x.Count);
         }
 
         public static bool AddOrderDetail(OrderDetail orderDetail)
@@ -1200,7 +1200,7 @@ namespace MVC.Models
 
         public static Rate GetRateByID(int id)
         {
-            return db.Rates.Where(x => x.ID == id).SingleOrDefault();
+            return GetRates().SingleOrDefault(x => x.ID == id);
         }
 
         public static IEnumerable<TKey> GetPropertyValue<TKey>(Func<Rate, TKey> keySelector)
@@ -1227,7 +1227,7 @@ namespace MVC.Models
 
         public static int? GetRatePoint(string userId, int productId)
         {
-            return GetRates().Where(x => x.CreateBy == UserHelper.GetPropertyValue(userId, y => y.ID) && x.ProductID == productId).SingleOrDefault().RatePoint;
+            return GetRates().SingleOrDefault(x => x.CreateBy == UserHelper.GetPropertyValue(userId, y => y.ID) && x.ProductID == productId).RatePoint;
         }
 
         public static RateView GetRateView(int productId)
@@ -1347,7 +1347,7 @@ namespace MVC.Models
 
         public static Comment GetCommentByID(int id)
         {
-            return db.Comments.Where(x => x.ID == id).SingleOrDefault();
+            return GetComments().SingleOrDefault(x => x.ID == id);
         }
 
         public static IEnumerable<TKey> GetPropertyValue<TKey>(Func<Comment, TKey> keySelector)
