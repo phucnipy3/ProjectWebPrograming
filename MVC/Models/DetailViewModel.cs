@@ -41,6 +41,8 @@ namespace MVC.Models
 
     public class RateView
     {
+        public int? RateMain { get; set; }
+
         public double? RatePoint { get; set; }
 
         public List<int> PercentPoint { get; set; }
@@ -48,6 +50,10 @@ namespace MVC.Models
 
     public class CommentView
     {
+        public string Name { get; set; }
+
+        public string Image { get; set; }
+
         public Comment Comment { get; set; }
 
         public List<CommentView> ReplyComment { get; set; }

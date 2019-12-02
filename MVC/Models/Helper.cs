@@ -506,11 +506,11 @@ namespace MVC.Models
             return Search(GetBestSalerProducts(), x => x.ProductName, searchString);
         }
 
-        public static DetailViewModel GetProductDetail(int productId)
+        public static DetailViewModel GetProductDetail(int productId, string userId)
         {
             DetailViewModel detailViewModel = new DetailViewModel();
             detailViewModel.MainProduct = GetMainProductDetail(productId);
-            detailViewModel.Rate = RateHelper.GetRateView(productId);
+            detailViewModel.Rate = RateHelper.GetRateView(productId, userId);
             detailViewModel.Comments = CommentHelper.GetCommentView(productId).ToList();
             detailViewModel.RelateProducts = GetRalateProduct(productId).ToList();
             return detailViewModel;
@@ -555,6 +555,8 @@ namespace MVC.Models
                 product.Status = true;
                 product.CreatedDate = DateTime.Now;
                 product.ModifiedDate = DateTime.Now;
+                if (!product.PromotionPrice.HasValue)
+                    product.PromotionPrice = product.Price;
                 db.Products.Add(product);
                 db.SaveChanges();
                 return true;
@@ -608,7 +610,7 @@ namespace MVC.Models
 
         private static string GetTag(Product product)
         {
-            if (((TimeSpan)(DateTime.Now - product.CreatedDate)).Days >= Convert.ToInt32(ConfigurationManager.AppSettings["numberOfRecentDays"]))
+            if (product.CreatedDate.HasValue && ((TimeSpan)(DateTime.Now - product.CreatedDate)).Days >= Convert.ToInt32(ConfigurationManager.AppSettings["numberOfRecentDays"]))
                 return "new";
             if (product.PromotionPrice / product.Price >= 1 - Convert.ToDecimal(ConfigurationManager.AppSettings["onPercent"]))
                 return "hot";
@@ -1214,9 +1216,10 @@ namespace MVC.Models
             return GetRates().Where(x => x.CreateBy == UserHelper.GetUserByUserID(userId).ID && x.ProductID == productId).SingleOrDefault().RatePoint;
         }
 
-        public static RateView GetRateView(int productId)
+        public static RateView GetRateView(int productId, string userId)
         {
             RateView rateView = new RateView();
+            rateView.RateMain = GetRatePoint(userId, productId);
             rateView.RatePoint = GetRatePoint(productId);
             rateView.PercentPoint = new List<int>();
             for (int i = 0; i < 5; i++)
@@ -1327,12 +1330,16 @@ namespace MVC.Models
 
         public static IEnumerable<CommentView> GetCommentView(int productId)
         {
-            return GetComments().Where(x => x.ProductID == productId && x.ParentID == null).OrderByDescending(x => x.CreateDate).Select(x => new CommentView()
+            return GetComments().Where(x => x.ProductID == productId && !x.ParentID.HasValue).OrderByDescending(x => x.CreateDate).Select(x => new CommentView()
             {
                 Comment = x,
+                Name = UserHelper.GetPropertyValue((int)x.CreateBy, y => y.Name),
+                Image = UserHelper.GetPropertyValue((int)x.CreateBy, y => y.Image),
                 ReplyComment = GetComments().Where(y => y.ProductID == productId && y.ParentID == x.ID).OrderByDescending(y => y.CreateDate).Select(y => new CommentView()
                 {
-                    Comment = y
+                    Comment = y,
+                    Name = UserHelper.GetPropertyValue((int)y.CreateBy, z => z.Name),
+                    Image = UserHelper.GetPropertyValue((int)y.CreateBy, z => z.Image),
                 }).ToList()
             });
         }
@@ -1341,6 +1348,26 @@ namespace MVC.Models
         {
             try
             {
+                comment.CreateDate = DateTime.Now;
+                db.Comments.Add(comment);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool AddComment(int productId, int createBy, string content, int? parentId = null)
+        {
+            try
+            {
+                Comment comment = new Comment();
+                comment.ProductID = productId;
+                comment.CreateBy = createBy;
+                comment.Content = content;
+                comment.ParentID = parentId;
                 comment.CreateDate = DateTime.Now;
                 db.Comments.Add(comment);
                 db.SaveChanges();
