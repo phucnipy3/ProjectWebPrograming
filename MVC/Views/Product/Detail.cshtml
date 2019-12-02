@@ -172,20 +172,20 @@
 
                         <div class="row comment">
                             <div class="col-auto">
-                                <img src="/" alt="Alternate Text" class="rounded-circle comment-image d-block" />
+                                <img src="/@comment.Image" alt="Alternate Text" class="rounded-circle comment-image d-block" />
                             </div>
                             <div class="col pl-0 comment-body">
                                 <div class="row">
                                     <div class="col-12 comment-name">
-                                        <span>dfghdfgdf</span>
+                                        <span>@comment.Name</span>
                                     </div>
                                     <div class="col-12 comment-text">
                                         <p>@comment.Comment.Content</p>
                                     </div>
                                     <div class="col-12 comment-tools">
                                         <ul class="p-0">
-                                            <li class="d-inline-block"><i class="fa fa-clock-o"></i> 13:94 &emsp;</li>
-                                            <li class="d-inline-block"><i class="fa fa-calendar"></i> 04/01/2015 &emsp;</li>
+                                            <li class="d-inline-block"><i class="fa fa-clock-o"></i> @comment.Comment.CreateDate.Value.Date.ToShortTimeString() &emsp;</li>
+                                            <li class="d-inline-block"><i class="fa fa-calendar"></i> @comment.Comment.CreateDate.Value.Date.ToShortDateString() &emsp;</li>
                                             <li class="d-inline-block"><a href="#create-new-@comment.Comment.ID" class="text-decoration-none text-info" data-parent-id="@comment.Comment.ID" data-toggle="collapse">reply</a></li>
                                         </ul>
                                     </div>
@@ -194,20 +194,20 @@
                                         {
                                             <div class="row comment">
                                                 <div class="col-auto">
-                                                    <img src="/" alt="Alternate Text" class="rounded-circle comment-image d-block" />
+                                                    <img src="/@reply.Image" alt="Alternate Text" class="rounded-circle comment-image d-block" />
                                                 </div>
                                                 <div class="col pl-0 comment-body">
                                                     <div class="row">
                                                         <div class="col-12 comment-name">
-                                                            <span>dfghdfgdf</span>
+                                                            <span>@reply.Name</span>
                                                         </div>
                                                         <div class="col-12 comment-text">
                                                             <p>@reply.Comment.Content</p>
                                                         </div>
                                                         <div class="col-12 comment-tools">
                                                             <ul class="p-0">
-                                                                <li class="d-inline-block"><i class="fa fa-clock-o"></i> 13:94 &emsp;</li>
-                                                                <li class="d-inline-block"><i class="fa fa-calendar"></i> 04/01/2015 &emsp;</li>
+                                                                <li class="d-inline-block"><i class="fa fa-clock-o"></i> @reply.Comment.CreateDate.Value.ToShortTimeString() &emsp;</li>
+                                                                <li class="d-inline-block"><i class="fa fa-calendar"></i> @reply.Comment.CreateDate.Value.Date.ToShortDateString() &emsp;</li>
                                                                 <li class="d-inline-block"><a href="#create-new-@comment.Comment.ID" class="text-decoration-none text-info" data-parent-id="@comment.Comment.ID" data-toggle="collapse">reply</a></li>
                                                             </ul>
                                                         </div>
@@ -247,7 +247,7 @@
                 <div class="col-auto mr-auto">
                     <h3>Liên quan</h3>
                 </div>
-                @for (int i = 0; i < 5; i++)
+                @for (int i = 0; i < 5 && i<Model.RelateProducts.Count; i++)
                 {
                     var item = Model.RelateProducts[i];
                     <div class="col-12">
@@ -360,7 +360,7 @@
                     </div>
                     <a class="carousel-control-prev" href="#carouselRecommend" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
+                        <span class="sr-only">Previous</span>  
                     </a>
                     <a class="carousel-control-next" href="#carouselRecommend" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>

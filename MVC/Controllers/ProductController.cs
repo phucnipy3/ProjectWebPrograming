@@ -68,7 +68,7 @@ namespace MVC.Controllers
             int id = UserHelper.GetUserByUserID(HttpContext.User.Identity.Name).ID;
             Comment cmt = new Comment() { ProductID = idProduct, Content = content, CreateBy = id };
             CommentHelper.AddComment(cmt);
-            return Content("success");
+            return Redirect("/Product/Detail/" + idProduct.ToString());
         }
         [Authorize]
         [HttpPost]
@@ -77,7 +77,7 @@ namespace MVC.Controllers
             int id = UserHelper.GetUserByUserID(HttpContext.User.Identity.Name).ID;
             Comment cmt = new Comment() { ProductID = idProduct, Content = content, ParentID = idParent, CreateBy = id };
             CommentHelper.AddComment(cmt);
-            return Content("success");
+            return Redirect("/Product/Detail/" + idProduct.ToString());
         }
     }
 }
