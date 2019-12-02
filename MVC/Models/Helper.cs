@@ -600,7 +600,8 @@ namespace MVC.Models
                     product.ModifiedDate = DateTime.Now;
                     db.Products.AddOrUpdate(x => x.ID, product);
                     db.SaveChanges();
-                    OrderDetailHelper.UpdateOderDatailPriceForProductID(product.ID, product.Price, product.PromotionPrice);
+                    if (!OrderDetailHelper.UpdateOderDatailPriceForProductID(product.ID, product.Price, product.PromotionPrice))
+                        return false;
                     return true;
                 }
                 return false;
@@ -1169,14 +1170,8 @@ namespace MVC.Models
         {
             try
             {
-                var orderDetails = db.OrderDetails.Where(x => x.ProductID == productID && OrderHelper.GetOrderByID(x.OrderID).Ordered == null).ToList();
-                foreach (OrderDetail orderDetail in orderDetails)
-                {
-                    orderDetail.Price = newPrice;
-                    orderDetail.PromotionPrice = newPromotionPrice;
-                    if (!UpdateOderDatail(orderDetail))
-                        return false;
-                }
+                GetOrderDetailByProductID(productID).Where(x => OrderHelper.GetPropertyValue(x.OrderID, y => !y.Ordered.HasValue))
+                    .ToList().ForEach(x => { x.Price = newPrice; x.PromotionPrice = newPromotionPrice; });
                 return true;
             }
             catch
