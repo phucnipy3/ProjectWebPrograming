@@ -1215,9 +1215,10 @@ namespace MVC.Models
 
         public static int GetRatePoint(int point, int productId)
         {
-            if (GetRates().Where(x => x.ProductID == productId).Count() == 0)
+            int count = GetRates().Where(x => x.ProductID == productId).Count();
+            if (count == 0)
                 return 0;
-            return GetRates().Where(x => x.ProductID == productId && x.RatePoint == point).Count() * 100 / GetRates().Where(x => x.ProductID == productId).Count();
+            return GetRates().Where(x => x.ProductID == productId && x.RatePoint == point).Count() * 100 / count;
         }
 
         public static int? GetRatePoint(string userId, int productId)
@@ -1231,7 +1232,7 @@ namespace MVC.Models
             rateView.RatePoint = GetRatePoint(productId);
             rateView.PercentPoint = new List<int>();
             for (int i = 0; i < 5; i++)
-                rateView.PercentPoint.Add(GetRatePoint(i, productId));
+                rateView.PercentPoint.Add(GetRatePoint(i + 1, productId));
             return rateView;
         }
 
