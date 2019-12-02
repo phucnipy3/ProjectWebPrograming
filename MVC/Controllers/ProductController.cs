@@ -52,25 +52,30 @@ namespace MVC.Controllers
             HttpContext.Session["RecentProducts"] = recentProducts;
             return View(ProductHelper.GetProductDetail(id));
         }
-
+        [Authorize]
         [HttpPost]
         public ActionResult Rate(int id, int point)
         {
-            Rate rate = new Rate() { ProductID = id, RatePoint = point };
+            int Userid = UserHelper.GetUserByUserID(HttpContext.User.Identity.Name).ID;
+            Rate rate = new Rate() { ProductID = id, RatePoint = point,CreateBy = Userid };
             RateHelper.AddRate(rate);
             return Content("success");
         }
+        [Authorize]
         [HttpPost]
         public ActionResult Comment(int idProduct, string content)
         {
-            Comment cmt = new Comment() { ProductID = idProduct, Content = content };
+            int id = UserHelper.GetUserByUserID(HttpContext.User.Identity.Name).ID;
+            Comment cmt = new Comment() { ProductID = idProduct, Content = content, CreateBy = id };
             CommentHelper.AddComment(cmt);
             return Content("success");
         }
+        [Authorize]
         [HttpPost]
         public ActionResult Reply(int idProduct, string content,int idParent)
         {
-            Comment cmt = new Comment() { ProductID = idProduct, Content = content,ParentID = idParent };
+            int id = UserHelper.GetUserByUserID(HttpContext.User.Identity.Name).ID;
+            Comment cmt = new Comment() { ProductID = idProduct, Content = content, ParentID = idParent, CreateBy = id };
             CommentHelper.AddComment(cmt);
             return Content("success");
         }
