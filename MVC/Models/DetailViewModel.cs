@@ -48,6 +48,10 @@ namespace MVC.Models
 
     public class CommentView
     {
+        public string UserID { get; set; }
+
+        public string Image { get; set; }
+
         public Comment Comment { get; set; }
 
         public List<CommentView> ReplyComment { get; set; }

@@ -555,6 +555,8 @@ namespace MVC.Models
                 product.Status = true;
                 product.CreatedDate = DateTime.Now;
                 product.ModifiedDate = DateTime.Now;
+                if (!product.PromotionPrice.HasValue)
+                    product.PromotionPrice = product.Price;
                 db.Products.Add(product);
                 db.SaveChanges();
                 return true;
@@ -608,7 +610,7 @@ namespace MVC.Models
 
         private static string GetTag(Product product)
         {
-            if (((TimeSpan)(DateTime.Now - product.CreatedDate)).Days >= Convert.ToInt32(ConfigurationManager.AppSettings["numberOfRecentDays"]))
+            if (product.CreatedDate != null && ((TimeSpan)(DateTime.Now - product.CreatedDate)).Days >= Convert.ToInt32(ConfigurationManager.AppSettings["numberOfRecentDays"]))
                 return "new";
             if (product.PromotionPrice / product.Price >= 1 - Convert.ToDecimal(ConfigurationManager.AppSettings["onPercent"]))
                 return "hot";
@@ -1330,9 +1332,13 @@ namespace MVC.Models
             return GetComments().Where(x => x.ProductID == productId && x.ParentID == null).OrderByDescending(x => x.CreateDate).Select(x => new CommentView()
             {
                 Comment = x,
+                UserID = UserHelper.GetPropertyValue((int)x.CreateBy, y => y.UserID),
+                Image = UserHelper.GetPropertyValue((int)x.CreateBy, y => y.Image),
                 ReplyComment = GetComments().Where(y => y.ProductID == productId && y.ParentID == x.ID).OrderByDescending(y => y.CreateDate).Select(y => new CommentView()
                 {
-                    Comment = y
+                    Comment = y,
+                    UserID = UserHelper.GetPropertyValue((int)y.CreateBy, z => z.UserID),
+                    Image = UserHelper.GetPropertyValue((int)y.CreateBy, z => z.Image),
                 }).ToList()
             });
         }
