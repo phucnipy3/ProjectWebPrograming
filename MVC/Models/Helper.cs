@@ -882,6 +882,7 @@ namespace MVC.Models
                 order.Ordered = DateTime.Now;
                 if (!AddOrder(order))
                     return false;
+                order = GetOrdersOf(userId).OrderByDescending(x => x.Ordered).First();
                 shoppingCart.Items.ForEach(x => OrderDetailHelper.AddOrderDetail(order.ID, x.Product.ID, (int)x.Count));
                 return true;
             }
