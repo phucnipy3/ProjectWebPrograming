@@ -506,11 +506,11 @@ namespace MVC.Models
             return Search(GetBestSalerProducts(), x => x.ProductName, searchString);
         }
 
-        public static DetailViewModel GetProductDetail(int productId)
+        public static DetailViewModel GetProductDetail(int productId, string userId)
         {
             DetailViewModel detailViewModel = new DetailViewModel();
             detailViewModel.MainProduct = GetMainProductDetail(productId);
-            detailViewModel.Rate = RateHelper.GetRateView(productId);
+            detailViewModel.Rate = RateHelper.GetRateView(productId, userId);
             detailViewModel.Comments = CommentHelper.GetCommentView(productId).ToList();
             detailViewModel.RelateProducts = GetRalateProduct(productId).ToList();
             return detailViewModel;
@@ -1216,9 +1216,10 @@ namespace MVC.Models
             return GetRates().Where(x => x.CreateBy == UserHelper.GetUserByUserID(userId).ID && x.ProductID == productId).SingleOrDefault().RatePoint;
         }
 
-        public static RateView GetRateView(int productId)
+        public static RateView GetRateView(int productId, string userId)
         {
             RateView rateView = new RateView();
+            rateView.RateMain = GetRatePoint(userId, productId);
             rateView.RatePoint = GetRatePoint(productId);
             rateView.PercentPoint = new List<int>();
             for (int i = 0; i < 5; i++)
@@ -1329,15 +1330,15 @@ namespace MVC.Models
 
         public static IEnumerable<CommentView> GetCommentView(int productId)
         {
-            return GetComments().Where(x => x.ProductID == productId && x.ParentID == null).OrderByDescending(x => x.CreateDate).Select(x => new CommentView()
+            return GetComments().Where(x => x.ProductID == productId && !x.ParentID.HasValue).OrderByDescending(x => x.CreateDate).Select(x => new CommentView()
             {
                 Comment = x,
-                UserID = UserHelper.GetPropertyValue((int)x.CreateBy, y => y.UserID),
+                Name = UserHelper.GetPropertyValue((int)x.CreateBy, y => y.Name),
                 Image = UserHelper.GetPropertyValue((int)x.CreateBy, y => y.Image),
                 ReplyComment = GetComments().Where(y => y.ProductID == productId && y.ParentID == x.ID).OrderByDescending(y => y.CreateDate).Select(y => new CommentView()
                 {
                     Comment = y,
-                    UserID = UserHelper.GetPropertyValue((int)y.CreateBy, z => z.UserID),
+                    Name = UserHelper.GetPropertyValue((int)y.CreateBy, z => z.Name),
                     Image = UserHelper.GetPropertyValue((int)y.CreateBy, z => z.Image),
                 }).ToList()
             });
