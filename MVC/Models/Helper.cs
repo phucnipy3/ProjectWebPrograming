@@ -644,6 +644,11 @@ namespace MVC.Models
             return GetProductDetails().Where(x => x.ProductCategoryID == id).Select(x => x.ProductID).ToList();
         }
 
+        public static ProductDetail GetProductDetailsByID(int productId, int productCategoryId)
+        {
+            return GetProductDetails().SingleOrDefault(x => x.ProductID == productId && x.ProductCategoryID == productCategoryId);
+        }
+
         public static bool AddProductDetail(int productId, int productCategoryId)
         {
             try
