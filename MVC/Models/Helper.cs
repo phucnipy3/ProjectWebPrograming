@@ -868,6 +868,29 @@ namespace MVC.Models
             return shoppingCart;
         }
 
+        public static bool Ordered(string userId, ShoppingCart shoppingCart, OrderInfomation orderInfomation)
+        {
+            try
+            {
+                Order order = new Order();
+                order.ShipName = orderInfomation.Name;
+                order.ShipAddress = orderInfomation.Address;
+                order.ShipEmail = orderInfomation.Email;
+                order.ShipMobile = orderInfomation.PhoneNumber;
+                order.Transport = orderInfomation.Transport;
+                order.CreateBy = UserHelper.GetPropertyValue(userId, x => x.ID);
+                order.Ordered = DateTime.Now;
+                if (!AddOrder(order))
+                    return false;
+                shoppingCart.Items.ForEach(x => OrderDetailHelper.AddOrderDetail(order.ID, x.Product.ID, (int)x.Count));
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private static IEnumerable<TimeLogs> GetTimeLogs(int orderId)
         {
             var order = GetOrderByID(orderId);
