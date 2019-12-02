@@ -44,7 +44,7 @@ namespace MVC.Controllers
         public ActionResult Detail(int id = 1)
         {
 
-            ViewBag.RatePoint = 2;
+            ViewBag.RatePoint = RateHelper.GetRatePoint(HttpContext.User.Identity.Name,id);
             List<ProductOnPage> recentProducts = HttpContext.Session["RecentProducts"] as List<ProductOnPage>;
             if (recentProducts == null)
                 recentProducts = new List<ProductOnPage>();

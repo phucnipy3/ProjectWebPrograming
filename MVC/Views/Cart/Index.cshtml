@@ -38,110 +38,111 @@
 }
 else
 {
-    <form action="/Cart/UpdateCartQuantity" method="post" id="formCart">
         <h2 class="m-5">Giỏ hàng của bạn</h2>
         <div class="mx-5">
 
             <div class="cart table-responsive-lg">
-                <table class="table">
+                <form action="/Cart/UpdateCartQuantity" method="post" id="formCart">
 
-                    <thead class="bg-info text-white">
-                        <tr>
+                    <table class="table">
 
-                            <th class="first-cell"> </th>
-
-                            <th colspan="2" class="flex-nowrap">Tên sản phẩm</th>
-                            <th>Giá</th>
-                            <th>Số lượng</th>
-                            <th>Thành tiền</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @foreach (var item in Model.Items)
-                        {
+                        <thead class="bg-info text-white">
                             <tr>
-                                <td class="first-cell">
-                                    <div class="row">
-                                        <div class="col-auto align-self-center">
-                                            <a href="/Cart/RemoveFromCart/@Model.Items.IndexOf(item)" class="close float-left text-danger">
-                                                x
-                                            </a>
-                                        </div>
 
-                                        <div class="col-8 h-100">
-                                            <img src="/@item.Product.Image" alt="Alternate Text" class="image-on-cart" />
+                                <th class="first-cell"> </th>
+
+                                <th colspan="2" class="flex-nowrap">Tên sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.Items)
+                            {
+                                <tr>
+                                    <td class="first-cell">
+                                        <div class="row">
+                                            <div class="col-auto align-self-center">
+                                                <a href="/Cart/RemoveFromCart/@Model.Items.IndexOf(item)" class="close float-left text-danger">
+                                                    x
+                                                </a>
+                                            </div>
+
+                                            <div class="col-8 h-100">
+                                                <img src="/@item.Product.Image" alt="Alternate Text" class="image-on-cart" />
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td colspan="2">
-                                    <div class="name-cell my-auto">
-                                        @item.Product.Name
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="price-cell">
-                                        @item.ProductPrice <u>đ</u>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="quantity-cell">
-                                        @Html.TextBoxFor(x => x.Items[Model.Items.IndexOf(item)].Count, new { type = "number", min="1" })
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="sub-total-cell">
-                                        @item.StringSubTotal <u>đ</u>
+                                    </td>
+                                    <td colspan="2">
+                                        <div class="name-cell my-auto">
+                                            @item.Product.Name
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="price-cell">
+                                            @item.ProductPrice <u>đ</u>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="quantity-cell">
+                                            @Html.TextBoxFor(x => x.Items[Model.Items.IndexOf(item)].Count, new { type = "number", min = "1" })
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="sub-total-cell">
+                                            @item.StringSubTotal <u>đ</u>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td colspan="6">
+                                    <div class="row">
+                                        <div class="col-auto ml-auto pr-4">
+                                            <a href="#" onclick="return UpdateCart()" class="btn btn-success">Cập nhật giỏ hàng</a>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
-                        }
-                        <tr>
-                            <td colspan="6">
-                                <div class="row">
-                                    <div class="col-auto ml-auto pr-4">
-                                        <a href="#" onclick="return UpdateCart()" class="btn btn-success">Cập nhật giỏ hàng</a>
+                            <tr>
+                                <td colspan="6">
+                                    <div class="row text-total">
+                                        <div class="col-auto ml-auto pr-4">
+                                            Tổng tiền
+                                        </div>
+                                        <div class="col-auto pr-4">
+                                            @Model.StringGrantTotal <u>đ</u>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="6">
-                                <div class="row text-total">
-                                    <div class="col-auto ml-auto pr-4">
-                                        Tổng tiền
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <div class="row">
+                                        <div class="col-auto ml-auto pr-4">
+                                            <a href="#checkOut" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="checkOut" class="btn btn-primary btn-checkout">Đi đến đặt hàng <i class="fa fa-arrow-circle-right"></i></a>
+                                        </div>
                                     </div>
-                                    <div class="col-auto pr-4">
-                                        @Model.StringGrantTotal <u>đ</u>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="6">
-                                <div class="row">
-                                    <div class="col-auto ml-auto pr-4">
-                                        <a href="#checkOut" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="checkOut" class="btn btn-primary btn-checkout">Đi đến đặt hàng <i class="fa fa-arrow-circle-right"></i></a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="6">
-                                <div id="checkOut" class="collapse row">
-                                    <div class="col-12 col-md-8" id="containerInfo">
-                                        @Html.Partial("FormInfo", new MVC.Models.OrderInfomation())
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                                </td>
+                            </tr>
 
-    </form>
+                        </tbody>
+                    </table>
+                </form>
+                
+                        <div id="checkOut" class="collapse row">
+                            <div class="col-12 col-md-8" id="containerInfo">
+                                @Html.Partial("FormInfo", new MVC.Models.OrderInfomation())
+                            </div>
+                        </div>
+                    
+            </div>
+    </div>
+
+
 }
 @section scripts{
     <script>

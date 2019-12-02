@@ -63,7 +63,7 @@
 
     <div class="row mb-3">
         <div class="col-auto">
-            <a href="#modalAdd" data-toggle="modal" class="btn btn-primary">Add new product</a>
+            <a href="#modalAdd" data-toggle="modal" class="btn btn-primary">Add new product detail</a>
         </div>
         <div class="col-8 col-lg-6 col-sm-7 mx-auto">
             <form action="/Admin/Users/Index" class="align-items-center d-flex">
@@ -93,7 +93,7 @@
                 @foreach (var item in Model)
                 {
                 <tr>
-                    <td>
+                    <td class="text-center">
                         <nobr>
                             @Html.DisplayFor(modelItem => item.ProductID)
                         </nobr>
@@ -130,7 +130,7 @@
         var id;
         function DeleteItem(productID,productCategoryID) {
             $.ajax({
-                url: '/Admin/ProductDetails/DeleteTransfer/?productID=' + productID + '&&productCategoryID='+productCategoryID,
+                url: '/Admin/ProductDetails/DeleteTransfer?productID=' + productID + '&productCategoryID='+productCategoryID,
                 method: 'post',
                 success: function (partialView) {
                     $("#formDelete").html(partialView);
@@ -141,7 +141,7 @@
         };
         function UpdateItem(productID, productCategoryID) {
             $.ajax({
-                url: '/Admin/ProductDetails/UpdateTransfer/?productID=' + productID + '&&productCategoryID=' + productCategoryID,
+                url: '/Admin/ProductDetails/UpdateTransfer?productID=' + productID + '&productCategoryID=' + productCategoryID,
                 method: 'post',
                 success: function (partialView) {
                     $("#formUpdateContent").html(partialView);

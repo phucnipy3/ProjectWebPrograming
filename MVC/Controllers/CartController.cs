@@ -24,8 +24,8 @@ namespace MVC.Controllers
         {
             if(ModelState.IsValid)
             {
-                // Order
-                return Content("success");
+                if(OrderHelper.Ordered(HttpContext.User.Identity.Name,HttpContext.Session["ShoppingCart"] as ShoppingCart,model))
+                    return Content("success");
             }
             return PartialView("FormInfo", model);
         }

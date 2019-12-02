@@ -13,7 +13,7 @@ namespace MVC.Areas.Admin.Controllers
     [Authorize(Roles ="Admin,Employee")]
     public class ProductDetailsController : ApplicationController,IAdminController<ProductDetail>
     {
-        
+        [HttpPost]
         public ActionResult Add(ProductDetail model)
         {
             if (ModelState.IsValid)
@@ -25,7 +25,7 @@ namespace MVC.Areas.Admin.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Existing User ID!");
+                    ModelState.AddModelError("", "Existing product detail!");
                     return PartialView("Add");
                 }
             }
@@ -34,21 +34,24 @@ namespace MVC.Areas.Admin.Controllers
                 return PartialView("Add");
             }
         }
-
+        [HttpPost]
         public ActionResult Delete(DeleteViewModel model)
         {
             throw new NotImplementedException();
         }
+        [HttpPost]
         public ActionResult Delete(DeleteProductDetailViewModel model)
         {
             if (ProductDetailHelper.DeleteProductDetail(model.ProductID,model.ProductCategoryID))
                 return Content("success");
             return Content("failure");
         }
+        [HttpPost]
         public ActionResult DeleteTransfer(int? productID,int?  productCategoryID)
         {
             return PartialView("ConfirmDelete", new DeleteProductDetailViewModel() { ProductCategoryID = (int)productCategoryID,ProductID = (int)productID });
         }
+        [HttpPost]
 
         public ActionResult DeleteTransfer(int? id)
         {
@@ -67,18 +70,19 @@ namespace MVC.Areas.Admin.Controllers
             ViewBag.SearchString = searchString;
             return View(models.OrderByDescending(x => x.ProductID).ToPagedList(page, pageSize));
         }
-
+        [HttpPost]
         public ActionResult Update(ProductDetail model)
         {
             if (ProductDetailHelper.AddProductDetail(model))
                 return Content("success");
             return Content("failure");
         }
-
+        [HttpPost]
         public ActionResult UpdateTransfer(int? id)
         {
             throw new NotImplementedException();
         }
+        [HttpPost]
         public ActionResult UpdateTransfer(int? productID, int? productCategoryID)
         {
             ProductDetail model = ProductDetailHelper.GetProductDetails().FirstOrDefault();
