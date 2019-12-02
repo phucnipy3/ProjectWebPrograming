@@ -553,6 +553,8 @@ namespace MVC.Models
             try
             {
                 product.Status = true;
+                product.CreatedDate = DateTime.Now;
+                product.ModifiedDate = DateTime.Now;
                 db.Products.Add(product);
                 db.SaveChanges();
                 return true;
@@ -590,6 +592,7 @@ namespace MVC.Models
                 if (oldProduct != null)
                 {
                     product.Status = true;
+                    product.ModifiedDate = DateTime.Now;
                     db.Products.AddOrUpdate(x => x.ID, product);
                     db.SaveChanges();
                     OrderDetailHelper.UpdateOderDatailPriceForProductID(product.ID, product.Price, product.PromotionPrice);
@@ -739,6 +742,8 @@ namespace MVC.Models
             try
             {
                 productCategory.Status = true;
+                productCategory.CreatedDate = DateTime.Now;
+                productCategory.ModifiedDate = DateTime.Now;
                 db.ProductCategories.Add(productCategory);
                 db.SaveChanges();
                 return true;
@@ -776,6 +781,7 @@ namespace MVC.Models
                 if (oldProductCategory != null)
                 {
                     productCategory.Status = true;
+                    productCategory.ModifiedDate = DateTime.Now;
                     db.ProductCategories.AddOrUpdate(x => x.ID, productCategory);
                     db.SaveChanges();
                     return true;
@@ -911,6 +917,7 @@ namespace MVC.Models
             {
                 order.Status = true;
                 order.TransportationFee = GetTransportationFee(order.Transport);
+                order.CreateDate = DateTime.Now;
                 db.Orders.Add(order);
                 db.SaveChanges();
                 return true;
@@ -1221,6 +1228,7 @@ namespace MVC.Models
         {
             try
             {
+                rate.CreateDate = DateTime.Now;
                 db.Rates.Add(rate);
                 db.SaveChanges();
                 return true;
@@ -1238,7 +1246,6 @@ namespace MVC.Models
                 var rate = GetRateByID(id);
                 if (rate != null)
                 {
-                    rate.CreateDate = DateTime.Now;
                     db.Rates.Remove(rate);
                     db.SaveChanges();
                     return true;

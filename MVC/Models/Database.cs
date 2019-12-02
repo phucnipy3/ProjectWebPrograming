@@ -11,23 +11,12 @@ using System.Web;
 
 namespace MVC.Models
 {
-    internal class DefaultDateTimeValueAttribute : Attribute
-    {
-        public string DefaultValue { get; set; }
-
-        public DefaultDateTimeValueAttribute()
-        {
-            DefaultValue = DateTime.Now.ToString();
-        }
-    }
-
     [Table("Order")]
     public partial class Order
     {
         [Key]
         public int ID { get; set; }
 
-        [DefaultDateTimeValue()]
         public DateTime? CreateDate { get; set; }
 
         public int? CreateBy { get; set; }
@@ -76,7 +65,7 @@ namespace MVC.Models
         public int ProductID { get; set; }
 
         [DefaultValue(0)]
-        public int Count { get; set; }
+        public int? Count { get; set; }
 
         [DefaultValue(0)]
         public decimal? Price { get; set; }
@@ -120,12 +109,10 @@ namespace MVC.Models
 
         public int? Warranty { get; set; }
 
-        [DefaultDateTimeValue()]
         public DateTime? CreatedDate { get; set; }
 
         public int? CreatedBy { get; set; }
 
-        [DefaultDateTimeValue()]
         public DateTime? ModifiedDate { get; set; }
 
         public int? ModifiedBy { get; set; }
@@ -165,12 +152,10 @@ namespace MVC.Models
         [StringLength(50)]
         public string SeoTitle { get; set; }
 
-        [DefaultDateTimeValue()]
         public DateTime? CreatedDate { get; set; }
 
         public int? CreatedBy { get; set; }
 
-        [DefaultDateTimeValue()]
         public DateTime? ModifiedDate { get; set; }
 
         public int? ModifiedBy { get; set; }
@@ -191,7 +176,6 @@ namespace MVC.Models
         [DefaultValue(1)]
         public int? RatePoint { get; set; }
 
-        [DefaultDateTimeValue()]
         public DateTime? CreateDate { get; set; }
 
         public int? CreateBy { get; set; }
@@ -243,7 +227,6 @@ namespace MVC.Models
 
         public string Content { get; set; }
 
-        [DefaultDateTimeValue()]
         public DateTime? CreateDate { get; set; }
 
         public DateTime? LastModify { get; set; }
