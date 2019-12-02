@@ -1239,6 +1239,13 @@ namespace MVC.Models
         {
             try
             {
+                var oldRate = GetRates().SingleOrDefault(x => x.CreateBy == rate.CreateBy && x.ProductID == rate.ProductID);
+                if (oldRate != null)
+                {
+                    oldRate.RatePoint = rate.RatePoint;
+                    oldRate.CreateDate = DateTime.Now;
+                    return UpdateRate(oldRate);
+                }
                 rate.CreateDate = DateTime.Now;
                 db.Rates.Add(rate);
                 db.SaveChanges();
@@ -1254,10 +1261,18 @@ namespace MVC.Models
         {
             try
             {
+                
                 Rate rate = new Rate();
                 rate.CreateBy = UserHelper.GetPropertyValue(userId, x => x.ID);
-                rate.RatePoint = ratePoint;
                 rate.ProductID = productId;
+                var oldRate = GetRates().SingleOrDefault(x => x.CreateBy == rate.CreateBy && x.ProductID == rate.ProductID);
+                if (oldRate != null)
+                {
+                    oldRate.RatePoint = ratePoint;
+                    oldRate.CreateDate = DateTime.Now;
+                    return UpdateRate(oldRate);
+                }
+                rate.RatePoint = ratePoint;
                 rate.CreateDate = DateTime.Now;
                 db.Rates.Add(rate);
                 db.SaveChanges();
