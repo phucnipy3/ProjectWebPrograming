@@ -818,7 +818,7 @@ namespace MVC.Models
             return Search(GetOrders(), searchString);
         }
 
-        public static IEnumerable<OrderViewModel> GetOrderViewModelsByUserID(string userId)
+        public static IEnumerable<OrderViewModel> GetOrderViewModels(string userId = null)
         {
             List<Order> orders = GetOrdersOf(userId).ToList();
             foreach (Order order in orders)
@@ -837,29 +837,24 @@ namespace MVC.Models
                 orderViewModel.PaymentMethods = order.PaymentMethods;
                 orderViewModel.TotalMoney = totalMoney.ToString("N0");
                 orderViewModel.Products = OrderDetailHelper.GetProductOnOrder(order.ID).ToList();
-                orderViewModel.TimeLogs = GetTimeLogs(order.ID).ToList();
+                orderViewModel.TimeLogs = GetTimeLogs(order.ID).OrderByDescending(x => x.Timeline).ToList();
                 yield return orderViewModel;
             }
         }
 
-        public static IEnumerable<OrderViewModel> GetOrderViewModels()
-        {
-            return GetOrderViewModelsByUserID("");
-        }
-
         public static OrderViewModel GetOrderViewModels(string userId, int orderId)
         {
-            return GetOrderViewModelsByUserID(userId).SingleOrDefault(x => x.ID == orderId);
+            return GetOrderViewModels(userId).SingleOrDefault(x => x.ID == orderId);
         }
 
-        public static IEnumerable<OrderViewModel> GetOrderViewModels(string userId, string searchString, string status)
+        public static IEnumerable<OrderViewModel> GetOrderViewModels(string userId, string searchString, string status = "All")
         {
-            return Search(GetOrderViewModelsByUserID(userId).Where(x => status == "All" || x.Status == status), searchString);
+            return Search(GetOrderViewModels(userId).Where(x => status == "All" || x.Status == status), searchString);
         }
 
-        public static IEnumerable<OrderViewModel> GetOrderViewModels(string userId, string status)
+        public static IEnumerable<OrderViewModel> GetOrderViewModels(string userId, string status = "All")
         {
-            return GetOrderViewModelsByUserID(userId).Where(x => status == "All" || x.Status == status);
+            return GetOrderViewModels(userId).Where(x => status == "All" || x.Status == status);
         }
 
         public static ShoppingCart GetShoppingCart(string userId)
@@ -920,7 +915,7 @@ namespace MVC.Models
 
         public static IEnumerable<Order> GetOrdersOf(string userId)
         {
-            return GetOrders().Where(x => userId == "" || UserHelper.GetPropertyValue((int)x.CreateBy, y => y.UserID) == userId);
+            return GetOrders().Where(x => String.IsNullOrEmpty(userId) || UserHelper.GetPropertyValue((int)x.CreateBy, y => y.UserID) == userId);
         }
 
         public static IEnumerable<TKey> GetPropertyValue<TKey>(Func<Order, TKey> keySelector)
