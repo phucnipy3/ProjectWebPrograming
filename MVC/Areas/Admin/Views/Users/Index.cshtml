@@ -105,7 +105,12 @@
                         <th class="text-center">
                             Address
                         </th>
-
+                        <th class="text-center">
+                            Role
+                        </th>
+                        <th class="text-center">
+                            Status
+                        </th>
 
 
                         <th></th>
@@ -115,57 +120,67 @@
 
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            <nobr>
-                                @Html.DisplayFor(modelItem => item.ID)
-                            </nobr>
-                        </td>
-                        <td class="text-center">
-                            <nobr>
-                                @Html.DisplayFor(modelItem => item.UserID)
-                            </nobr>
-                        </td>
-                        <td class="text-center">
-                            <nobr>
-                                @Html.DisplayFor(modelItem => item.Password)
-                            </nobr>
-                        </td>
-                        <td class="text-center">
-                            <nobr>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </nobr>
-                        </td>
+                <tr>
+                    <td>
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.ID)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.UserID)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </nobr>
+                    </td>
 
-                        <td class="text-center">
-                            <nobr>
-                                @Html.DisplayFor(modelItem => item.Phone)
-                            </nobr>
-                        </td>
-                        <td class="text-center">
-                            <nobr>
-                                @Html.DisplayFor(modelItem => item.Sex)
-                            </nobr>
-                        </td>
-                        <td class="text-center">
-                            <nobr>
-                                @Html.DisplayFor(modelItem => item.Email)
-                            </nobr>
-                        </td>
-                        <td class="text-center">
-                            <nobr>
-                                @Html.DisplayFor(modelItem => item.Address)
-                            </nobr>
-                        </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Sex)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Role)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </nobr>
+                    </td>
 
 
-                        <td>
-                            <nobr>
-                                <a href="#" onclick="UpdateItem(@item.ID)"><i class="far fa-edit"></i></a> |
-                                <a href="#" onclick="DeleteItem(@item.ID)" class="Delete-Item"><i class="fas fa-trash-alt"></i></a>
-                            </nobr>
-                        </td>
-                    </tr>
+                    <td>
+                        <nobr>
+                            <a href="#" onclick="UpdateItem(@item.ID)"><i class="far fa-edit"></i></a> |
+                            <a href="#" onclick="DeleteItem(@item.ID)" class="Delete-Item"><i class="fas fa-trash-alt"></i></a>
+                        </nobr>
+                    </td>
+                </tr>
                 }
 
 

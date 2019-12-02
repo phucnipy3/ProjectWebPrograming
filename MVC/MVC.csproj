@@ -335,7 +335,6 @@
     <Content Include="Areas\Admin\Views\ProductCategory\Add.cshtml" />
     <None Include="Areas\Admin\Views\ProductCategory\Update.cshtml" />
     <Content Include="Areas\Admin\Views\ProductCategory\ConfirmDelete.cshtml" />
-    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
     <Content Include="Scripts\infinite-scroll.pkgd.js" />
     <Content Include="SCSS\Custom.css">
       <DependentUpon>Custom.scss</DependentUpon>
@@ -433,10 +432,11 @@
     <Content Include="Content\bootstrap\bootstrap.scss" />
     <Content Include="Content\bootstrap\bootstrap-reboot.scss" />
     <Content Include="Content\bootstrap\bootstrap-grid.scss" />
+    <Content Include="Areas\Admin\Views\Statistical\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Products\ConfirmDelete.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Products\Update.cshtml" />
-    <Content Include="Areas\Admin\Views\Statistical\Index.cshtml" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>

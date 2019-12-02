@@ -16,7 +16,7 @@ using MVC.Controllers;
 namespace MVC.Areas.Admin.Controllers
 {
     [Authorize(Roles ="Admin")]
-    public class UsersController : ApplicationController, IAdminController
+    public class UsersController : ApplicationController, IAdminController<User>
     {
         private DatabaseDetailsContext db = new DatabaseDetailsContext();
 
@@ -34,11 +34,12 @@ namespace MVC.Areas.Admin.Controllers
             return View(models.OrderByDescending(x => x.ID).ToPagedList(page, sizePage));
         }
         [HttpPost]
-        public ActionResult Add(object model)
+        public ActionResult Add(User model)
         {
             if (ModelState.IsValid)
             {
-                if(UserHelper.AddUser(model as User))
+                
+                if (UserHelper.AddUser(model)) 
                 {
                     return Content("success");
                 }
@@ -75,7 +76,7 @@ namespace MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(object model)
+        public ActionResult Update(User model)
         {
             if (UserHelper.UpdateUser(model as User))
                 return Content("success");

@@ -18,18 +18,24 @@ namespace MVC.Controllers
             ViewBag.SearchString = searchString;
             ViewBag.MetaTitle = metaTitle;
             IPagedList<ProductOnPage> products;
-            IEnumerable<ProductCategory> categories;
-            if (String.IsNullOrEmpty(searchString))
+            IEnumerable<ProductCategory> categories = ProductCategoryHelper.GetProductCategories();
+            if (metaTitle == "Lasted")
             {
-                products = ProductHelper.GetProductsByCategoryMetaTitle(metaTitle).OrderByDescending(x => x.ProductID).ToPagedList(page, sizePage);
-                categories = ProductCategoryHelper.GetProductCategories();
+                products = ProductHelper.GetNewProducts().ToPagedList(page, sizePage);
+            }
+            else if (metaTitle == "Best-Saler")
+            {
+                products = ProductHelper.GetBestSalerProducts().ToPagedList(page, sizePage);
+            }
+            else if (metaTitle == "Hot")
+            {
+                products = ProductHelper.GetHotProducts().ToPagedList(page, sizePage);
             }
             else
             {
-                // Thiếu searchString
                 products = ProductHelper.GetProductsByCategoryMetaTitle(metaTitle).OrderByDescending(x => x.ProductID).ToPagedList(page, sizePage);
-                categories = ProductCategoryHelper.GetProductCategories();
             }
+
             ProductViewModel model = new ProductViewModel() { Products = products, Categories = categories };
             return View(model);
         }

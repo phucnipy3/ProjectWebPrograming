@@ -1,22 +1,21 @@
-﻿@model MVC.Models.ProductCategory
-@using (Html.BeginForm("Update", "ProductCategory", FormMethod.Post, new { id = "formUpdate" }))
+﻿@model MVC.Models.Product
+@using (Html.BeginForm("Update", "Product", FormMethod.Post, new { id = "formUpdate" }))
 {
     @Html.AntiForgeryToken();
-    @Html.ValidationSummary(true, "", new { @class = "alert-danger" });
-
+    @Html.ValidationSummary(true, "", new { @class = "aleart-danger" });
     <div class="row">
         <div class="col-8 offset-2">
             <div class="form-group">
-                <label for="InputNameAPC">ID</label>
-                @Html.TextBoxFor(model => model.ID, new { @class = "form-control", id = "InputNameAPC", @readonly = true})
+                <label for="InputUserIDUU">ID</label>
+                @Html.TextBoxFor(model => model.ID, new { @class = "form-control", @readonly = true })
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-8 offset-2">
             <div class="form-group">
-                <label for="InputNameAPC">Product category name</label>
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", id = "InputNameAPC", placeholder = "Enter name" })
+                <label for="InputUserIDSU">Product Name</label>
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", id = "InputUserIDSU", placeholder = "Enter name" })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -24,39 +23,119 @@
     <div class="row">
         <div class="col-8 offset-2">
             <div class="form-group">
-                <label for="InputMetaTitleAPC">Meta title</label>
-                @Html.TextBoxFor(model => model.MetaTitle, new { @class = "form-control", id = "InputMetaTitleAPC", placeholder = "Meta title", @readonly = true })
-                @Html.ValidationMessageFor(model => model.MetaTitle, "", new { @class = "text-danger" })
+                <label for="InputPasswordAU">Author</label>
+                @Html.TextBoxFor(model => model.Author, new { @class = "form-control", id = "InputPasswordAU", placeholder = "Enter author" })
+                @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-8 offset-2">
             <div class="form-group">
-                <label for="InputParentIDAPC">Parent's ID</label>
-                @Html.TextBoxFor(model => model.ParentID, new { @class = "form-control", id = "InputParentIDAPC", placeholder = "Enter parent's ID" })
-                @Html.ValidationMessageFor(model => model.ParentID, "", new { @class = "text-danger" })
+                <label for="InputEmailAU">Image</label>
+                @Html.TextBoxFor(model => model.Image, new { type = "file", @class = "form-control-file", id = "InputNameAU" })
+                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-8 offset-2">
             <div class="form-group">
-                <label for="InputDisplayOrderAPC">Display Order</label>
-                @Html.TextBoxFor(model => model.DisplayOrder, new { @class = "form-control", id = "InputDisplayOrderAPC", placeholder = "Enter display order", @Value = "1" })
-                @Html.ValidationMessageFor(model => model.DisplayOrder, "", new { @class = "text-danger" })
+                <label for="InputPhoneAU">Price</label>
+                @Html.TextBoxFor(model => model.Price, new { @class = "form-control", id = "InputPhoneAU", placeholder = "Enter price" })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-8 offset-2">
             <div class="form-group">
-                <label for="InputSeoTitleAPC">Seo Title</label>
-                @Html.TextBoxFor(model => model.SeoTitle, new { @class = "form-control", id = "InputSeoTitleAPC", placeholder = "Enter SEO title" })
-                @Html.ValidationMessageFor(model => model.SeoTitle, "", new { @class = "text-danger" })
+                <label for="InputEmailEU">Promotion Price</label>
+                @Html.TextBoxFor(model => model.PromotionPrice, new { @class = "form-control", id = "InputEmailEU", placeholder = "Enter promotion price" })
+                @Html.ValidationMessageFor(model => model.PromotionPrice, "", new { @class = "text-danger" })
+
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputAddressEU">Included VAT</label>
+                @Html.TextBoxFor(model => model.IncludedVAT, new { @class = "form-control", id = "InputAddressEU" })
+                @Html.ValidationMessageFor(model => model.IncludedVAT, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputEmailEU">Quantity</label>
+                @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control", id = "InputEmailEU", placeholder = "Enter quantity" })
+                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputEmailEU">Detail</label>
+                @Html.TextAreaFor(model => model.Detail, new { @class = "form-control", id = "InputEmailEU", placeholder = "Enter detail" })
+                @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputEmailEU">Warranty</label>
+                @Html.TextBoxFor(model => model.Warranty, new { @class = "form-control", id = "InputEmailEU", placeholder = "Enter warranty policy " })
+                @Html.ValidationMessageFor(model => model.Warranty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputEmailAU">Created Date</label>
+                @Html.TextBoxFor(model => model.CreatedDate, new { type = "file", @class = "form-control-file", id = "InputNameAU", @readonly = true })
+                @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputEmailAU">Created By</label>
+                @Html.TextBoxFor(model => model.CreatedBy, new { type = "file", @class = "form-control-file", id = "InputNameAU", @readonly = true })
+                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputEmailAU">Modyfied Date</label>
+                @Html.TextBoxFor(model => model.ModifiedBy, new { type = "file", @class = "form-control-file", id = "InputNameAU", @readonly = true })
+                @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputEmailAU">Created By</label>
+                @Html.TextBoxFor(model => model.ModifiedBy, new { type = "file", @class = "form-control-file", id = "InputNameAU", @readonly = true })
+                @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+
+
     <div class="row">
         <div class="col-5 offset-6">
             <button type="submit" class="btn btn-primary">Update</button>

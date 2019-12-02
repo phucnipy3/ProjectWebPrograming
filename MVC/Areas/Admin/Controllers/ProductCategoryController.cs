@@ -13,7 +13,7 @@ using MVC.Controllers;
 namespace MVC.Areas.Admin.Controllers
 {
     [Authorize(Roles ="Admin")]
-    public class ProductCategoryController : ApplicationController, IAdminController
+    public class ProductCategoryController : ApplicationController, IAdminController<ProductCategory>
     {
         // GET: Admin/ProductCategory
         public ActionResult Index(string searchString, int page = 1, int sizePage = 10)
@@ -29,7 +29,7 @@ namespace MVC.Areas.Admin.Controllers
             return View(models.OrderByDescending(x => x.ID).ToPagedList(page, sizePage));
         }
         [HttpPost]
-        public ActionResult Add(object model)
+        public ActionResult Add(ProductCategory model)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,7 @@ namespace MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(object model)
+        public ActionResult Update(ProductCategory model)
         {
             if (ProductCategoryHelper.UpdateProductCategory(model as ProductCategory))
                 return Content("success");

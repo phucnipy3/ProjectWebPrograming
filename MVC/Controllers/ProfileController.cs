@@ -28,8 +28,16 @@ namespace MVC.Controllers
         {
             if(ModelState.IsValid)
             {
-                // đổi pass
-                return Content("success");
+                if(UserHelper.ChangePassword(HttpContext.User.Identity.Name,model.OldPassword,model.NewPassword))
+                {
+                    return Content("success");
+                }
+                else
+                {
+                    ModelState.AddModelError("","Mật khẩu không đúng");
+                    return PartialView("ChangePassword", model);
+                    
+                }
 
             }
             return PartialView("ChangePassword", model);

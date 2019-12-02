@@ -45,7 +45,7 @@
             <label>Sex: </label>
         </div>
         <div class="form-check form-check-inline">
-            @Html.RadioButtonFor(model => model.Sex, "Male", new { id = "MaleRadio", @checked = true})
+            @Html.RadioButtonFor(model => model.Sex, "Male", new { id = "MaleRadio", @checked = true })
             <label class="form-check-label" for="MaleRadio">
                 Male
             </label>
@@ -74,16 +74,27 @@
                 @Html.TextBoxFor(model => model.Address, new { @class = "form-control", id = "InputAddressEU", placeholder = "Enter address" })
                 @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
 
-          </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputAddressEU">Role</label>
+                @Html.TextBoxFor(model => model.Role, new { @class = "form-control", id = "InputAddressEU", placeholder = "Customer or Employee?" })
+                @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+
+            </div>
         </div>
     </div>
 
 
 
-<div class="row">
-    <div class="col-5 offset-6">
-        <button type="submit" class="btn btn-primary">Add</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+    <div class="row">
+        <div class="col-5 offset-6">
+            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
     </div>
-</div>
 }

@@ -4,8 +4,8 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
-    ViewBag.Name = "product";
 }
+
 <div class="container-fluid">
     <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
@@ -28,7 +28,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add new Product</h5>
+                    <h5 class="modal-title">Add new product</h5>
                     <button type="button" class="close" aria-label="Close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -45,7 +45,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Update Product</h5>
+                    <h5 class="modal-title">Update product</h5>
                     <button type="button" class="close" aria-label="Close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -59,128 +59,182 @@
 </div>
 
 
-<h2>Product </h2>
+<h2>Products</h2>
 
-<p>
-    <div class="row">
+
+    <div class="row mb-3">
         <div class="col-auto">
-            <a href="#modalAdd" data-toggle="modal" class="btn btn-primary">Add new Product</a>
+            <a href="#modalAdd" data-toggle="modal" class="btn btn-primary">Add new product</a>
         </div>
         <div class="col-8 col-lg-6 col-sm-7 mx-auto">
-            <form action="/Admin/Product/Index" class="align-items-center d-flex">
+            <form action="/Admin/Users/Index" class="align-items-center d-flex">
                 <input type="text" placeholder="Search..." class="form-control" value="@ViewBag.SearchString" name="searchString" />
                 <input type="submit" value="Search" class="btn btn-outline-info mx-2" />
             </form>
         </div>
     </div>
 
-</p>
-<table class="table table-striped table-hover">
-    <thead class="thead-dark">
-        <tr>
-            <th>
-                #
-            </th>
-            <th class="text-center">
-                Name
-            </th>
-            <th class="text-center">
-                Meta Title
-            </th>
-            <th class="text-center">
-                Author
-            </th>
-            <th class="text-center">
-                Price
-            </th>
-            <th class="text-center">
-                Promotion Price
-            </th>
-            <th class="text-center">
-                Included VAT
-            </th>
-            <th class="text-center">
-                Quantity
-            </th>
-            <th class="text-center">
-                Detail
-            </th>
-            <th class="text-center">
-                Warranty
-            </th>
-            <th class="text-center">
-                Created Date
-            </th>
-            <th class="text-center">
-                Created By
-            </th>
-            <th class="text-center">
-                Modify Date
-            </th>
-            <th class="text-center">
-                Modify By
-            </th>
-            <th class="text-center">
-                Status
-            </th>
-            <th></th>
-        </tr>
-    </thead>
+<div class="row">
+    <div class="col-12" >
+        <div style="overflow:auto">
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th class="text-center">
+                            Name
+                        </th>
+                        <th class="text-center">
+                            Meta Title
+                        </th>
+                        <th class="text-center">
+                            Author
+                        </th>
+                        <th class="text-center">
+                            Image
+                        </th>
+                        <th class="text-center">
+                            Price
+                        </th>
+                        <th class="text-center">
+                            Promotion Price
+                        </th>
+                        <th class="text-center">
+                            Included VAT
+                        </th>
+                        <th class="text-center">
+                            Quantity
+                        </th>
+                        <th class="text-center">
+                            Detail
+                        </th>
+                        <th class="text-center">
+                            Warranty
+                        </th>
+                        <th class="text-center">
+                            Created Date
+                        </th>
+                        <th class="text-center">
+                            Created By
+                        </th>
+                        <th class="text-center">
+                            Modyfied Date
+                        </th>
+                        <th class="text-center">
+                            Modyfied By
+                        </th>
+                        <th class="text-center">
+                            Status
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
 
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.MetaTitle)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.PromotionPrice)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.IncludedVAT)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.Warranty)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.CreatedBy)
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.ModifiedDate)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.ModifiedBy)
-            </td>
-            </td>
-            <td>
-                <nobr>
-                    <a href="#" onclick="UpdateItem(@item.ID)"><i class="far fa-edit"></i></a> |
-                    <a href="#" onclick="DeleteItem(@item.ID)" class="Delete-Item"><i class="fas fa-trash-alt"></i></a>
-                </nobr>
-            </td>
-        </tr>
-    }
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.ID)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.MetaTitle)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Author)
+                        </nobr>
+                    </td>
+
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Image)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.PromotionPrice)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.IncludedVAT)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Detail)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Warranty)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.CreatedBy)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.ModifiedDate)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.ModifiedBy)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </nobr>
+                    </td>
 
 
-</table>
+                    <td>
+                        <nobr>
+                            <a href="#" onclick="UpdateItem(@item.ID)"><i class="far fa-edit"></i></a> |
+                            <a href="#" onclick="DeleteItem(@item.ID)" class="Delete-Item"><i class="fas fa-trash-alt"></i></a>
+                        </nobr>
+                    </td>
+                </tr>
+                }
+
+
+            </table>
+
+        </div>
+    </div>
+</div>
+
 @Html.PagedListPager(Model, page => Url.Action("Index",new { page, @searchString = @ViewBag.SearchString }), new PagedListRenderOptions {
     LiElementClasses = new string[] { "page-item"}, UlElementClasses = new string[] { "pagination", "justify-content-center" },
     MaximumPageNumbersToDisplay = 5,
@@ -192,7 +246,7 @@
         var id;
         function DeleteItem(id) {
             $.ajax({
-                url: '/Admin/Product/DeleteTransfer/' + id,
+                url: '/Admin/Products/DeleteTransfer/' + id,
                 method: 'post',
                 success: function (partialView) {
                     $("#formDelete").html(partialView);
@@ -203,7 +257,7 @@
         };
         function UpdateItem(id) {
             $.ajax({
-                url: '/Admin/Product/UpdateTransfer/' + id,
+                url: '/Admin/Products/UpdateTransfer/' + id,
                 method: 'post',
                 success: function (partialView) {
                     $("#formUpdateContent").html(partialView);
@@ -213,6 +267,7 @@
             return false;
         }
         $(document).ready(function () {
+            $(".my-paging ul li a").addClass("page-link");
             $("#modalAdd").on("submit", "#formAdd", function (e) {
                 e.preventDefault();  // prevent standard form submission
 
@@ -262,7 +317,7 @@
                 var form = $(this);
                 $.ajax({
                     url: form.attr("action"),
-                    method: form.attr("method"),  // post
+                    method: form.attr("method"),  // post 
                     data: form.serialize(),
                     success: function (partialResult) {
                         $("#modalUpdate").modal('hide');

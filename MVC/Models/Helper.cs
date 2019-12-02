@@ -392,11 +392,11 @@ namespace MVC.Models
             }
         }
 
-        public static bool ChangePassword(int userId, string oldPass, string newPass)
+        public static bool ChangePassword(string userId, string oldPass, string newPass)
         {
             try
             {
-                var user = GetUserByID(userId);
+                var user = GetUserByUserID(userId);
                 if (user != null)
                 {
                     if (user.Password != EncodePassword(oldPass))

@@ -9,14 +9,14 @@ using System.Web.Mvc;
 
 namespace MVC.Areas.Admin.Code
 {
-    interface IAdminController
+    interface IAdminController<T>
     {
         ActionResult Index(string searchString, int page = 1, int pageSize = 10);
-        ActionResult Add(object model);
+        ActionResult Add(T model);
         ActionResult Delete(DeleteViewModel model);
         ActionResult DeleteTransfer(int? id);
         ActionResult UpdateTransfer(int? id);
-        ActionResult Update(object model); 
+        ActionResult Update(T model); 
     }
     
 }

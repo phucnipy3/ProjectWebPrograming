@@ -42,82 +42,92 @@
             </nav>
         </div>
         <div class="col-12 col-lg-8 col-xl-9">
-            <div class="row post-feed">
-                @foreach (var item in Model.Products)
-                {
-                    <div class="col-6 col-md-4 col-xl-3 py-3 post">
-                        <div class="view view-eighth">
-                            <a href="/Product/Detail/@item.ProductID" class="text-decoration-none text-dark product">
-                                <div class="card border-0">
-                                    <img src="/@item.ImageLink" alt="Alternate Text" class="image-on-home m-auto" />
-                                </div>
-                                <div class="card-body p-0">
-                                    <div class="row">
-                                        <div class="col-12 pt-2 product-name overflow-hidden">
-                                            <p>@item.ProductName</p>
-                                        </div>
+            @if (Model.Products.Count > 0)
+            {
+                <div class="row post-feed">
+                    @foreach (var item in Model.Products)
+                    {
+                        <div class="col-6 col-md-4 col-xl-3 py-3 post">
+                            <div class="view view-eighth">
+                                <a href="/Product/Detail/@item.ProductID" class="text-decoration-none text-dark product">
+                                    <div class="card border-0">
+                                        <img src="/@item.ImageLink" alt="Alternate Text" class="image-on-home m-auto" />
                                     </div>
-                                    <div class="row">
-                                        <div class="col-12 pt-2 product-price">
-                                            @if (item.PromotionPrice != item.Price)
-                                            {
-                                                <p>
-                                                    @item.PromotionPrice <u>đ</u>
-                                                </p>
-                                            }
-                                            else
-                                            {
-                                                <p>
-                                                    @item.Price <u>đ</u>
-                                                </p>
-                                            }
+                                    <div class="card-body p-0">
+                                        <div class="row">
+                                            <div class="col-12 pt-2 product-name overflow-hidden">
+                                                <p>@item.ProductName</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 pt-2 product-discount">
-                                            @if (item.PromotionPrice != item.Price)
-                                            {
-                                                <del>
-                                                    @item.Price <u>đ</u>
-                                                </del>
-                                            }
+                                        <div class="row">
+                                            <div class="col-12 pt-2 product-price">
+                                                @if (item.PromotionPrice != item.Price)
+                                                {
+                                                    <p>
+                                                        @item.PromotionPrice <u>đ</u>
+                                                    </p>
+                                                }
+                                                else
+                                                {
+                                                    <p>
+                                                        @item.Price <u>đ</u>
+                                                    </p>
+                                                }
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 pt-2 product-rate">
+                                        <div class="row">
+                                            <div class="col-12 pt-2 product-discount">
+                                                @if (item.PromotionPrice != item.Price)
+                                                {
+                                                    <del>
+                                                        @item.Price <u>đ</u>
+                                                    </del>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 pt-2 product-rate">
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
-                            <div class="mask">
-                                <div class="row h-custom-40 align-content-end">
-                                    <div class="col-auto mx-auto">
-                                        <a href="#" onclick="AddToCart(@item.ProductID)" class="add">Add To Cart</a>
+                                </a>
+                                <div class="mask">
+                                    <div class="row h-custom-40 align-content-end">
+                                        <div class="col-auto mx-auto">
+                                            <a href="#" onclick="AddToCart(@item.ProductID)" class="add">Add To Cart</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row h-custom-12 align-content-center">
-                                    <div class="col-auto mx-auto">
-                                        <a href="/Product/Detail/@item.ProductID" class="info">View More</a>
+                                    <div class="row h-custom-12 align-content-center">
+                                        <div class="col-auto mx-auto">
+                                            <a href="/Product/Detail/@item.ProductID" class="info">View More</a>
+                                        </div>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                }
-            </div>
-            <div class="page-load-status text-center hide">
-                <p class="infinite-scroll-request">Loading...</p>
-                <p class="infinite-scroll-last">End of content</p>
-                <p class="infinite-scroll-error">No more pages to load</p>
-            </div>
-            @Html.PagedListPager(Model.Products, page => Url.Action("Index",new { page }), new PagedListRenderOptions {
-            LiElementClasses = new string[] { "page-item"},
-            UlElementClasses = new string[] { "pagination", "justify-content-center" },
-            Display = PagedListDisplayMode.IfNeeded, ContainerDivClasses= new[] {"my-paging"},
-            MaximumPageNumbersToDisplay = 5
-            })
+                    }
+                </div>
+                <div class="page-load-status text-center hide">
+                    <p class="infinite-scroll-request">Loading...</p>
+                    <p class="infinite-scroll-last">End of content</p>
+                    <p class="infinite-scroll-error">No more pages to load</p>
+                </div>
+                Html.PagedListPager(Model.Products, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+                {
+                    LiElementClasses = new string[] { "page-item" },
+                    UlElementClasses = new string[] { "pagination", "justify-content-center" },
+                    Display = PagedListDisplayMode.IfNeeded,
+                    ContainerDivClasses = new[] { "my-paging" },
+                    MaximumPageNumbersToDisplay = 5
+                });
+            }
+            else
+            {
+                
+            }
+
         </div>
     </div>
 </div>
