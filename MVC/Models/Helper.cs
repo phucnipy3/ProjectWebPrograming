@@ -610,7 +610,7 @@ namespace MVC.Models
 
         private static string GetTag(Product product)
         {
-            if (product.CreatedDate != null && ((TimeSpan)(DateTime.Now - product.CreatedDate)).Days >= Convert.ToInt32(ConfigurationManager.AppSettings["numberOfRecentDays"]))
+            if (product.CreatedDate.HasValue && ((TimeSpan)(DateTime.Now - product.CreatedDate)).Days >= Convert.ToInt32(ConfigurationManager.AppSettings["numberOfRecentDays"]))
                 return "new";
             if (product.PromotionPrice / product.Price >= 1 - Convert.ToDecimal(ConfigurationManager.AppSettings["onPercent"]))
                 return "hot";
@@ -1347,6 +1347,26 @@ namespace MVC.Models
         {
             try
             {
+                comment.CreateDate = DateTime.Now;
+                db.Comments.Add(comment);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool AddComment(int productId, int createBy, string content, int? parentId = null)
+        {
+            try
+            {
+                Comment comment = new Comment();
+                comment.ProductID = productId;
+                comment.CreateBy = createBy;
+                comment.Content = content;
+                comment.ParentID = parentId;
                 comment.CreateDate = DateTime.Now;
                 db.Comments.Add(comment);
                 db.SaveChanges();
