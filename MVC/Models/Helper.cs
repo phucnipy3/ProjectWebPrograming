@@ -386,7 +386,6 @@ namespace MVC.Models
                 var oldUser = GetUserByID(user.ID);
                 if (oldUser != null)
                 {
-                    user.Image = String.IsNullOrEmpty(user.Image) ? oldUser.Image : ImageResourceManagement(user.Image, "Resource/Avatar/");
                     user.Password = oldUser.Password;
                     user.Status = true;
                     db.Users.AddOrUpdate(x => x.ID, user);
@@ -562,7 +561,6 @@ namespace MVC.Models
             try
             {
                 product.Status = true;
-                product.Image = ImageResourceManagement(product.Image, "Resource/ChiTiet/");
                 product.CreatedDate = DateTime.Now;
                 product.ModifiedDate = DateTime.Now;
                 if (!product.PromotionPrice.HasValue)
@@ -603,7 +601,6 @@ namespace MVC.Models
                 var oldProduct = GetProductByID(product.ID);
                 if (oldProduct != null)
                 {
-                    product.Image = String.IsNullOrEmpty(product.Image) ? oldProduct.Image : ImageResourceManagement(product.Image, "Resource/Avatar/");
                     product.Status = true;
                     product.ModifiedDate = DateTime.Now;
                     db.Products.AddOrUpdate(x => x.ID, product);

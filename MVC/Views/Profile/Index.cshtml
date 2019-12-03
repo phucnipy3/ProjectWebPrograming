@@ -24,7 +24,7 @@
 </div>
 <div class="mx-5">
     <h2>Thông tin cá nhân</h2>
-    @using (Html.BeginForm("Update", "Profile", FormMethod.Post))
+    @using (Html.BeginForm("Update", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken();
         @Html.ValidationSummary(true, "", new { @class = "aleart-danger" });
@@ -32,10 +32,10 @@
         <div class="row">
             <div class="col-8">
                 <div class="form-group">
-                    @*<label for="InputUserIDUU">Update Avatar</label>*@
-                    @Html.TextBoxFor(model => model.Image, new { type = "file" })
-                    <input type="file" id="ImageGetter" value="@Model.Image"/>
-                    @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+                    <label for="InputUserIDUU">Update Avatar</label>
+                    <input type="file" name="Avatar" class="form-control-file" />
+                    @Html.TextBoxFor(model => model.Image, new { @hidden = true })
+                    @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
             <div class="col-8">
                 <div class="form-group">
                     <label for="InputUserIDUU">User ID</label>
-                    @Html.TextBoxFor(model => model.UserID, new { @class = "form-control", id = "InputUserIDUU", placeholder = "Enter user ID",@readonly = true})
+                    @Html.TextBoxFor(model => model.UserID, new { @class = "form-control", id = "InputUserIDUU", placeholder = "Enter user ID", @readonly = true })
                     @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -119,14 +119,15 @@
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </div>
+        @Html.HiddenFor(model => model.Role)
+        @Html.HiddenFor(model => model.Active)
+        @Html.HiddenFor(model => model.Status)
     }
 
 
 
 
-    @Html.HiddenFor(model => model.Role)
-    @Html.HiddenFor(model => model.Active)
-    @Html.HiddenFor(model => model.Status)
+
 </div>
 
 
@@ -152,9 +153,9 @@
                     }
                 });
             });
-            //$("#ImageGetter").change(function () {
-            //    $("#ImageLink").attr("value", $(this).val());
-            //});
+            $("#ImageGetter").change(function () {
+                $("#ImageLink").attr("value", $(this).val().replace("C:\\fakepath\\", ""));
+            });
         });
     </script>
 }

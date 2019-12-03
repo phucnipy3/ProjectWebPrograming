@@ -8,13 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using MVC.Models;
-
+using System.IO;
 
 namespace MVC.Areas.Admin.Controllers
 {
-    [Authorize(Roles ="Admin,Employee")]
-    public class ProductsController : ApplicationController, IAdminController<Product>
+    public class ProductsController : ApplicationController
     {
+        [Authorize(Roles = "Admin,Employee")]
+
         public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
             ViewBag.Active = "#Products";
@@ -29,12 +30,16 @@ namespace MVC.Areas.Admin.Controllers
             return View(models.OrderByDescending(x => x.ID).ToPagedList(page, pageSize));
         }
         [HttpPost]
-        public ActionResult Add(Product model)
+        public ActionResult Add(Product model, HttpPostedFileBase Hinh)
         {
             if(ModelState.IsValid)
             {
-                if(ProductHelper.AddProduct(model as Product))
-                {
+                string fileName = Helper.ConvertMetaTitle(model.Name) + DateTime.Now.ToString("-HH-mm-ss-dd-MM-yyyy") + Path.GetExtension(Hinh.FileName);
+                model.Image = "~/Resource/chitiet/" + fileName;
+                string savePath = Path.Combine(Server.MapPath("~/Resource/chiet/"), fileName);
+                Hinh.SaveAs(savePath);
+                if (ProductHelper.AddProduct(model))
+                { 
                     return Content("success");
                 }
             }
@@ -58,11 +63,18 @@ namespace MVC.Areas.Admin.Controllers
         }
 
 
+        
         [HttpPost]
-
-        public ActionResult Update(Product model)
+        public ActionResult Update(Product model, HttpPostedFileBase Hinh)
         {
-            if (ProductHelper.UpdateProduct(model as Product  ))
+            if(Hinh != null)
+            {
+                string fileName = Helper.ConvertMetaTitle(model.Name) + DateTime.Now.ToString("-HH-mm-ss-dd-MM-yyyy") + Path.GetExtension(Hinh.FileName);
+                model.Image = "~/Resource/chitiet/" + fileName;
+                string savePath = Path.Combine(Server.MapPath("~/Resource/chitet/"), fileName);
+                Hinh.SaveAs(savePath);
+            }
+            if (ProductHelper.UpdateProduct(model))
                 return Content("success");
             return Content("failure");
         }
