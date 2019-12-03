@@ -301,6 +301,7 @@ namespace MVC.Models
         }
 
         public static TKey GetPropertyValue<TKey>(string userId, Func<User, TKey> keySelector)
+
         {
             return keySelector(GetUserByUserID(userId));
         }
@@ -962,8 +963,9 @@ namespace MVC.Models
                 db.SaveChanges();
                 return true;
             }
-            catch
+            catch (Exception e)
             {
+                
                 return false;
             }
         }
