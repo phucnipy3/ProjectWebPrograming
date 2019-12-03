@@ -70,16 +70,10 @@
                         </form>
                     </div>
                     <div class="col-auto pr-0">
-                        <form action="/Admin/ManageOrders" method="post" class="w-auto">
-                            <input type="text" name="OrderID" value="" hidden />
-                            <button type="submit" class="btn btn-success float-right">Xác nhận</button>
-                        </form>
+                        <a href="#" onclick="Confirm()" class="btn btn-success float-right">Xác nhận</a>
                     </div>
                     <div class="col-auto pr-0">
-                        <form action="/Admin/ManageOrders" method="post" class="w-auto">
-                            <input type="text" name="OrderID" value="" hidden />
-                            <button type="submit" class="btn btn-danger float-right">Hủy</button>
-                        </form>
+                        <a href="#" onclick="Cancel()" class="btn btn-danger float-right">Hủy</a>
                     </div>
                 </div>
                 
@@ -98,7 +92,40 @@
 </div>
 @section scripts{
     <script>
-        
+        function Confirm(id) {
+            $.ajax({
+                url: '/Admin/ManageOrders/Confirm/' + id,
+                method: 'post',
+                success: function (result) {
+                    if (result == "success") {
+                        $("#TextSuccess").html('Confirm succesfully!');
+                        $("#modalSuccess").modal();
+                    }
+                    else {
+                        $("#TextFailure").html('Confirm fail!');
+                        $("#modalFailure").modal();
+                    }
+                }
+            });
+            return false;
+        };
+        function Confirm(id) {
+            $.ajax({
+                url: '/Admin/ManageOrders/Cancel/' + id,
+                method: 'post',
+                success: function (result) {
+                    if (result == "success") {
+                        $("#TextSuccess").html('Cancel succesfully!');
+                        $("#modalSuccess").modal();
+                    }
+                    else {
+                        $("#TextFailure").html('Cancel fail!');
+                        $("#modalFailure").modal();
+                    }
+                }
+            });
+            return false;
+        };
         $(document).ready(function () {
             $("li.order-bar").removeClass("active");
             $("@ViewBag.OrderActive").addClass("active");
