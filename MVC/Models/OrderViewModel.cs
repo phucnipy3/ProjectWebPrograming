@@ -5,6 +5,15 @@ using System.Web;
 
 namespace MVC.Models
 {
+    public class OrderManagementViewModel
+    {
+        public OrderViewModel OrderViewModel { get; set; }
+
+        public string Image { get; set; }
+
+        public string Name { get; set; }
+    }
+
     public class OrderViewModel
     {
         public int ID { get; set; }
@@ -31,6 +40,9 @@ namespace MVC.Models
 
         public string TotalMoney { get; set; }
 
+        public string Tag { get; set; }
+
+        public DateTime? CreateDate { get; set; }
     }
 
     public class ProductOnOrder

@@ -33,7 +33,7 @@
             <div class="col-8">
                 <div class="form-group">
                     @*<label for="InputUserIDUU">Update Avatar</label>*@
-                    @Html.TextBoxFor(model => model.Image, new { @class = "form-control", id = "ImageLink", placeholder = "Enter user ID", @hidden = true })
+                    @Html.TextBoxFor(model => model.Image, new { type = "file" })
                     <input type="file" id="ImageGetter" value="@Model.Image"/>
                     @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
                 </div>
@@ -152,9 +152,9 @@
                     }
                 });
             });
-            $("#ImageGetter").change(function () {
-                $("#ImageLink").attr("value",$(this).val());
-            });
+            //$("#ImageGetter").change(function () {
+            //    $("#ImageLink").attr("value", $(this).val());
+            //});
         });
     </script>
 }

@@ -826,9 +826,19 @@ namespace MVC.Models
             return Search(GetOrders(), searchString);
         }
 
+        public static IEnumerable<OrderManagementViewModel> GetOrderManagementViewModels()
+        {
+            return GetOrderViewModels().Select(x => new OrderManagementViewModel()
+            {
+                Name = UserHelper.GetPropertyValue((int)GetPropertyValue(x.ID, y => y.CreateBy), y => y.Name),
+                Image = UserHelper.GetPropertyValue((int)GetPropertyValue(x.ID, y => y.CreateBy), y => y.Image),
+                OrderViewModel = x
+            });
+        }
+
         public static IEnumerable<OrderViewModel> GetOrderViewModels(string userId = null)
         {
-            List<Order> orders = GetOrdersOf(userId).ToList();
+            List<Order> orders = GetOrdersOf(userId).OrderByDescending(x => x.CreateDate).ToList();
             foreach (Order order in orders)
             {
                 decimal totalProductMoney = (decimal)OrderDetailHelper.TotalMoneyOfOrder(order.ID);
@@ -838,7 +848,8 @@ namespace MVC.Models
                 orderViewModel.ShipName = order.ShipName;
                 orderViewModel.ShipMobile = order.ShipMobile;
                 orderViewModel.ShipAddress = order.ShipAddress;
-                orderViewModel.Status = GetStatus(order.ID);
+                orderViewModel.Tag = GetTag(order.ID);
+                orderViewModel.Status = GetStatus(orderViewModel.Tag);
                 orderViewModel.TotalProductMoney = totalProductMoney.ToString("N0");
                 orderViewModel.Transport = order.Transport;
                 orderViewModel.TransportationFee = ((decimal)order.TransportationFee).ToString("N0");
@@ -846,6 +857,7 @@ namespace MVC.Models
                 orderViewModel.TotalMoney = totalMoney.ToString("N0");
                 orderViewModel.Products = OrderDetailHelper.GetProductOnOrder(order.ID).ToList();
                 orderViewModel.TimeLogs = GetTimeLogs(order.ID).OrderByDescending(x => x.Timeline).ToList();
+                orderViewModel.CreateDate = order.CreateDate;
                 yield return orderViewModel;
             }
         }
@@ -903,18 +915,18 @@ namespace MVC.Models
         {
             var order = GetOrderByID(orderId);
             if (order.Canceled != null)
-                yield return new TimeLogs() { Timeline = order.Canceled, Event = "Canceled" };
+                yield return new TimeLogs() { Timeline = order.Canceled, Event = "Đã hủy đơn hàng" };
             if (order.Complete != null)
-                yield return new TimeLogs() { Timeline = order.Complete, Event = "Complete" };
+                yield return new TimeLogs() { Timeline = order.Complete, Event = "Đã giao đơn hàng" };
             if (order.TookProducts != null)
-                yield return new TimeLogs() { Timeline = order.TookProducts, Event = "TookProducts" };
+                yield return new TimeLogs() { Timeline = order.TookProducts, Event = "Đã lấy hàng" };
             if (order.Confirmed != null)
-                yield return new TimeLogs() { Timeline = order.Confirmed, Event = "Confirmed" };
+                yield return new TimeLogs() { Timeline = order.Confirmed, Event = "Đã xác nhận đơn hàng" };
             if (order.Ordered != null)
-                yield return new TimeLogs() { Timeline = order.Ordered, Event = "Ordered" };
+                yield return new TimeLogs() { Timeline = order.Ordered, Event = "Đã đặt hàng" };
         }
 
-        private static string GetStatus(int orderId)
+        private static string GetTag(int orderId)
         {
             var order = GetOrderByID(orderId);
             if (order.Canceled != null)
@@ -927,6 +939,19 @@ namespace MVC.Models
                 return "Confirmed";
             if (order.Ordered != null)
                 return "Ordered";
+            return "";
+        }
+
+        private static string GetStatus(string tag)
+        {
+            switch (tag)
+            {
+                case "Canceled": return "Đã hủy";
+                case "Complete": return "Đã giao";
+                case "TookProducts": return "Chờ giao hàng";
+                case "Confirmed": return "Chờ lấy hàng";
+                case "Ordered": return "Chờ xác nhận";
+            }
             return "";
         }
 
