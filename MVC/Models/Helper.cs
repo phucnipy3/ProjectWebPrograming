@@ -1008,7 +1008,7 @@ namespace MVC.Models
             {
                 case "Canceled": return "Đã hủy";
                 case "Complete": return "Đã giao";
-                case "TookProducts": return "Chờ giao hàng";
+                case "TookProducts": return "Đang giao hàng";
                 case "Confirmed": return "Chờ lấy hàng";
                 case "Ordered": return "Chờ xác nhận";
             }
