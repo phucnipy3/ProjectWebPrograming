@@ -349,6 +349,7 @@
     <Content Include="Areas\Admin\Views\OrderDetails\Index.cshtml" />
     <Content Include="Areas\Admin\Views\OrderDetails\Update.cshtml" />
     <Content Include="Areas\Admin\Views\ManageOrders\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageOrders\Detail.cshtml" />
     <None Include="Areas\Admin\Views\ProductCategory\Update.cshtml" />
     <Content Include="Areas\Admin\Views\ProductCategory\ConfirmDelete.cshtml" />
     <Content Include="Scripts\infinite-scroll.pkgd.js" />
