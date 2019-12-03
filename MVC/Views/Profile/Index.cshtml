@@ -32,8 +32,9 @@
         <div class="row">
             <div class="col-8">
                 <div class="form-group">
-                    <label for="InputUserIDUU">Update Avatar</label>
-                    @Html.TextBoxFor(model => model.Image, new { @class = "form-control-file", id = "InputUserIDUU", placeholder = "Enter user ID", type="file" })
+                    @*<label for="InputUserIDUU">Update Avatar</label>*@
+                    @Html.TextBoxFor(model => model.Image, new { @class = "form-control", id = "ImageLink", placeholder = "Enter user ID", @hidden = true })
+                    <input type="file" id="ImageGetter" value="@Model.Image"/>
                     @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -150,6 +151,9 @@
                             $("#formChangePasswordContent").html(partialResult);
                     }
                 });
+            });
+            $("#ImageGetter").change(function () {
+                $("#ImageLink").attr("value",$(this).val());
             });
         });
     </script>

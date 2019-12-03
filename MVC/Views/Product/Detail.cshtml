@@ -184,7 +184,7 @@
                                     </div>
                                     <div class="col-12 comment-tools">
                                         <ul class="p-0">
-                                            <li class="d-inline-block"><i class="fa fa-clock-o"></i> @comment.Comment.CreateDate.Value.Date.ToShortTimeString() &emsp;</li>
+                                            <li class="d-inline-block"><i class="fa fa-clock-o"></i> @comment.Comment.CreateDate.Value.ToShortTimeString() &emsp;</li>
                                             <li class="d-inline-block"><i class="fa fa-calendar"></i> @comment.Comment.CreateDate.Value.Date.ToShortDateString() &emsp;</li>
                                             <li class="d-inline-block"><a href="#create-new-@comment.Comment.ID" class="text-decoration-none text-info" data-parent-id="@comment.Comment.ID" data-toggle="collapse">reply</a></li>
                                         </ul>

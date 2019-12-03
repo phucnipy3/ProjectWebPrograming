@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Reflection;
 using MVC.Areas.Admin.Models;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace MVC.Models
 {
@@ -261,6 +262,15 @@ namespace MVC.Models
             chartDatas[1].Total = data.Select(x => x.Revenue).Sum();
             return chartDatas;
         }
+
+        protected static string ImageResourceManagement(string path, string resource)
+        {
+            resource += ConvertMetaTitle(path.Substring(path.LastIndexOf('\\')));
+            while (File.Exists(resource))
+                resource += "_copy";
+            File.Copy(path, resource, true);
+            return resource;
+        }
     }
 
     public class UserHelper : Helper
@@ -301,14 +311,8 @@ namespace MVC.Models
         }
 
         public static TKey GetPropertyValue<TKey>(string userId, Func<User, TKey> keySelector)
-
         {
             return keySelector(GetUserByUserID(userId));
-        }
-
-        public static string GetNameByUserID(string userId)
-        {
-            return GetPropertyValue(userId, x => x.Name);
         }
 
         public static User GetUserByUserID(string userId)
@@ -344,6 +348,7 @@ namespace MVC.Models
                 if (GetUsers().Where(x => x.UserID == user.UserID).Count() > 0)
                     return false;
                 user.Status = true;
+                user.Image = String.IsNullOrEmpty(user.Image) ? "Resource/Avatar/avatar.png" : ImageResourceManagement(user.Image, "Resource/Avatar/");
                 user.Password = EncodePassword(user.Password);
                 db.Users.Add(user);
                 db.SaveChanges();
@@ -381,8 +386,9 @@ namespace MVC.Models
                 var oldUser = GetUserByID(user.ID);
                 if (oldUser != null)
                 {
-                    user.Status = true;
+                    user.Image = String.IsNullOrEmpty(user.Image) ? oldUser.Image : ImageResourceManagement(user.Image, "Resource/Avatar/");
                     user.Password = oldUser.Password;
+                    user.Status = true;
                     db.Users.AddOrUpdate(x => x.ID, user);
                     db.SaveChanges();
                     return true;
@@ -556,6 +562,7 @@ namespace MVC.Models
             try
             {
                 product.Status = true;
+                product.Image = ImageResourceManagement(product.Image, "Resource/ChiTiet/");
                 product.CreatedDate = DateTime.Now;
                 product.ModifiedDate = DateTime.Now;
                 if (!product.PromotionPrice.HasValue)
@@ -596,6 +603,7 @@ namespace MVC.Models
                 var oldProduct = GetProductByID(product.ID);
                 if (oldProduct != null)
                 {
+                    product.Image = String.IsNullOrEmpty(product.Image) ? oldProduct.Image : ImageResourceManagement(product.Image, "Resource/Avatar/");
                     product.Status = true;
                     product.ModifiedDate = DateTime.Now;
                     db.Products.AddOrUpdate(x => x.ID, product);
@@ -870,7 +878,7 @@ namespace MVC.Models
 
         public static bool Ordered(string userId, ShoppingCart shoppingCart, OrderInfomation orderInfomation)
         {
-            //try
+            try
             {
                 Order order = new Order();
                 order.ShipName = orderInfomation.Name;
@@ -885,7 +893,7 @@ namespace MVC.Models
                 shoppingCart.Items.ForEach(x => OrderDetailHelper.AddOrderDetail(order.ID, x.Product.ID, (int)x.Count));
                 return true;
             }
-            //catch
+            catch
             {
                 return false;
             }
@@ -953,7 +961,7 @@ namespace MVC.Models
 
         public static bool AddOrder(Order order)
         {
-            //try
+            try
             {
                 order.Status = true;
                 order.TransportationFee = GetTransportationFee(order.Transport);
@@ -962,7 +970,7 @@ namespace MVC.Models
                 db.SaveChanges();
                 return true;
             }
-            //catch (Exception e)
+            catch (Exception e)
             {
                 
                 return false;
@@ -1252,7 +1260,10 @@ namespace MVC.Models
 
         public static int? GetRatePoint(string userId, int productId)
         {
-            return GetPropertyValue(GetRateByID(userId, productId).ID, x => x.RatePoint);
+            var rate = GetRateByID(userId, productId);
+            if (rate != null)
+                return rate.RatePoint;
+            return 0;
         }
 
         public static RateView GetRateView(int productId)

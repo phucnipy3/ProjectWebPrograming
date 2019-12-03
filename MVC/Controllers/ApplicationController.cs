@@ -16,7 +16,10 @@ namespace MVC.Controllers
         {
             base.Initialize(requestContext);
             if(HttpContext.User.Identity.IsAuthenticated)
-                ViewBag.UserName = UserHelper.GetNameByUserID(HttpContext.User.Identity.Name);
+            {
+                ViewBag.UserName = UserHelper.GetPropertyValue(HttpContext.User.Identity.Name, x => x.Name);
+                ViewBag.UserAvatar = UserHelper.GetPropertyValue(HttpContext.User.Identity.Name, x => x.Image);
+            }
         }
     }
 }
