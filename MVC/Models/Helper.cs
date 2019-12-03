@@ -826,7 +826,7 @@ namespace MVC.Models
             return Search(GetOrders(), searchString);
         }
 
-        public static IEnumerable<OrderManagementViewModel> GetOrderManagementViewModels()
+        private static IEnumerable<OrderManagementViewModel> GetOrderManagementViewModels()
         {
             return GetOrderViewModels().Select(x => new OrderManagementViewModel()
             {
@@ -836,12 +836,12 @@ namespace MVC.Models
             });
         }
 
-        public static IEnumerable<OrderManagementViewModel> GetOrderManagementViewModels(string searchString, string tag = "All")
+        public static IEnumerable<OrderManagementViewModel> GetOrderManagementViewModels(string tag = "All", string searchString = null)
         {
             return Search(GetOrderManagementViewModels().Where(x => tag == "All" || x.OrderViewModel.Tag == tag), searchString);
         }
 
-        public static IEnumerable<OrderViewModel> GetOrderViewModels(string userId = null)
+        private static IEnumerable<OrderViewModel> GetOrderViewModels(string userId = null)
         {
             List<Order> orders = GetOrdersOf(userId).OrderByDescending(x => x.CreateDate).ToList();
             foreach (Order order in orders)
@@ -867,19 +867,14 @@ namespace MVC.Models
             }
         }
 
-        public static OrderViewModel GetOrderViewModels(string userId, int orderId)
+        public static OrderViewModel GetOrderViewModels(int orderId, string userId = null)
         {
             return GetOrderViewModels(userId).SingleOrDefault(x => x.ID == orderId);
         }
 
-        public static IEnumerable<OrderViewModel> GetOrderViewModels(string userId, string searchString, string tag = "All")
+        public static IEnumerable<OrderViewModel> GetOrderViewModels(string userId, string tag = "All", string searchString = null)
         {
             return Search(GetOrderViewModels(userId).Where(x => tag == "All" || x.Tag == tag), searchString);
-        }
-
-        public static IEnumerable<OrderViewModel> GetOrderViewModels(string userId, string tag = "All")
-        {
-            return GetOrderViewModels(userId).Where(x => tag == "All" || x.Status == tag);
         }
 
         public static ShoppingCart GetShoppingCart(string userId)
@@ -921,48 +916,32 @@ namespace MVC.Models
             try
             {
                 var order = GetOrderByID(orderId);
-                if (order != null && !order.Confirmed.HasValue)
+                if (order != null)
                 {
-                    order.Confirmed = DateTime.Now;
-                    db.SaveChanges();
-                    return true;
-                }
-                return false;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public static bool TookProducts(int orderId)
-        {
-            try
-            {
-                var order = GetOrderByID(orderId);
-                if (order != null && !order.TookProducts.HasValue)
-                {
-                    order.TookProducts = DateTime.Now;
-                    db.SaveChanges();
-                    return true;
-                }
-                return false;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public static bool Complete(int orderId)
-        {
-            try
-            {
-                var order = GetOrderByID(orderId);
-                if (order != null && !order.Complete.HasValue)
-                {
-                    order.Complete = DateTime.Now;
-                    db.SaveChanges();
+                    if (order.Ordered == null)
+                    {
+                        order.Ordered = DateTime.Now;
+                        db.SaveChanges();
+                        return true;
+                    }
+                    if (order.Confirmed == null)
+                    {
+                        order.Confirmed = DateTime.Now;
+                        db.SaveChanges();
+                        return true;
+                    }
+                    if (order.TookProducts == null)
+                    {
+                        order.TookProducts = DateTime.Now;
+                        db.SaveChanges();
+                        return true;
+                    }
+                    if (order.Complete == null)
+                    {
+                        order.Complete = DateTime.Now;
+                        db.SaveChanges();
+                        return true;
+                    }
                     return true;
                 }
                 return false;

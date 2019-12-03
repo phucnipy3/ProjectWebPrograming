@@ -18,7 +18,7 @@ namespace MVC.Controllers
             string UserID = HttpContext.User.Identity.Name;
             IEnumerable<OrderViewModel> models;
             if (!String.IsNullOrEmpty( searchString ))
-                models = OrderHelper.GetOrderViewModels(UserID, searchString, status);
+                models = OrderHelper.GetOrderViewModels(UserID, status, searchString);
             models = OrderHelper.GetOrderViewModels(UserID, status);
             ViewBag.OrderActive = "#" + status;
             ViewBag.SearchString = searchString;
@@ -28,7 +28,7 @@ namespace MVC.Controllers
         public ActionResult Detail(int OrderID)
         {
             string UserID = HttpContext.User.Identity.Name;
-            OrderViewModel models = OrderHelper.GetOrderViewModels(UserID, OrderID);
+            OrderViewModel models = OrderHelper.GetOrderViewModels(OrderID, UserID);
             return View(models);
         }
     }
