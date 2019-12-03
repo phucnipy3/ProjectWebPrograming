@@ -1253,7 +1253,10 @@ namespace MVC.Models
 
         public static int? GetRatePoint(string userId, int productId)
         {
-            return GetPropertyValue(GetRateByID(userId, productId).ID, x => x.RatePoint);
+            var rate = GetRateByID(userId, productId);
+            if (rate != null)
+                return rate.RatePoint;
+            return null;
         }
 
         public static RateView GetRateView(int productId)
