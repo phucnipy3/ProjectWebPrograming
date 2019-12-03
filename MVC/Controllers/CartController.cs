@@ -26,6 +26,7 @@ namespace MVC.Controllers
             {
                 if(OrderHelper.Ordered(HttpContext.User.Identity.Name,HttpContext.Session["ShoppingCart"] as ShoppingCart,model))
                     return Content("success");
+                ModelState.AddModelError("", "Có lỗi xảy ra, vui lòng thử lại sau");
             }
             return PartialView("FormInfo", model);
         }

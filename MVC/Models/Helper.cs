@@ -963,8 +963,9 @@ namespace MVC.Models
                 db.SaveChanges();
                 return true;
             }
-            catch
+            catch (Exception e)
             {
+                
                 return false;
             }
         }
