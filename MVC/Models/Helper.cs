@@ -836,6 +836,11 @@ namespace MVC.Models
             });
         }
 
+        public static IEnumerable<OrderManagementViewModel> GetOrderManagementViewModels(string searchString, string tag = "All")
+        {
+            return Search(GetOrderManagementViewModels().Where(x => tag == "All" || x.OrderViewModel.Tag == tag), searchString);
+        }
+
         public static IEnumerable<OrderViewModel> GetOrderViewModels(string userId = null)
         {
             List<Order> orders = GetOrdersOf(userId).OrderByDescending(x => x.CreateDate).ToList();
@@ -867,14 +872,14 @@ namespace MVC.Models
             return GetOrderViewModels(userId).SingleOrDefault(x => x.ID == orderId);
         }
 
-        public static IEnumerable<OrderViewModel> GetOrderViewModels(string userId, string searchString, string status = "All")
+        public static IEnumerable<OrderViewModel> GetOrderViewModels(string userId, string searchString, string tag = "All")
         {
-            return Search(GetOrderViewModels(userId).Where(x => status == "All" || x.Status == status), searchString);
+            return Search(GetOrderViewModels(userId).Where(x => tag == "All" || x.Tag == tag), searchString);
         }
 
-        public static IEnumerable<OrderViewModel> GetOrderViewModels(string userId, string status = "All")
+        public static IEnumerable<OrderViewModel> GetOrderViewModels(string userId, string tag = "All")
         {
-            return GetOrderViewModels(userId).Where(x => status == "All" || x.Status == status);
+            return GetOrderViewModels(userId).Where(x => tag == "All" || x.Status == tag);
         }
 
         public static ShoppingCart GetShoppingCart(string userId)
@@ -904,6 +909,82 @@ namespace MVC.Models
                     return false;
                 shoppingCart.Items.ForEach(x => OrderDetailHelper.AddOrderDetail(order.ID, x.Product.ID, (int)x.Count));
                 return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool Confirmed(int orderId)
+        {
+            try
+            {
+                var order = GetOrderByID(orderId);
+                if (order != null && !order.Confirmed.HasValue)
+                {
+                    order.Confirmed = DateTime.Now;
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool TookProducts(int orderId)
+        {
+            try
+            {
+                var order = GetOrderByID(orderId);
+                if (order != null && !order.TookProducts.HasValue)
+                {
+                    order.TookProducts = DateTime.Now;
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool Complete(int orderId)
+        {
+            try
+            {
+                var order = GetOrderByID(orderId);
+                if (order != null && !order.Complete.HasValue)
+                {
+                    order.Complete = DateTime.Now;
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool Canceled(int orderId)
+        {
+            try
+            {
+                var order = GetOrderByID(orderId);
+                if (order != null && !order.Canceled.HasValue)
+                {
+                    order.Canceled = DateTime.Now;
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
             }
             catch
             {
