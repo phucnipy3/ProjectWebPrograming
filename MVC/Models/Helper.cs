@@ -883,7 +883,6 @@ namespace MVC.Models
                 order.Ordered = DateTime.Now;
                 if (!AddOrder(order))
                     return false;
-                order = GetOrdersOf(userId).OrderByDescending(x => x.Ordered).First();
                 shoppingCart.Items.ForEach(x => OrderDetailHelper.AddOrderDetail(order.ID, x.Product.ID, (int)x.Count));
                 return true;
             }
@@ -1224,6 +1223,11 @@ namespace MVC.Models
             return GetRates().SingleOrDefault(x => x.ID == id);
         }
 
+        public static Rate GetRateByID(string userId, int productId)
+        {
+            return GetRates().SingleOrDefault(x => x.CreateBy == UserHelper.GetPropertyValue(userId, y => y.ID) && x.ProductID == productId);
+        }
+
         public static IEnumerable<TKey> GetPropertyValue<TKey>(Func<Rate, TKey> keySelector)
         {
             return GetPropertyValue(GetRates(), keySelector);
@@ -1249,7 +1253,7 @@ namespace MVC.Models
 
         public static int? GetRatePoint(string userId, int productId)
         {
-            return GetRates().SingleOrDefault(x => x.CreateBy == UserHelper.GetPropertyValue(userId, y => y.ID) && x.ProductID == productId).RatePoint;
+            return GetPropertyValue(GetRateByID(userId, productId).ID, x => x.RatePoint);
         }
 
         public static RateView GetRateView(int productId)
