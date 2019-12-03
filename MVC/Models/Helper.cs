@@ -1256,7 +1256,7 @@ namespace MVC.Models
             var rate = GetRateByID(userId, productId);
             if (rate != null)
                 return rate.RatePoint;
-            return null;
+            return 0;
         }
 
         public static RateView GetRateView(int productId)
