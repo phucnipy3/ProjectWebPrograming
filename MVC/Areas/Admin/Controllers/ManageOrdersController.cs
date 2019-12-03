@@ -1,5 +1,4 @@
-﻿using MVC.Controllers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,12 +6,12 @@ using System.Web.Mvc;
 
 namespace MVC.Areas.Admin.Controllers
 {
-    public class HomeController : ApplicationController
+    public class ManageOrdersController : Controller
     {
-        // GET: Admin/Home
+        // GET: Admin/ManageOrders
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "Statistical");
+            return View();
         }
     }
 }

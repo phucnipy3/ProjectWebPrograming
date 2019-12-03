@@ -12,12 +12,13 @@ using MVC.Controllers;
 
 namespace MVC.Areas.Admin.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin,Employee")]
     public class ProductCategoryController : ApplicationController, IAdminController<ProductCategory>
     {
         // GET: Admin/ProductCategory
         public ActionResult Index(string searchString, int page = 1, int sizePage = 10)
         {
+            ViewBag.Active = "#ProductCategory";
             IEnumerable<ProductCategory> models;
             if (String.IsNullOrEmpty(searchString))
                 models = ProductCategoryHelper.GetProductCategories();

@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 <body>
-    
+
     <div class="container-fluid">
         <div class="modal fade" id="modalSuccess" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
@@ -86,7 +86,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
 
-                    @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin")|| User.IsInRole("Employee")))
+                    @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Employee")))
                     {
                         <li class="nav-item">
                             <div class="dropdown">
@@ -101,7 +101,7 @@
                                     <a class="dropdown-item" href="/Admin/Login/Logout">Log out <span class="float-right"><i class="fas fa-sign-out-alt"></i></span></a>
                                 </div>
                             </div>
-                        </li> 
+                        </li>
                     }
                     else
                     {
@@ -124,28 +124,27 @@
                 </div>
 
 
-                <nav id="sidebar-product" class="navbar-expand-lg bg-info rounded text-light navbar-light px-5 px-lg-4 ">
+                <nav id="sidebar-product" class="navbar navbar-expand-lg bg-info rounded text-light navbar-dark px-5 px-lg-4 ">
 
                     <div id="sidebar" class="collapse navbar-collapse py-3 ">
 
                         <ul class="navbar-nav non-flex mr-0 h5 w-100">
-                            <li class="nav-item"><h3>Danh mục</h3></li>
+                            <li class="nav-item"><h3>Quản lý</h3></li>
+
                             <hr class="w-100 bg-light" />
+                            <li class="nav-item active" id="Statistical"> <a class="nav-link " href="/Admin/Statistical">Statistical</a></li>
+
                             @if (User.IsInRole("Admin"))
                             {
 
-                                <li class="nav-item"><a class="nav-link text-light" href="/Admin/Users/Index">Users</a></li>
+                                <li class="nav-item" id="Users"><a class="nav-link" href="/Admin/Users/Index">Users</a></li>
                             }
 
-                            <li class="nav-item"><a class="nav-link text-light" href="/Admin/Users">Product</a></li>
-                            <li class="nav-item"> <a class="nav-link text-light" href="#">Design</a></li>
-                            <li class="nav-item"><a class="nav-link text-light" href="#">Home</a></li>
-                            <li class="nav-item"><a class="nav-link text-light" href="#">Product</a></li>
-                            <li class="nav-item"> <a class="nav-link text-light" href="#">Design</a></li>
-                            <li class="nav-item"><a class="nav-link text-light" href="#">Home</a></li>
-                            <li class="nav-item"><a class="nav-link text-light" href="#">Product</a></li>
-                            <li class="nav-item"> <a class="nav-link text-light" href="#">Design</a></li>
-                        </ul>
+                            <li class="nav-item" id="Products"><a class="nav-link " href="/Admin/Products">Product</a></li>
+                            <li class="nav-item" id="ProductDetails"> <a class="nav-link " href="/Admin/ProductDetails">Product detail</a></li>
+                            <li class="nav-item" id="ProductCategory"><a class="nav-link " href="/Admin/ProductCategory">Category</a></li>
+                            <li class="nav-item" id="Orders"><a class="nav-link " href="/Admin/Orders">Order</a></li>
+                            <li class="nav-item" id="OrderDetails"> <a class="nav-link " href="/Admin/OrderDetails">Order detail</a></li>
                     </div>
                 </nav>
             </div>
@@ -169,7 +168,10 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-
+    <script>
+        $("li.active").removeClass("active");
+        $("@ViewBag.Active").addClass("active");
+    </script>
     <script>
         $(document).ready(function () {
             $("#Adminlogin").on("submit", "#formAdmin", function (e) {

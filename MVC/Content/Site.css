@@ -82,11 +82,14 @@ footer {
     color:#717070;
     font-size:20;
 }
+ul.order-navbar-nav li a:hover{
+    color:black !important;
+}
 .bg-dark-light {
     background: #E8E8E8;
 }
 .super-black{
-    color:black;
+    color:black !important;
 }
 .clip-background {
     background-image:url('../Resource/ClipBG.svg');

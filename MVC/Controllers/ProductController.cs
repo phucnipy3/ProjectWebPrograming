@@ -12,7 +12,7 @@ namespace MVC.Controllers
     public class ProductController : ApplicationController
     {
         // GET: Product
-        public ActionResult Index(string searchString, string metaTitle = "Iphone-cases", int page = 1, int sizePage = 2)
+        public ActionResult Index(string searchString, string metaTitle = "Iphone-cases", int page = 1, int sizePage = 10)
         {
             ViewBag.CategoryActive = "#"+metaTitle+"";
             ViewBag.SearchString = searchString;

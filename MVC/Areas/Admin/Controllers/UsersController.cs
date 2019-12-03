@@ -23,6 +23,7 @@ namespace MVC.Areas.Admin.Controllers
         // GET: Users
         public ActionResult Index(string searchString, int page = 1, int sizePage = 10)
         {
+            ViewBag.Active = "#Users";
             IEnumerable<User> models;
             if (String.IsNullOrEmpty(searchString))
                 models = UserHelper.GetUsersExcludeAdmins();

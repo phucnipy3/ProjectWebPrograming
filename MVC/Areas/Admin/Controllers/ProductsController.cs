@@ -12,10 +12,12 @@ using MVC.Models;
 
 namespace MVC.Areas.Admin.Controllers
 {
+    [Authorize(Roles ="Admin,Employee")]
     public class ProductsController : ApplicationController, IAdminController<Product>
     {
         public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
+            ViewBag.Active = "#Products";
             IEnumerable<Product> models;
             if (String.IsNullOrEmpty(searchString))
                 models = ProductHelper.GetProducts();

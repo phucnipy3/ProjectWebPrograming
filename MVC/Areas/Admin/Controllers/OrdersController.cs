@@ -11,6 +11,8 @@ using PagedList;
 
 namespace MVC.Areas.Admin.Controllers
 {
+
+    [Authorize(Roles ="Admin,Employee")]
     public class OrdersController : ApplicationController,IAdminController<Order>
     {
         public ActionResult Add(Order model)
@@ -42,6 +44,7 @@ namespace MVC.Areas.Admin.Controllers
 
         public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
+            ViewBag.Active = "#Orders";
             IEnumerable<Order> models;
             if (String.IsNullOrEmpty(searchString))
                 models = OrderHelper.GetOrders();

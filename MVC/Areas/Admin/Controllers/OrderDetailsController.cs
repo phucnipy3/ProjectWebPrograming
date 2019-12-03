@@ -10,6 +10,7 @@ using MVC.Areas.Admin.Models;
 using PagedList;
 namespace MVC.Areas.Admin.Controllers
 {
+    [Authorize(Roles ="Admin,Employee")]
     public class OrderDetailsController : ApplicationController, IDetailsController<OrderDetail>
     {
         public ActionResult Add(OrderDetail model)
@@ -35,7 +36,7 @@ namespace MVC.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(DeleteDetailViewModel model)
         {
-            if (ProductDetailHelper.DeleteProductDetail(model.MainID, model.SubID))
+            if (OrderDetailHelper.DeleteOrderDetail(model.MainID, model.SubID))
                 return Content("success");
             return Content("failure");
         }
@@ -48,6 +49,7 @@ namespace MVC.Areas.Admin.Controllers
 
         public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
+            ViewBag.Active = "#OrderDetails";
             IEnumerable<OrderDetail> models;
             if (String.IsNullOrEmpty(searchString))
                 models = OrderDetailHelper.GetOrderDetails();

@@ -152,9 +152,9 @@
 @section scripts{
     <script>
         var id;
-        function DeleteItem(productID,productCategoryID) {
+        function DeleteItem(orderID,productID) {
             $.ajax({
-                url: '/Admin/OrderDetails/DeleteTransfer/?productID=' + productID + '&&productCategoryID='+productCategoryID,
+                url: '/Admin/OrderDetails/DeleteTransfer/?MainID=' + orderID + '&&SubID=' + productID,
                 method: 'post',
                 success: function (partialView) {
                     $("#formDelete").html(partialView);
@@ -163,9 +163,9 @@
             });
             return false;
         };
-        function UpdateItem(productID, productCategoryID) {
+        function UpdateItem(orderID, productID) {
             $.ajax({
-                url: '/Admin/OrderDetails/UpdateTransfer/?productID=' + productID + '&&productCategoryID=' + productCategoryID,
+                url: '/Admin/OrderDetails/UpdateTransfer/?MainID=' + orderID + '&&SubID=' + productID,
                 method: 'post',
                 success: function (partialView) {
                     $("#formUpdateContent").html(partialView);

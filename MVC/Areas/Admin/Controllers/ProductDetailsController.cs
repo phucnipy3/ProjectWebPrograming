@@ -55,6 +55,7 @@ namespace MVC.Areas.Admin.Controllers
 
         public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
+            ViewBag.Active = "#ProductDetails";
             IEnumerable<ProductDetail> models;
             if (String.IsNullOrEmpty(searchString))
                 models = ProductDetailHelper.GetProductDetails();

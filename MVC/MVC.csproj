@@ -141,6 +141,7 @@
     <Compile Include="Areas\Admin\Code\IDetailsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageOrdersController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderDetailsController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\DesignController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ForgetPassController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -346,6 +348,7 @@
     <Content Include="Areas\Admin\Views\OrderDetails\ConfirmDelete.cshtml" />
     <Content Include="Areas\Admin\Views\OrderDetails\Index.cshtml" />
     <Content Include="Areas\Admin\Views\OrderDetails\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\ManageOrders\Index.cshtml" />
     <None Include="Areas\Admin\Views\ProductCategory\Update.cshtml" />
     <Content Include="Areas\Admin\Views\ProductCategory\ConfirmDelete.cshtml" />
     <Content Include="Scripts\infinite-scroll.pkgd.js" />
@@ -513,10 +516,12 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\ChangePassword.cshtml" />
     <Content Include="Views\Design\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Application\" />
+    <Folder Include="Views\Error\" />
     <Folder Include="Views\ForgetPass\" />
     <Folder Include="Views\Login\" />
     <Folder Include="Views\Register\" />
