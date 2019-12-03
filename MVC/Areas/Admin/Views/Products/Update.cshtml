@@ -1,5 +1,5 @@
 ﻿@model MVC.Models.Product
-@using (Html.BeginForm("Update", "Product", FormMethod.Post, new { id = "formUpdate" }))
+@using (Html.BeginForm("Update", "Products", FormMethod.Post, new { id = "formUpdate", enctype = "multipart/form-data", novalidate="novalidate" }))
 {
     @Html.AntiForgeryToken();
     @Html.ValidationSummary(true, "", new { @class = "aleart-danger" });
@@ -33,7 +33,8 @@
         <div class="col-8 offset-2">
             <div class="form-group">
                 <label for="InputEmailAU">Image</label>
-                @Html.TextBoxFor(model => model.Image, new { type = "file", @class = "form-control-file", id = "InputNameAU" })
+                <input type="file" name="Hinh" id="HinhUpdate" class="form-control-file" />
+                @Html.TextBoxFor(model => model.Image, new { @hidden = true })
                 @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -96,46 +97,11 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-8 offset-2">
-            <div class="form-group">
-                <label for="InputEmailAU">Created Date</label>
-                @Html.TextBoxFor(model => model.CreatedDate, new { type = "file", @class = "form-control-file", id = "InputNameAU", @readonly = true })
-                @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-8 offset-2">
-            <div class="form-group">
-                <label for="InputEmailAU">Created By</label>
-                @Html.TextBoxFor(model => model.CreatedBy, new { type = "file", @class = "form-control-file", id = "InputNameAU", @readonly = true })
-                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-8 offset-2">
-            <div class="form-group">
-                <label for="InputEmailAU">Modyfied Date</label>
-                @Html.TextBoxFor(model => model.ModifiedBy, new { type = "file", @class = "form-control-file", id = "InputNameAU", @readonly = true })
-                @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-8 offset-2">
-            <div class="form-group">
-                <label for="InputEmailAU">Created By</label>
-                @Html.TextBoxFor(model => model.ModifiedBy, new { type = "file", @class = "form-control-file", id = "InputNameAU", @readonly = true })
-                @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-
-
-
-
+    @Html.HiddenFor(model => model.CreatedDate)
+    @Html.HiddenFor(model => model.CreatedBy)
+    @Html.HiddenFor(model => model.ModifiedDate)
+    @Html.HiddenFor(model => model.ModifiedBy)
+    @Html.HiddenFor(model => model.Status)
     <div class="row">
         <div class="col-5 offset-6">
             <button type="submit" class="btn btn-primary">Update</button>

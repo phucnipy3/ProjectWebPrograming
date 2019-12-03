@@ -36,7 +36,7 @@
 <div class="container pt-5">
     <div class="row">
         <div class="col-lg-3 col-6 mx-auto">
-            <img src="/@Model.MainProduct.Image" alt="Alternate Text" width="100% " />
+            <img src="@Url.Content(Model.MainProduct.Image)" alt="Alternate Text" width="100% " />
         </div>
         <div class="">
 
@@ -172,7 +172,7 @@
 
                         <div class="row comment">
                             <div class="col-auto">
-                                <img src="/@comment.Image" alt="Alternate Text" class="rounded-circle comment-image d-block" />
+                                <img src="@Url.Content(comment.Image)" alt="Alternate Text" class="rounded-circle comment-image d-block" />
                             </div>
                             <div class="col pl-0 comment-body">
                                 <div class="row">
@@ -194,7 +194,7 @@
                                         {
                                             <div class="row comment">
                                                 <div class="col-auto">
-                                                    <img src="/@reply.Image" alt="Alternate Text" class="rounded-circle comment-image d-block" />
+                                                    <img src="@Url.Content(reply.Image)" alt="Alternate Text" class="rounded-circle comment-image d-block" />
                                                 </div>
                                                 <div class="col pl-0 comment-body">
                                                     <div class="row">
@@ -258,7 +258,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="card border-0">
-                                            <img src="/@item.ImageLink" alt="Alternate Text" class="image-on-home m-auto" />
+                                            <img src="@Url.Content(item.ImageLink)" alt="Alternate Text" class="image-on-home m-auto" />
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -343,7 +343,7 @@
                         <div class="carousel-item active">
                             <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 d-block float-left">
                                 <a href="/Product/Detail/@lst[0].ProductID">
-                                    <img src="/@lst[0].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
+                                    <img src="@Url.Content(lst[0].ImageLink)" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
                                 </a>
                             </div>
                         </div>
@@ -352,7 +352,7 @@
                             <div class="carousel-item ">
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 d-block float-left">
                                     <a href="/Product/Detail/@lst[i].ProductID">
-                                        <img src="/@lst[i].ImageLink" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
+                                        <img src="@Url.Content(lst[i].ImageLink)" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
                                     </a>
                                 </div>
                             </div>

@@ -72,7 +72,9 @@ else
                                             </div>
 
                                             <div class="col-8 h-100">
-                                                <img src="/@item.Product.Image" alt="Alternate Text" class="image-on-cart" />
+                                                <a href="/Product/Detail/@item.Product.ID">
+                                                    <img src="@Url.Content(item.Product.Image)" alt="Alternate Text" class="image-on-cart" />
+                                                </a>
                                             </div>
                                         </div>
                                     </td>
