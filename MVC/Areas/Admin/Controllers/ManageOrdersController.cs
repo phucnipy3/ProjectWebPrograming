@@ -4,29 +4,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using MVC.Models;
+using PagedList;
 namespace MVC.Areas.Admin.Controllers
 {
+    [Authorize(Roles ="Admin,Employee")]
     public class ManageOrdersController : ApplicationController
     {
         // GET: Admin/ManageOrders
-        public ActionResult Index()
+        public ActionResult Index(string searchString, string status = "All", int page = 1, int pageSize = 10)
         {
-            ViewBag.OrderActive = "#Ordered";
-            return View();
+            ViewBag.Active = "#ManageOrders";
+            IEnumerable<OrderManagementViewModel> models;
+            if (!String.IsNullOrEmpty(searchString))
+                models = OrderHelper.GetOrderManagementViewModels(searchString, status);
+            models = OrderHelper.GetOrderManagementViewModels(status);
+            ViewBag.OrderActive = "#" + status;
+            ViewBag.SearchString = searchString;
+            ViewBag.Status = status;
+            return View(models.ToPagedList(page, pageSize));
         }
-
-        public ActionResult Detail()
+        [HttpPost]
+        public ActionResult Detail(int? orderID)
         {
-            return View();
+            OrderViewModel models = OrderHelper.GetOrderViewModels((int)orderID);
+            return View(models);
         }
-        public ActionResult Confirm()
+        [HttpPost]
+        public ActionResult Confirm(int? id)
         {
-            return Content("");
+            if (OrderHelper.Confirmed((int)id))
+                return Content("success");
+            return Content("failure");
         }
-        public ActionResult Cancel()
+        [HttpPost]
+        public ActionResult Cancel(int? id)
         {
-            return Content("");
+            if (OrderHelper.Canceled((int)id))
+                return Content("success");
+            return Content("failure");
         }
     }
 }

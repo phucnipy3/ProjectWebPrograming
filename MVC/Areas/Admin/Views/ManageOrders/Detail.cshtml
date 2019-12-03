@@ -1,5 +1,4 @@
-﻿
-@model MVC.Models.OrderViewModel
+﻿@model MVC.Models.OrderViewModel
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -109,23 +108,61 @@
         </div>
         <div class="row">
             <div class="col-12 px-4">
-                <div class="col-auto pr-0 ml-auto">
-                    <form action="/Admin/ManageOrders" method="post" class="w-auto">
-                        <input type="text" name="OrderID" value="" hidden />
-                        <button type="submit" class="btn btn-success float-right">Xác nhận</button>
-                    </form>
+                <div class="row">
+                    @if (!(Model.Tag == "Canceled") && !(Model.Tag == "Complete"))
+                    {
+                        <div class="col-auto pr-0 ml-auto">
+                            <a href="#" onclick="Confirm(@Model.ID)" class="btn btn-success ">Xác nhận</a>
+                        </div>
+                        <div class="col-auto pr-3">
+                            <a href="#" onclick="Cancel(@Model.ID)" class="btn btn-danger ">Hủy</a>
+                        </div>
+                    }
                 </div>
-                <div class="col-auto pr-0">
-                    <form action="/Admin/ManageOrders" method="post" class="w-auto">
-                        <input type="text" name="OrderID" value="" hidden />
-                        <button type="submit" class="btn btn-danger float-right">Hủy</button>
-                    </form>
-                </div>
+                
             </div>
         </div>
     </div>
 </div>
+@section scripts{
+<script>
 
+    function Confirm(id) {
+        $.ajax({
+            url: '/Admin/ManageOrders/Confirm/' + id,
+            method: 'post',
+            success: function (result) {
+                if (result == "success") {
+                    $("#TextSuccess").html('Confirm succesfully!');
+                    $("#modalSuccess").modal();
+                }
+                else {
+                    $("#TextFailure").html('Confirm fail!');
+                    $("#modalFailure").modal();
+                }
+            }
+        });
+        return false;
+    };
+    function Cancel(id) {
+        $.ajax({
+            url: '/Admin/ManageOrders/Cancel/' + id,
+            method: 'post',
+            success: function (result) {
+                if (result == "success") {
+                    $("#TextSuccess").html('Cancel succesfully!');
+                    $("#modalSuccess").modal();
+                }
+                else {
+                    $("#TextFailure").html('Cancel fail!');
+                    $("#modalFailure").modal();
+                }
+            }
+        });
+        return false;
+    };
+    </script>    
+}
 <script>
     function GoBack() {
         window.history.back();

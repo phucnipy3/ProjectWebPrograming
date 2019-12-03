@@ -26,7 +26,7 @@
         <div class="col-8 offset-2">
             <div class="form-group">
                 <label for="InputEmailAU">Image</label>
-                @Html.TextBoxFor(model => model.Image, new { @class = "form-control", id = "InputNameAU" })
+                @Html.TextBoxFor(model => model.Image, new {@class = "form-control", id = "InputNameAU" })
                 @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
             </div>
         </div>

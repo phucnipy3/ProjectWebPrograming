@@ -1,4 +1,4 @@
-﻿
+﻿@model IPagedList<MVC.Models.OrderManagementViewModel>
 @using PagedList;
 @using PagedList.Mvc;
 @{
@@ -32,14 +32,13 @@
             </div>
         </div>
     </form>
-    @*@foreach (var item in Model)
-        {*@
+    @foreach (var item in Model)
+        {
     <div class="container py-2 bg-dark-light my-3">
         <div class="row">
             <div class="col-12 px-4">
                 <span class="text-danger float-right h6">
-                    @*@item.Status*@
-                    Đã thanh toán
+                    @item.OrderViewModel.Tag
                 </span>
             </div>
         </div>
@@ -47,14 +46,14 @@
             <div class="col-1">
                 <div class="row">
                     <div class="col-auto mx-auto">
-                        <img src="~/Resource/support.png" alt="Alternate Text" width="80" height="80" />
+                        <img src="/@item.Image" alt="Alternate Text" width="80" height="80" />
                     </div>
                 </div>
             </div>
             <div class="col-9 px-4 m-3">
-                <span class="h5">Nguyễn Huỳnh phúc</span>
+                <span class="h5">@item.Name</span>
                 <br />
-                <span>199000 <u>đ</u></span>
+                <span class="text-danger pt-2">@item.OrderViewModel.TotalMoney<u>đ</u></span>
             </div>
 
         </div>
@@ -65,30 +64,34 @@
                 <div class="row">
                     <div class="col-auto ml-auto pr-0">
                         <form action="/Admin/ManageOrders/Detail" method="post" class="w-auto">
-                            <input type="text" name="OrderID" value="" hidden />
+                            <input type="text" name="OrderID" value="@item.OrderViewModel.ID" hidden />
                             <button type="submit" class="btn btn-info float-right">Xem chi tiết</button>
                         </form>
                     </div>
-                    <div class="col-auto pr-0">
-                        <a href="#" onclick="Confirm()" class="btn btn-success float-right">Xác nhận</a>
-                    </div>
-                    <div class="col-auto pr-0">
-                        <a href="#" onclick="Cancel()" class="btn btn-danger float-right">Hủy</a>
-                    </div>
+                    @if (!(item.OrderViewModel.Tag == "Canceled") && !(item.OrderViewModel.Tag == "Complete"))
+                    {
+                        <div class="col-auto pr-0">
+                            <a href="#" onclick="Confirm(@item.OrderViewModel.ID)" class="btn btn-success float-right">Xác nhận</a>
+                        </div>
+                        <div class="col-auto pr-0">
+                            <a href="#" onclick="Cancel(@item.OrderViewModel.ID)" class="btn btn-danger float-right">Hủy</a>
+                        </div>
+                    }
+
                 </div>
                 
             </div>
         </div>
     </div>
-    @*}*@
-    @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+    }
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
         {
                 LiElementClasses = new string[] { "page-item" },
                 UlElementClasses = new string[] { "pagination", "justify-content-center" },
                 Display = PagedListDisplayMode.IfNeeded,
             ContainerDivClasses = new[] { "my-paging" },
                 MaximumPageNumbersToDisplay = 5
-                })*@
+                })
 </div>
 @section scripts{
     <script>
@@ -109,7 +112,7 @@
             });
             return false;
         };
-        function Confirm(id) {
+        function Cancel(id) {
             $.ajax({
                 url: '/Admin/ManageOrders/Cancel/' + id,
                 method: 'post',
@@ -137,6 +140,9 @@
                     // Trigger the button element with a click
                     $("formOrder").submit();
                 }
+            });
+            $("#modalSuccess").on("hidden.bs.modal", function () {
+                window.location.reload();
             });
         });
     </script>
