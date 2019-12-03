@@ -301,6 +301,7 @@ namespace MVC.Models
         }
 
         public static TKey GetPropertyValue<TKey>(string userId, Func<User, TKey> keySelector)
+
         {
             return keySelector(GetUserByUserID(userId));
         }
