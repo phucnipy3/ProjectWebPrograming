@@ -17,7 +17,7 @@
                     </button>
                 </div>
                 <div class="modal-body" id="formDelete">
-                    @Html.Partial("ConfirmDelete", new MVC.Areas.Admin.Models.DeleteProductDetailViewModel())
+                    @Html.Partial("ConfirmDelete", new MVC.Areas.Admin.Models.DeleteDetailViewModel())
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
             <a href="#modalAdd" data-toggle="modal" class="btn btn-primary">Add new product detail</a>
         </div>
         <div class="col-8 col-lg-6 col-sm-7 mx-auto">
-            <form action="/Admin/Users/Index" class="align-items-center d-flex">
+            <form action="/Admin/ProductDetails/Index" class="align-items-center d-flex">
                 <input type="text" placeholder="Search..." class="form-control" value="@ViewBag.SearchString" name="searchString" />
                 <input type="submit" value="Search" class="btn btn-outline-info mx-2" />
             </form>
@@ -130,7 +130,7 @@
         var id;
         function DeleteItem(productID,productCategoryID) {
             $.ajax({
-                url: '/Admin/ProductDetails/DeleteTransfer?productID=' + productID + '&productCategoryID='+productCategoryID,
+                url: '/Admin/ProductDetails/DeleteTransfer/?productID=' + productID + '&&productCategoryID='+productCategoryID,
                 method: 'post',
                 success: function (partialView) {
                     $("#formDelete").html(partialView);
@@ -141,7 +141,7 @@
         };
         function UpdateItem(productID, productCategoryID) {
             $.ajax({
-                url: '/Admin/ProductDetails/UpdateTransfer?productID=' + productID + '&productCategoryID=' + productCategoryID,
+                url: '/Admin/ProductDetails/UpdateTransfer/?productID=' + productID + '&&productCategoryID=' + productCategoryID,
                 method: 'post',
                 success: function (partialView) {
                     $("#formUpdateContent").html(partialView);

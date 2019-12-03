@@ -1,0 +1,52 @@
+﻿@model MVC.Models.Order
+@using (Html.BeginForm("Add", "Orders", FormMethod.Post, new { id = "formAdd" }))
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary(true, "", new { @class = "alert-danger" });
+
+    
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputShipNameAPC">Ship Name</label>
+                @Html.TextBoxFor(model => model.ShipName, new { @class = "form-control", id = "InputShipNameAPC", placeholder = "Enter Ship Name" })
+                @Html.ValidationMessageFor(model => model.ShipName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputShipMobileAPC">Ship Mobile</label>
+                @Html.TextBoxFor(model => model.ShipMobile, new { @class = "form-control", id = "InputShipMobileAPC", placeholder = "Enter Ship Mobile", @Value = "1" })
+                @Html.ValidationMessageFor(model => model.ShipMobile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputShipAddressAPC">Ship Address</label>
+                @Html.TextBoxFor(model => model.ShipAddress, new { @class = "form-control", id = "InputShipAddressAPC", placeholder = "Enter Ship Address " })
+                @Html.ValidationMessageFor(model => model.ShipAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputShipEmailAPC">Ship Email</label>
+                @Html.TextBoxFor(model => model.ShipEmail, new { @class = "form-control", id = "InputShipEmailAPC", placeholder = "Enter Ship EMail" })
+                @Html.ValidationMessageFor(model => model.ShipEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="row">
+        <div class="col-5 offset-6">
+            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+    </div>
+}

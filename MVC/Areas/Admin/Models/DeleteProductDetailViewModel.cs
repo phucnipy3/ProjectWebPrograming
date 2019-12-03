@@ -5,9 +5,9 @@ using System.Web;
 
 namespace MVC.Areas.Admin.Models
 {
-    public class DeleteProductDetailViewModel
+    public class DeleteDetailViewModel
     {
-        public int ProductID { get; set; }
-        public int ProductCategoryID { get; set; }
+        public int MainID { get; set; }
+        public int SubID { get; set; }
     }
 }

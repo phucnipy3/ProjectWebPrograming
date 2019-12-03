@@ -1,0 +1,61 @@
+﻿@model MVC.Models.OrderDetail
+@using (Html.BeginForm("Add", "OrderDetails", FormMethod.Post, new { id = "formAdd" }))
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary(true, "", new { @class = "alert-danger" });
+
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputUserIDSU">Order ID</label>
+                @Html.TextBoxFor(model => model.OrderID, new { @class = "form-control", id = "InputUserIDSU", placeholder = "Enter order's id" })
+                @Html.ValidationMessageFor(model => model.OrderID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputUserIDSU">Product ID</label>
+                @Html.TextBoxFor(model => model.ProductID, new { @class = "form-control", id = "InputUserIDSU", placeholder = "Enter product's id" })
+                @Html.ValidationMessageFor(model => model.ProductID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputUserIDSU">Count</label>
+                @Html.TextBoxFor(model => model.Count, new { @class = "form-control", id = "InputUserIDSU", placeholder = "Enter count" })
+                @Html.ValidationMessageFor(model => model.Count, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputUserIDSU">Price</label>
+                @Html.TextBoxFor(model => model.Price, new { @class = "form-control", id = "InputUserIDSU", placeholder = "Enter price" })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="form-group">
+                <label for="InputUserIDSU">Promotion Price</label>
+                @Html.TextBoxFor(model => model.PromotionPrice, new { @class = "form-control", id = "InputUserIDSU", placeholder = "Enter promotion price" })
+                @Html.ValidationMessageFor(model => model.PromotionPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-5 offset-6">
+            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+    </div>
+}

@@ -1,12 +1,11 @@
-﻿@model MVC.Areas.Admin.Models.DeleteDetailViewModel
-@using (Html.BeginForm("Delete", "ProductDetails", FormMethod.Post, new { id = "formConfirmDelete"}))
+﻿@model MVC.Areas.Admin.Models.DeleteViewModel
+@using (Html.BeginForm("Delete", "Orders", FormMethod.Post, new { id = "formConfirmDelete"}))
 {
     <div class="row">
         <div class="col-auto mx-auto">
             <p class="text-center">
                 <h5>Bạn có chắc chắn muốn xóa?</h5>
-                @Html.TextBoxFor(model => model.MainID, new { hidden = true })
-                @Html.TextBoxFor(model => model.SubID, new { hidden = true })
+                @Html.TextBoxFor(model =>model.ID, new { hidden = true})
             </p>
         </div>
     </div>

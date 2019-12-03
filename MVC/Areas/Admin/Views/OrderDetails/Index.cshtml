@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<MVC.Models.Product>
+﻿@model PagedList.IPagedList<MVC.Models.OrderDetail>
 @using PagedList.Mvc
 @using MVC.Areas.Admin.Models;
 @{
@@ -17,7 +17,7 @@
                     </button>
                 </div>
                 <div class="modal-body" id="formDelete">
-                    @Html.Partial("ConfirmDelete", new MVC.Areas.Admin.Models.DeleteViewModel())
+                    @Html.Partial("ConfirmDelete", new MVC.Areas.Admin.Models.DeleteDetailViewModel())
                 </div>
             </div>
         </div>
@@ -28,13 +28,13 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add new product</h5>
+                    <h5 class="modal-title">Add new order detail</h5>
                     <button type="button" class="close" aria-label="Close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" id="formAddContent">
-                    @Html.Partial("Add", new MVC.Models.Product())
+                    @Html.Partial("Add", new MVC.Models.OrderDetail())
                 </div>
             </div>
         </div>
@@ -45,29 +45,28 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Update product</h5>
+                    <h5 class="modal-title">Update order detail</h5>
                     <button type="button" class="close" aria-label="Close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" id="formUpdateContent">
-                    @Html.Partial("Update", new MVC.Models.Product())
+                    @Html.Partial("Update", new MVC.Models.OrderDetail())
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
-<h2>Products</h2>
+<h2>Order details</h2>
 
 
     <div class="row mb-3">
         <div class="col-auto">
-            <a href="#modalAdd" data-toggle="modal" class="btn btn-primary">Add new product</a>
+            <a href="#modalAdd" data-toggle="modal" class="btn btn-primary">Add new order detail</a>
         </div>
         <div class="col-8 col-lg-6 col-sm-7 mx-auto">
-            <form action="/Admin/Products/Index" class="align-items-center d-flex">
+            <form action="/Admin/OrderDetails/Index" class="align-items-center d-flex">
                 <input type="text" placeholder="Search..." class="form-control" value="@ViewBag.SearchString" name="searchString" />
                 <input type="submit" value="Search" class="btn btn-outline-info mx-2" />
             </form>
@@ -80,53 +79,20 @@
             <table class="table table-striped table-hover">
                 <thead class="thead-dark">
                     <tr>
-                        <th>
-                            #
+                        <th class="text-center">
+                            Order ID
                         </th>
                         <th class="text-center">
-                            Name
+                            Product ID
                         </th>
                         <th class="text-center">
-                            Meta Title
-                        </th>
-                        <th class="text-center">
-                            Author
-                        </th>
-                        <th class="text-center">
-                            Image
+                            Count
                         </th>
                         <th class="text-center">
                             Price
                         </th>
                         <th class="text-center">
                             Promotion Price
-                        </th>
-                        <th class="text-center">
-                            Included VAT
-                        </th>
-                        <th class="text-center">
-                            Quantity
-                        </th>
-                        <th class="text-center">
-                            Detail
-                        </th>
-                        <th class="text-center">
-                            Warranty
-                        </th>
-                        <th class="text-center">
-                            Created Date
-                        </th>
-                        <th class="text-center">
-                            Created By
-                        </th>
-                        <th class="text-center">
-                            Modyfied Date
-                        </th>
-                        <th class="text-center">
-                            Modyfied By
-                        </th>
-                        <th class="text-center">
-                            Status
                         </th>
                         <th></th>
                     </tr>
@@ -136,30 +102,19 @@
                 @foreach (var item in Model)
                 {
                 <tr>
-                    <td>
+                    <td class="text-center">
                         <nobr>
-                            @Html.DisplayFor(modelItem => item.ID)
+                            @Html.DisplayFor(modelItem => item.OrderID)
                         </nobr>
                     </td>
                     <td class="text-center">
                         <nobr>
-                            @Html.DisplayFor(modelItem => item.Name)
+                            @Html.DisplayFor(modelItem => item.ProductID)
                         </nobr>
                     </td>
                     <td class="text-center">
                         <nobr>
-                            @Html.DisplayFor(modelItem => item.MetaTitle)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.Author)
-                        </nobr>
-                    </td>
-
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.Image)
+                            @Html.DisplayFor(modelItem => item.Count)
                         </nobr>
                     </td>
                     <td class="text-center">
@@ -172,57 +127,10 @@
                             @Html.DisplayFor(modelItem => item.PromotionPrice)
                         </nobr>
                     </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.IncludedVAT)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.Quantity)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.Detail)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.Warranty)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.CreatedDate)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.CreatedBy)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.ModifiedDate)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.ModifiedBy)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.Status)
-                        </nobr>
-                    </td>
-
-
                     <td>
                         <nobr>
-                            <a href="#" onclick="UpdateItem(@item.ID)"><i class="far fa-edit"></i></a> |
-                            <a href="#" onclick="DeleteItem(@item.ID)" class="Delete-Item"><i class="fas fa-trash-alt"></i></a>
+                            <a href="#" onclick="UpdateItem(@item.OrderID,@item.ProductID)"><i class="far fa-edit"></i></a> |
+                            <a href="#" onclick="DeleteItem(@item.OrderID,@item.ProductID)" class="Delete-Item"><i class="fas fa-trash-alt"></i></a>
                         </nobr>
                     </td>
                 </tr>
@@ -244,9 +152,9 @@
 @section scripts{
     <script>
         var id;
-        function DeleteItem(id) {
+        function DeleteItem(productID,productCategoryID) {
             $.ajax({
-                url: '/Admin/Products/DeleteTransfer/' + id,
+                url: '/Admin/OrderDetails/DeleteTransfer/?productID=' + productID + '&&productCategoryID='+productCategoryID,
                 method: 'post',
                 success: function (partialView) {
                     $("#formDelete").html(partialView);
@@ -255,9 +163,9 @@
             });
             return false;
         };
-        function UpdateItem(id) {
+        function UpdateItem(productID, productCategoryID) {
             $.ajax({
-                url: '/Admin/Products/UpdateTransfer/' + id,
+                url: '/Admin/OrderDetails/UpdateTransfer/?productID=' + productID + '&&productCategoryID=' + productCategoryID,
                 method: 'post',
                 success: function (partialView) {
                     $("#formUpdateContent").html(partialView);
@@ -279,7 +187,7 @@
                     success: function (partialResult) {
                         if (partialResult == "success") {
                             $("#modalAdd").modal('hide');
-                            $("#TextSuccess").html('Add product successfully!');
+                            $("#TextSuccess").html('Add order detail successfully!');
                             $("#modalSuccess").modal();
                         }
                         else
@@ -301,12 +209,12 @@
                     success: function (partialResult) {
                         $("#modalConfirmDelete").modal('hide');
                         if (partialResult == "success") {
-                            $("#TextSuccess").html('Delete product successfully!');
+                            $("#TextSuccess").html('Delete order detail successfully!');
                             $("#modalSuccess").modal();
                         }
                         else {
                             $("#modalDeleteFailure").modal();
-                            $("#TextFailure").html('Delete product fail!');
+                            $("#TextFailure").html('Delete order detail fail!');
                         }
                     }
                 });
@@ -322,11 +230,11 @@
                     success: function (partialResult) {
                         $("#modalUpdate").modal('hide');
                         if (partialResult == "success") {
-                            $("#TextSuccess").html('Update product succesfully!');
+                            $("#TextSuccess").html('Update order detail succesfully!');
                             $("#modalSuccess").modal();
                         }
                         else {
-                            $("#TextFailure").html('Update product fail!');
+                            $("#TextFailure").html('Update order detail fail!');
                             $("#modalUpdateFailure").modal();
                         }
                     }

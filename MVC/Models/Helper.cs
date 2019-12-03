@@ -381,9 +381,8 @@ namespace MVC.Models
                 var oldUser = GetUserByID(user.ID);
                 if (oldUser != null)
                 {
-                    if (GetUsers().Where(x => x.UserID == user.UserID).Count() > 0)
-                        return false;
                     user.Status = true;
+                    user.Password = oldUser.Password;
                     db.Users.AddOrUpdate(x => x.ID, user);
                     db.SaveChanges();
                     return true;
@@ -426,7 +425,7 @@ namespace MVC.Models
             return db.Products.Where(x => x.Status == true);
         }
 
-        public IEnumerable<Product> GetProducts(string searchString)
+        public static IEnumerable<Product> GetProducts(string searchString)
         {
             return Search(GetProducts(), searchString);
         }
@@ -871,7 +870,7 @@ namespace MVC.Models
 
         public static bool Ordered(string userId, ShoppingCart shoppingCart, OrderInfomation orderInfomation)
         {
-            try
+            //try
             {
                 Order order = new Order();
                 order.ShipName = orderInfomation.Name;
@@ -886,7 +885,7 @@ namespace MVC.Models
                 shoppingCart.Items.ForEach(x => OrderDetailHelper.AddOrderDetail(order.ID, x.Product.ID, (int)x.Count));
                 return true;
             }
-            catch
+            //catch
             {
                 return false;
             }
@@ -954,7 +953,7 @@ namespace MVC.Models
 
         public static bool AddOrder(Order order)
         {
-            try
+            //try
             {
                 order.Status = true;
                 order.TransportationFee = GetTransportationFee(order.Transport);
@@ -963,7 +962,7 @@ namespace MVC.Models
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception e)
+            //catch (Exception e)
             {
                 
                 return false;

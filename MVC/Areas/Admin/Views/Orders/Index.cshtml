@@ -1,11 +1,10 @@
-﻿@model PagedList.IPagedList<MVC.Models.Product>
+﻿@model PagedList.IPagedList<MVC.Models.Order>
 @using PagedList.Mvc
 @using MVC.Areas.Admin.Models;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-
 <div class="container-fluid">
     <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
@@ -28,13 +27,13 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add new product</h5>
+                    <h5 class="modal-title">Add new Product Category</h5>
                     <button type="button" class="close" aria-label="Close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" id="formAddContent">
-                    @Html.Partial("Add", new MVC.Models.Product())
+                    @Html.Partial("Add", new MVC.Models.Order())
                 </div>
             </div>
         </div>
@@ -45,13 +44,13 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Update product</h5>
+                    <h5 class="modal-title">Update Order</h5>
                     <button type="button" class="close" aria-label="Close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" id="formUpdateContent">
-                    @Html.Partial("Update", new MVC.Models.Product())
+                    @Html.Partial("Update", new MVC.Models.Order())
                 </div>
             </div>
         </div>
@@ -59,21 +58,22 @@
 </div>
 
 
-<h2>Products</h2>
+<h2>Order</h2>
 
-
-    <div class="row mb-3">
+<p>
+    <div class="row">
         <div class="col-auto">
-            <a href="#modalAdd" data-toggle="modal" class="btn btn-primary">Add new product</a>
+            <a href="#modalAdd" data-toggle="modal" class="btn btn-primary">Add Order</a>
         </div>
         <div class="col-8 col-lg-6 col-sm-7 mx-auto">
-            <form action="/Admin/Products/Index" class="align-items-center d-flex">
+            <form action="/Admin/Orders/Index" class="align-items-center d-flex">
                 <input type="text" placeholder="Search..." class="form-control" value="@ViewBag.SearchString" name="searchString" />
                 <input type="submit" value="Search" class="btn btn-outline-info mx-2" />
             </form>
         </div>
     </div>
 
+</p>
 <div class="row">
     <div class="col-12" >
         <div style="overflow:auto">
@@ -84,46 +84,28 @@
                             #
                         </th>
                         <th class="text-center">
-                            Name
+                            Create Date
                         </th>
                         <th class="text-center">
-                            Meta Title
+                            Create By
                         </th>
                         <th class="text-center">
-                            Author
+                            Ship Name
                         </th>
                         <th class="text-center">
-                            Image
+                            Ship Mobile
                         </th>
                         <th class="text-center">
-                            Price
+                            Ship Address
                         </th>
                         <th class="text-center">
-                            Promotion Price
+                            Ship Email
                         </th>
                         <th class="text-center">
-                            Included VAT
+                            Ordered
                         </th>
                         <th class="text-center">
-                            Quantity
-                        </th>
-                        <th class="text-center">
-                            Detail
-                        </th>
-                        <th class="text-center">
-                            Warranty
-                        </th>
-                        <th class="text-center">
-                            Created Date
-                        </th>
-                        <th class="text-center">
-                            Created By
-                        </th>
-                        <th class="text-center">
-                            Modyfied Date
-                        </th>
-                        <th class="text-center">
-                            Modyfied By
+                            Complete
                         </th>
                         <th class="text-center">
                             Status
@@ -135,97 +117,64 @@
 
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.ID)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.MetaTitle)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.Author)
-                        </nobr>
-                    </td>
-
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.Image)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.Price)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.PromotionPrice)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.IncludedVAT)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.Quantity)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.Detail)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.Warranty)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.CreatedDate)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.CreatedBy)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.ModifiedDate)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.ModifiedBy)
-                        </nobr>
-                    </td>
-                    <td class="text-center">
-                        <nobr>
-                            @Html.DisplayFor(modelItem => item.Status)
-                        </nobr>
-                    </td>
-
-
-                    <td>
-                        <nobr>
-                            <a href="#" onclick="UpdateItem(@item.ID)"><i class="far fa-edit"></i></a> |
-                            <a href="#" onclick="DeleteItem(@item.ID)" class="Delete-Item"><i class="fas fa-trash-alt"></i></a>
-                        </nobr>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    <nobr>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </nobr>
+                </td>
+                <td>
+                    <nobr>
+                        @Html.DisplayFor(modelItem => item.CreateDate)
+                    </nobr>
+                </td>
+                <td class="text-center">
+                    <nobr>
+                        @Html.DisplayFor(modelItem => item.CreateBy)
+                    </nobr>
+                </td>
+                <td class="text-center">
+                    <nobr>
+                        @Html.DisplayFor(modelItem => item.ShipName)
+                    </nobr>
+                </td>
+                <td class="text-center">
+                    <nobr>
+                        @Html.DisplayFor(modelItem => item.ShipMobile)
+                    </nobr>
+                </td>
+                <td class="text-center">
+                    <nobr>
+                        @Html.DisplayFor(modelItem => item.ShipAddress)
+                    </nobr>
+                </td>
+                <td class="text-center">
+                    <nobr>
+                        @Html.DisplayFor(modelItem => item.ShipEmail)
+                    </nobr>
+                </td>
+                <td class="text-center">
+                    <nobr>
+                        @Html.DisplayFor(modelItem => item.Ordered)
+                    </nobr>
+                </td>
+                <td class="text-center">
+                    <nobr>
+                        @Html.DisplayFor(modelItem => item.Complete)
+                    </nobr>
+                </td>
+                <td class="text-center">
+                    <nobr>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </nobr>
+                </td>
+                <td>
+                    <nobr>
+                        <a href="#" onclick="UpdateItem(@item.ID)"><i class="far fa-edit"></i></a> |
+                        <a href="#" onclick="DeleteItem(@item.ID)" class="Delete-Item"><i class="fas fa-trash-alt"></i></a>
+                    </nobr>
+                </td>
+            </tr>
                 }
 
 
@@ -246,7 +195,7 @@
         var id;
         function DeleteItem(id) {
             $.ajax({
-                url: '/Admin/Products/DeleteTransfer/' + id,
+                url: '/Admin/Orders/DeleteTransfer/' + id,
                 method: 'post',
                 success: function (partialView) {
                     $("#formDelete").html(partialView);
@@ -257,7 +206,7 @@
         };
         function UpdateItem(id) {
             $.ajax({
-                url: '/Admin/Products/UpdateTransfer/' + id,
+                url: '/Admin/Orders/UpdateTransfer/' + id,
                 method: 'post',
                 success: function (partialView) {
                     $("#formUpdateContent").html(partialView);
@@ -279,7 +228,7 @@
                     success: function (partialResult) {
                         if (partialResult == "success") {
                             $("#modalAdd").modal('hide');
-                            $("#TextSuccess").html('Add product successfully!');
+                            $("#TextSuccess").html('Add Order successfully!');
                             $("#modalSuccess").modal();
                         }
                         else
@@ -301,12 +250,12 @@
                     success: function (partialResult) {
                         $("#modalConfirmDelete").modal('hide');
                         if (partialResult == "success") {
-                            $("#TextSuccess").html('Delete product successfully!');
+                            $("#TextSuccess").html('Delete Order successfully!');
                             $("#modalSuccess").modal();
                         }
                         else {
                             $("#modalDeleteFailure").modal();
-                            $("#TextFailure").html('Delete product fail!');
+                            $("#TextFailure").html('Delete Order fail!');
                         }
                     }
                 });
@@ -317,16 +266,16 @@
                 var form = $(this);
                 $.ajax({
                     url: form.attr("action"),
-                    method: form.attr("method"),  // post 
+                    method: form.attr("method"),  // post
                     data: form.serialize(),
                     success: function (partialResult) {
                         $("#modalUpdate").modal('hide');
                         if (partialResult == "success") {
-                            $("#TextSuccess").html('Update product succesfully!');
+                            $("#TextSuccess").html('Update Order succesfully!');
                             $("#modalSuccess").modal();
                         }
                         else {
-                            $("#TextFailure").html('Update product fail!');
+                            $("#TextFailure").html('Update Order fail!');
                             $("#modalUpdateFailure").modal();
                         }
                     }

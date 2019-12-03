@@ -16,15 +16,15 @@ namespace MVC.Areas.Admin.Controllers
     {
         public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
-            IEnumerable<ProductOnPage> models;
+            IEnumerable<Product> models;
             if (String.IsNullOrEmpty(searchString))
-                models = ProductHelper.GetProductOnPages();
+                models = ProductHelper.GetProducts();
             else
             {
-                models = ProductHelper.GetProductOnPages(searchString);
+                models = ProductHelper.GetProducts(searchString);
             }
             ViewBag.SearchString = searchString;
-            return View(models.OrderByDescending(x => x.ProductID).ToPagedList(page, pageSize));
+            return View(models.OrderByDescending(x => x.ID).ToPagedList(page, pageSize));
         }
         [HttpPost]
         public ActionResult Add(Product model)
@@ -69,7 +69,7 @@ namespace MVC.Areas.Admin.Controllers
 
         public ActionResult UpdateTransfer(int? id)
         {
-            User model = UserHelper.GetUserByID((int)id);
+            Product model = ProductHelper.GetProductByID((int)id);
             return PartialView("Update", model);
         }
 

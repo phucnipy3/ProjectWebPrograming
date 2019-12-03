@@ -14,6 +14,7 @@ namespace MVC.Models
 
         [Required(ErrorMessage = "SĐT không được để trống")]
         [Phone(ErrorMessage = "Vui lòng nhập đúng SĐT")]
+        [MaxLength(10,ErrorMessage ="Số điện thoại phải có 10 chữ số")]
         [Display(Name = "Số điện thoại")]
         public string PhoneNumber { get; set; }
 
