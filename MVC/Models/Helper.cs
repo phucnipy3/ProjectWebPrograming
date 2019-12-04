@@ -271,6 +271,24 @@ namespace MVC.Models
             File.Copy(path, resource, true);
             return resource;
         }
+
+        public static string RandomPassword(string userId)
+        {
+            string pass = "";
+            Random random = new Random();
+            int lenght = random.Next(8, 13);
+            while (lenght > 0)
+            {
+                int key = random.Next(48, 123);
+                if (Char.IsLetterOrDigit((char)key))
+                {
+                    pass += (char)key;
+                    lenght--;
+                }
+            }
+            UserHelper.GetUserByUserID(userId).Password = EncodePassword(pass);
+            return pass;
+        }
     }
 
     public class UserHelper : Helper

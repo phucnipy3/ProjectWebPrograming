@@ -18,12 +18,8 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                return Content("success");
-
-                var sql = from users in db.Users
-                          where users.UserID == model.Email
-                          select users;
-                if (sql.Count() == 0)
+                var user = UserHelper.GetUsers().SingleOrDefault(x => x.Email == model.Email);
+                if (user == null)
                 {
                     ModelState.AddModelError("", "Email not exist!");
                     return PartialView("../Shared/ForgetPass", model);
@@ -41,8 +37,8 @@ namespace MVC.Controllers
                 masage.To.Add(new MailAddress(model.Email));
                 masage.Subject = "Forget Pass";
                 masage.Body = "We send mail from admin opxin.com. " +
-                              "Your account is " + sql.First().UserID + ", and you forgot your password. " +
-                              "Your password is " + sql.First().Password + ".";
+                              "Your account is " + user.UserID + ", and you forgot your password. " +
+                              "New password is " + Helper.RandomPassword(user.UserID) + ". Login again to change password. Thank you!";
                 masage.IsBodyHtml = true;
                 mail.Send(masage);
                 return Content("success");
