@@ -51,7 +51,7 @@
                             <div class="view view-eighth">
                                 <a href="/Product/Detail/@item.ProductID" class="text-decoration-none text-dark product">
                                     <div class="card border-0">
-                                        <img src="@Url.Content(item.ImageLink)" alt="Alternate Text" class="image-on-home m-auto" />
+                                        <img src="@Url.Content("~/"+item.ImageLink)" alt="Alternate Text" class="image-on-home m-auto" />
                                     </div>
                                     <div class="card-body p-0">
                                         <div class="row">
@@ -114,7 +114,7 @@
                     <p class="infinite-scroll-last">End of content</p>
                     <p class="infinite-scroll-error">No more pages to load</p>
                 </div>
-                Html.PagedListPager(Model.Products, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+                @Html.PagedListPager(Model.Products, page => Url.Action("Index", new { page }), new PagedListRenderOptions
                 {
                     LiElementClasses = new string[] { "page-item" },
                     UlElementClasses = new string[] { "pagination", "justify-content-center" },

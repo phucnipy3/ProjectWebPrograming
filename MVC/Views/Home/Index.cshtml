@@ -74,7 +74,7 @@ ViewBag.Active = "#HomeBtn";
             <a href="#" class="text-decoration-none"><h2 class="pl-4 pt-3 text-recommend">Ốp lưng đề cử</h2></a>
             <div class="ml-auto col-auto align-self-end pr-0">
 
-                <a href="#" class="text-decoration-none text-recommend float-right">Click to check it out! <i class="fas fa-angle-right"></i></a>
+                <a href="/Product/Index?metaTitle=Best-Saler" class="text-decoration-none text-recommend float-right">Click to check it out! <i class="fas fa-angle-right"></i></a>
             </div>
         </div>
         <div class="row mx-auto my-auto py-3">
@@ -84,7 +84,7 @@ ViewBag.Active = "#HomeBtn";
                         <div class="carousel-item active">
                             <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 d-block float-left">
                                 <a href="/Product/Detail/@Model.ListBestSaler[0].ProductID">
-                                    <img src="@Url.Content(Model.ListBestSaler[0].ImageLink)" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
+                                    <img src="@Url.Content("~/"+Model.ListBestSaler[0].ImageLink)" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
                                 </a>    
                             </div>
                         </div>
@@ -93,7 +93,7 @@ ViewBag.Active = "#HomeBtn";
                             <div class="carousel-item ">
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 d-block float-left">
                                     <a href="/Product/Detail/@Model.ListBestSaler[i].ProductID">
-                                        <img src="@Url.Content(Model.ListBestSaler[i].ImageLink)" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
+                                        <img src="@Url.Content("~/"+Model.ListBestSaler[i].ImageLink)" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
                                     </a>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@ ViewBag.Active = "#HomeBtn";
             <a href="#" class="text-decoration-none"><h2 class="pl-4 pt-3 text-lasted">Ốp lưng mới nhất!</h2></a>
             <div class="ml-auto col-auto align-self-end pr-0">
 
-                <a href="#" class="text-decoration-none text-lasted float-right">Click to check it out! <i class="fas fa-angle-right"></i></a>
+                <a href="/Product/Index?metaTitle=Lasted" class="text-decoration-none text-lasted float-right">Click to check it out! <i class="fas fa-angle-right"></i></a>
             </div>
         </div>
         <div class="row mx-auto my-auto py-3">
@@ -126,7 +126,7 @@ ViewBag.Active = "#HomeBtn";
                         <div class="carousel-item active">
                             <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 d-block float-left">
                                 <a href="/Product/Detail/@Model.ListNew[0].ProductID">
-                                    <img src="@Url.Content(Model.ListNew[0].ImageLink)" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
+                                    <img src="@Url.Content("~/"+Model.ListNew[0].ImageLink)" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
                                 </a>
                             </div>
                         </div>
@@ -135,7 +135,7 @@ ViewBag.Active = "#HomeBtn";
                             <div class="carousel-item ">
                                 <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 d-block float-left">
                                     <a href="/Product/Detail/@Model.ListNew[i].ProductID">
-                                        <img src="@Url.Content(Model.ListNew[i].ImageLink)" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
+                                        <img src="@Url.Content("~/"+Model.ListNew[i].ImageLink)" alt="Alternate Text" class="image-on-home d-block img-fluid m-auto" />
                                     </a>
                                 </div>
                             </div>
