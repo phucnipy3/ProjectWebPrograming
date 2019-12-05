@@ -4,11 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MVC.Areas.Admin.Models;
+using MVC.Controllers;
 using MVC.Models;
 namespace MVC.Areas.Admin.Controllers
 {
     [Authorize(Roles ="Admin,Employee")]
-    public class StatisticalController : Controller
+    public class StatisticalController : ApplicationController
     {
         // GET: Admin/Statistical
         public ActionResult Index()

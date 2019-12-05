@@ -4,7 +4,7 @@
 @{
                 /**/
 
-                ViewBag.Title = "Index";
+                ViewBag.Title = "Manage Orders";
                 Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -38,7 +38,7 @@
         <div class="row">
             <div class="col-12 px-4">
                 <span class="text-danger float-right h6">
-                    @item.OrderViewModel.Tag
+                    @item.OrderViewModel.Status
                 </span>
             </div>
         </div>
@@ -138,7 +138,7 @@
                     // Cancel the default action, if needed
                     event.preventDefault();
                     // Trigger the button element with a click
-                    $("formOrder").submit();
+                    $("#formOrder").submit();
                 }
             });
             $("#modalSuccess").on("hidden.bs.modal", function () {

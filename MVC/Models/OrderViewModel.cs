@@ -43,10 +43,22 @@ namespace MVC.Models
         public string Tag { get; set; }
 
         public DateTime? CreateDate { get; set; }
+
+        public string AllNames
+        {
+            get
+            {
+                string stringBuilder = "";
+                Products.ForEach(x => stringBuilder += x.Name.ToString() + " ");
+                return stringBuilder;
+            }
+        }
     }
 
     public class ProductOnOrder
     {
+        public int ID { get; set; }
+
         public string Image { get; set; }
 
         public string Name { get; set; }

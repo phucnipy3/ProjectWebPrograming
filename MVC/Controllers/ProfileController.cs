@@ -24,7 +24,7 @@ namespace MVC.Controllers
             if (Avatar != null)
             {
                 string fileName = UserHelper.GetUserByUserID(HttpContext.User.Identity.Name).ID.ToString() + DateTime.Now.ToString("-HH-mm-ss-dd-MM-yyyy")+Path.GetExtension(Avatar.FileName);
-                user.Image = "~/Resource/Avatar/" + fileName;
+                user.Image = "Resource/Avatar/" + fileName;
                 string savePath = Path.Combine(Server.MapPath("~/Resource/Avatar/"), fileName);
                 Avatar.SaveAs(savePath);
             }

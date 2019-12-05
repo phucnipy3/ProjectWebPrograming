@@ -12,28 +12,29 @@ namespace MVC.Controllers
     public class ProductController : ApplicationController
     {
         // GET: Product
-        public ActionResult Index(string searchString, string metaTitle = "op-lung-samsung", int page = 1, int sizePage = 10)
+        public ActionResult Index(string searchString, string metaTitle = "Lasted", int page = 1, int sizePage = 8)
         {
             ViewBag.CategoryActive = "#"+metaTitle+"";
             ViewBag.SearchString = searchString;
             ViewBag.MetaTitle = metaTitle;
+            ViewBag.Page = page;
             IPagedList<ProductOnPage> products;
             IEnumerable<ProductCategory> categories = ProductCategoryHelper.GetProductCategories();
             if (metaTitle == "Lasted")
             {
-                products = ProductHelper.GetNewProducts().ToPagedList(page, sizePage);
+                products = ProductHelper.GetNewProducts(searchString).ToPagedList(page, sizePage);
             }
             else if (metaTitle == "Best-Saler")
             {
-                products = ProductHelper.GetBestSalerProducts().ToPagedList(page, sizePage);
+                products = ProductHelper.GetBestSalerProducts(searchString).ToPagedList(page, sizePage);
             }
             else if (metaTitle == "Hot")
             {
-                products = ProductHelper.GetHotProducts().ToPagedList(page, sizePage);
+                products = ProductHelper.GetHotProducts(searchString).ToPagedList(page, sizePage);
             }
             else
             {
-                products = ProductHelper.GetProductsByCategoryMetaTitle(metaTitle).OrderByDescending(x => x.ProductID).ToPagedList(page, sizePage);
+                products = ProductHelper.GetProductsByCategoryMetaTitle(metaTitle, searchString).OrderByDescending(x => x.ProductID).ToPagedList(page, sizePage);
             }
 
             ProductViewModel model = new ProductViewModel() { Products = products, Categories = categories };
@@ -48,10 +49,12 @@ namespace MVC.Controllers
             List<ProductOnPage> recentProducts = HttpContext.Session["RecentProducts"] as List<ProductOnPage>;
             if (recentProducts == null)
                 recentProducts = new List<ProductOnPage>();
+            if(recentProducts.Where(x => x.ProductID==id).Count()==0)
             recentProducts.Add(ProductHelper.GetProductOnPages().Where(x => x.ProductID == id).SingleOrDefault());
             HttpContext.Session["RecentProducts"] = recentProducts;
             return View(ProductHelper.GetProductDetail(id));
         }
+
         [Authorize]
         [HttpPost]
         public ActionResult Rate(int id, int point)
@@ -68,7 +71,7 @@ namespace MVC.Controllers
             int id = UserHelper.GetUserByUserID(HttpContext.User.Identity.Name).ID;
             Comment cmt = new Comment() { ProductID = idProduct, Content = content, CreateBy = id };
             CommentHelper.AddComment(cmt);
-            return Redirect("/Product/Detail/" + idProduct.ToString());
+            return Redirect("/Product/Detail/" + idProduct.ToString()+"#newComment");
         }
         [Authorize]
         [HttpPost]
@@ -77,7 +80,7 @@ namespace MVC.Controllers
             int id = UserHelper.GetUserByUserID(HttpContext.User.Identity.Name).ID;
             Comment cmt = new Comment() { ProductID = idProduct, Content = content, ParentID = idParent, CreateBy = id };
             CommentHelper.AddComment(cmt);
-            return Redirect("/Product/Detail/" + idProduct.ToString());
+            return Redirect("/Product/Detail/" + idProduct.ToString() + "#newComment");
         }
     }
 }

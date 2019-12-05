@@ -1,7 +1,7 @@
 ﻿@model MVC.Models.DetailViewModel
 @using MVC.Models;
 @{
-    ViewBag.Title = "Detail";
+    ViewBag.Title = "Detail - Product";
     ViewBag.Active = "#ProductBtn";
 }
 
@@ -250,7 +250,7 @@
                 @for (int i = 0; i < 5 && i<Model.RelateProducts.Count; i++)
                 {
                     var item = Model.RelateProducts[i];
-                    <div class="col-12">
+                    <div class="col-12 pb-1 border-bottom mb-1" >
 
                         <div class="view view-eighth">
 

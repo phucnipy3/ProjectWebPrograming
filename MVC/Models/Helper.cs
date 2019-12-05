@@ -43,7 +43,7 @@ namespace MVC.Models
             List<string> searchStrings = searchString.ToLower().Split(' ').ToList();
             List<T> result = new List<T>();
             foreach (string str in searchStrings)
-                result.AddRange(items.Where(x => keySelector(x).ToString().Contains(str)).ToList());
+                result.AddRange(items.Where(x => keySelector(x).ToString().ToLower().Contains(str)).ToList());
             return result.Distinct();
         }
 
@@ -476,7 +476,7 @@ namespace MVC.Models
 
         public static IEnumerable<ProductOnPage> GetProductOnPages()
         {
-            return GetProducts().Select(x => new ProductOnPage()
+            return GetProducts().OrderByDescending(x => x.CreatedDate).Select(x => new ProductOnPage()
             {
                 ProductID = x.ID,
                 ProductName = x.Name,
@@ -504,7 +504,7 @@ namespace MVC.Models
 
         public static IEnumerable<ProductOnPage> GetNewProducts()
         {
-            return GetProductOnPages().Where(x => x.Tag.ToLower() == "new").ToList();
+            return GetProductOnPages().ToList();
         }
 
         public static IEnumerable<ProductOnPage> GetNewProducts(string searchString)
@@ -637,9 +637,7 @@ namespace MVC.Models
 
         private static string GetTag(Product product)
         {
-            if (product.CreatedDate.HasValue && ((TimeSpan)(DateTime.Now - product.CreatedDate)).Days >= Convert.ToInt32(ConfigurationManager.AppSettings["numberOfRecentDays"]))
-                return "new";
-            if (product.PromotionPrice / product.Price >= 1 - Convert.ToDecimal(ConfigurationManager.AppSettings["onPercent"]))
+            if (product.PromotionPrice < product.Price)
                 return "hot";
             return "normal";
         }
@@ -853,7 +851,7 @@ namespace MVC.Models
 
         public static IEnumerable<OrderManagementViewModel> GetOrderManagementViewModels(string tag = "All", string searchString = null)
         {
-            return Search(GetOrderManagementViewModels().Where(x => tag == "All" || x.OrderViewModel.Tag == tag), searchString);
+            return Search(GetOrderManagementViewModels().Where(x => tag == "All" || x.OrderViewModel.Tag == tag), x => x.Name, searchString);
         }
 
         private static IEnumerable<OrderViewModel> GetOrderViewModels(string userId = null)
@@ -889,7 +887,7 @@ namespace MVC.Models
 
         public static IEnumerable<OrderViewModel> GetOrderViewModels(string userId, string tag = "All", string searchString = null)
         {
-            return Search(GetOrderViewModels(userId).Where(x => tag == "All" || x.Tag == tag), searchString);
+            return Search(GetOrderViewModels(userId).Where(x => tag == "All" || x.Tag == tag), x => x.AllNames, searchString);
         }
 
         public static ShoppingCart GetShoppingCart(string userId)
@@ -1133,6 +1131,7 @@ namespace MVC.Models
         {
             return GetOrderDetailByOrderID(orderId).Select(x => new ProductOnOrder()
             {
+                ID = x.ProductID,
                 Image = ProductHelper.GetPropertyValue(x.ProductID, y => y.Image),
                 Name = ProductHelper.GetPropertyValue(x.ProductID, y => y.Name),
                 Count = x.Count,
@@ -1360,6 +1359,8 @@ namespace MVC.Models
 
         public static int? GetRatePoint(string userId, int productId)
         {
+            if (String.IsNullOrEmpty(userId))
+                return 0;
             var rate = GetRateByID(userId, productId);
             if (rate != null)
                 return rate.RatePoint;

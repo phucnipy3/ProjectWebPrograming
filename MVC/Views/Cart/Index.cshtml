@@ -1,6 +1,6 @@
 ﻿@model MVC.Models.ShoppingCart
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -146,8 +146,44 @@ else
 
 
 }
+<div class="container-fluid">
+    <div class="modal fade" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="phucni" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-auto mx-auto">
+                            <p class="text-center">
+                                <h5> Please login to order</h5>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto mx-auto">
+                            <a data-dismiss="modal" class="btn btn-primary ">OK</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @section scripts{
     <script>
+        @if(@User.Identity.IsAuthenticated)
+        {
+            <text>var authen = true;</text>
+        }
+        else
+        {
+            <text>var authen = false;</text>
+        }
         $("input[type='number']").inputSpinner();
         function UpdateCart() {
             $("#formCart").submit();
@@ -158,7 +194,10 @@ else
             });
             $("#containerInfo").on("submit", "#formInfo", function (e) {
                 e.preventDefault();  // prevent standard form submission
-
+                if (!authen) {
+                    $("#modalMessage").modal('show');
+                    return false;
+                }
                 var form = $(this);
                 $.ajax({
                     url: form.attr("action"),
@@ -172,6 +211,7 @@ else
                     }
                 });
             });
+            
         });
     </script>
 

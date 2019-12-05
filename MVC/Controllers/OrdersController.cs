@@ -17,9 +17,7 @@ namespace MVC.Controllers
             
             string UserID = HttpContext.User.Identity.Name;
             IEnumerable<OrderViewModel> models;
-            if (!String.IsNullOrEmpty( searchString ))
-                models = OrderHelper.GetOrderViewModels(UserID, status, searchString);
-            models = OrderHelper.GetOrderViewModels(UserID, status);
+            models = OrderHelper.GetOrderViewModels(UserID, status, searchString);
             ViewBag.OrderActive = "#" + status;
             ViewBag.SearchString = searchString;
             ViewBag.Status = status;

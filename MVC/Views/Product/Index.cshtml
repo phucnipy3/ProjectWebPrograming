@@ -14,8 +14,9 @@
         
         <div class="col-12 col-lg-4 col-xl-3 pb-3">
             <form action="/Product/Index" method="get" class="align-items-center d-flex py-3" id="formSearch">
-                <input type="text" name="metaTitle" value="@ViewBag.Metatitle" id="metaTitle"  hidden/>
+                <input type="text" name="metaTitle" value="@ViewBag.MetaTitle" id="metaTitle" hidden />
                 <input type="text" id="TextSearch" placeholder="Search..." class="form-control" name="searchString" value="@ViewBag.SearchString" />
+                <input type="text" name="page" value="@ViewBag.Page" id="page" hidden />
 
                 <button class="btn btn-link navbar-toggler bg-white navbar-light d-lg-none pr-0" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle sidebar">
                     <span class="navbar-toggler-icon"></span>
@@ -30,7 +31,7 @@
                         <hr class="w-100" />
                         <li class="nav-item" id="Lasted"><a class="nav-link" href="/Product/Index?metaTitle=Lasted" >Mới nhất</a></li>
                         <li class="nav-item" id="Best-Saler"><a class="nav-link" href="/Product/Index?metaTitle=Best-Saler">Bán chạy</a></li>
-                        <li class="nav-item" id="Hot "><a class="nav-link" href="/Product/Index?metaTitle=Hot"">Hot</a></li>
+                        <li class="nav-item" id="Hot"><a class="nav-link" href="/Product/Index?metaTitle=Hot">Hot</a></li>
 
                         @foreach (var item in Model.Categories)
                         {
@@ -47,11 +48,16 @@
                 <div class="row post-feed">
                     @foreach (var item in Model.Products)
                     {
-                        <div class="col-6 col-md-4 col-xl-3 py-3 post">
+                        <div class="col-6 col-md-4 col-xl-3 py-3 post ">
                             <div class="view view-eighth">
                                 <a href="/Product/Detail/@item.ProductID" class="text-decoration-none text-dark product">
-                                    <div class="card border-0">
+                                    <div class="card border-0 position-relative">
                                         <img src="@Url.Content("~/"+item.ImageLink)" alt="Alternate Text" class="image-on-home m-auto" />
+                                        @if (item.Tag == "hot")
+                                        {
+                                            <img src="~/Resource/hot.gif" class="position-absolute" style="right:7px;width:40px;top:10px;transform:rotate(45deg) " />
+
+                                        }
                                     </div>
                                     <div class="card-body p-0">
                                         <div class="row">
@@ -107,6 +113,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                     }
                 </div>
                 <div class="page-load-status text-center hide">
@@ -145,15 +152,33 @@
                     $("#formSearch").submit();
                 }
             });
-        });
-        $('.post-feed').infiniteScroll({
+            $(".page-link").click(function (e) {
+                e.preventDefault();
+                $("#page").val($(this).html());
+                $("#formSearch").submit();
+            });
+            $('.PagedList-skipToNext a').click(function (e) {
+                e.preventDefault();
+                var number = parseInt($(".active .page-link").html(), 10) +1;
+                $("#page").val(number);
+                $("#formSearch").submit();
+            });
+            var link = $('.PagedList-skipToNext a').attr("href");
+            var searchString = "@ViewBag.SearchString";
+            var metatitle = '@ViewBag.MetaTitle';
+            link = link+ "&searchString=" + searchString + "&metaTitle=" + metatitle;
+            $('.PagedList-skipToNext a').attr("href", link);
+            $('.post-feed').infiniteScroll({
             // options
             path: '.PagedList-skipToNext a',
             append: '.post',
             status: '.page-load-status',
-            hideNav: '.pagination',
-            history: 'false'
+                hideNav: '.pagination',
+            history: false
+            });
         });
+        
+        
     </script>
 }
 

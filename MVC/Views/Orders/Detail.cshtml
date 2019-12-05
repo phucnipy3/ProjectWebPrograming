@@ -1,6 +1,6 @@
 ﻿@model MVC.Models.OrderViewModel
 @{
-    ViewBag.Title = "Detail";
+    ViewBag.Title = "Detail - Order";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -53,20 +53,22 @@
                 <div class="col-1">
                     <div class="row">
                         <div class="col-auto mx-auto">
-                            <img src="@Url.Content("~/"+product.Image)" alt="Alternate Text" width="80" height="130" />
+                            <a href="/Product/Detail/@product.ID">
+                                <img src="@Url.Content("~/"+product.Image)" alt="Alternate Text" width="80" height="130" />
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-9 px-4">
+                <div class="col-9 px-4 align-self-center">
                     <span class="h5">@product.Name</span>
                     <br />
                     <span>x@(product.Count)</span>
                 </div>
                 <div class="col-2 align-self-center px-4">
-                    <span class="float-right">
+                    <span class="float-right text-right">
                         @if (product.PromotionPrice != product.Price)
                         {
-                            <del>@(product.Price)đ</del>
+                            <del>@(product.Price)đ</del> <br/>
                             <span class="text-danger">@(product.PromotionPrice)đ</span>
                         }
                         else
@@ -106,8 +108,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 px-4">
-                <a href="#" class="btn btn-info float-right">Mua lần nữa</a>
+            <div class="col-auto ml-auto pr-4">
+                <a href="#" class="btn btn-info">Mua lần nữa</a>
             </div>
         </div>
     </div>

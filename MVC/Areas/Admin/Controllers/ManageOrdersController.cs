@@ -16,9 +16,7 @@ namespace MVC.Areas.Admin.Controllers
         {
             ViewBag.Active = "#ManageOrders";
             IEnumerable<OrderManagementViewModel> models;
-            if (!String.IsNullOrEmpty(searchString))
-                models = OrderHelper.GetOrderManagementViewModels(searchString, status);
-            models = OrderHelper.GetOrderManagementViewModels(status);
+            models = OrderHelper.GetOrderManagementViewModels(status, searchString);
             ViewBag.OrderActive = "#" + status;
             ViewBag.SearchString = searchString;
             ViewBag.Status = status;

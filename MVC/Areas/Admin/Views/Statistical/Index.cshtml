@@ -1,11 +1,11 @@
 ﻿@model MVC.Areas.Admin.Models.StatisticalViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Statistical";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h3>Tổng số lượng bán ra: @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByMonth[0].Total)) @Model.AmountSoldAndRevenueByMonth[0].Dram</h3>
-<h3>Tổng doanh thu: @Html.Raw(Json.Encode(@Model.AmountSoldAndRevenueByMonth[1].Total)) @Model.AmountSoldAndRevenueByMonth[1].Dram</h3>
+<h3>Tổng số lượng bán ra: @Model.AmountSoldAndRevenueByMonth[0].Total.Value.ToString("N0") @Model.AmountSoldAndRevenueByMonth[0].Dram</h3>
+<h3>Tổng doanh thu: @Model.AmountSoldAndRevenueByMonth[1].Total.Value.ToString("N0") @Model.AmountSoldAndRevenueByMonth[1].Dram</h3>
 <a href="#" onclick="return ShowChartAmountSold('canvasAmountSoldAndRevenueByMonth')" class="btn btn-info m-3">Theo tháng</a>
 <a href="#" onclick="return ShowChartAmountSold('canvasAmountSoldAndRevenueByQuarters')" class="btn btn-primary m-3">Theo quý</a>
 <a href="#" onclick="return ShowChartAmountSold('canvasAmountSoldAndRevenueByYear')" class="btn btn-secondary m-3">Theo năm</a>
@@ -15,7 +15,7 @@
 <canvas id="canvasAmountSoldAndRevenueByYear" class="chartAmountSoldAndRevenue" style="display:none"></canvas>
 <canvas id="canvasAmountSoldAndRevenueByCategory" class="chartAmountSoldAndRevenue" style="display:none"></canvas>
 
-<h3>Tổng số lượng hóa đơn: @Html.Raw(Json.Encode(@Model.AmountBillByMonth.Total)) @Model.AmountBillByMonth.Dram</h3>
+<h3>Tổng số lượng hóa đơn: @Model.AmountBillByMonth.Total.Value.ToString("N0") @Model.AmountBillByMonth.Dram</h3>
 <a href="#" onclick="return ShowChartAmountBill('canvasAmountBillByMonth')" class="btn btn-info m-3">Theo tháng</a>
 <a href="#" onclick="return ShowChartAmountBill('canvasAmountBillByQuarters')" class="btn btn-primary m-3">Theo quý</a>
 <a href="#" onclick="return ShowChartAmountBill('canvasAmountBillByYear')" class="btn btn-secondary m-3">Theo năm</a>

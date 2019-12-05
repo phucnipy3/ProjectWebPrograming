@@ -1,6 +1,6 @@
 ﻿@model MVC.Models.OrderViewModel
 @{
-    ViewBag.Title = "Detail";
+    ViewBag.Title = "Detail - Manage Orders";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 
 }
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-9 px-4">
+                <div class="col-9 px-5">
                     <span class="h5">@product.Name</span>
                     <br />
                     <span>x@(product.Count)</span>
@@ -79,7 +79,7 @@
             </div>
         }
         <div class="row mt-3">
-            <div class="col-4 offset-6">
+            <div class="col-auto ml-auto">
                 <div class="row">
                     <div class="col-12">
                         <span class="text-danger h6 float-right">Tổng tiền hàng:</span>
