@@ -462,10 +462,10 @@ else
         });
         var count = $('.multi-item-carousel .carousel-item').length;
         $('.multi-item-carousel .carousel-item').each(function () {
-            var x = 5;
+            var x = 6;
             if (count < x)
                 x = count;
-            appendSlide(($(this)), ($(this)).next(), x);
+            appendSlide(($(this)), ($(this)).next(), x-1);
         });
         function appendSlide(node, next, n) {
             if (n == 0)
