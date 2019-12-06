@@ -170,11 +170,11 @@
                     @foreach (var comment in Model.Comments)
                     {
 
-                        <div class="row comment">
+                        <div class="row comment" id="comment-@comment.Comment.ID">
                             <div class="col-auto">
                                 <img src="@Url.Content("~/"+comment.Image)" alt="Alternate Text" class="rounded-circle comment-image d-block" />
                             </div>
-                            <div class="col pl-0 comment-body">
+                            <div class="col pl-0 comment-body" >
                                 <div class="row">
                                     <div class="col-12 ">
                                         <div class="row">
@@ -183,7 +183,7 @@
 
                                             </div>
                                             <div class="col-auto ml-auto">
-                                                <a href="" class="text-decoration-none text-dark">x</a>
+                                                <a href="/Product/DeleteComment/?id=@comment.Comment.ID&&idProduct=@Model.MainProduct.ID" class="text-decoration-none text-dark">x</a>
                                             </div>
                                         </div>
 
@@ -202,7 +202,7 @@
                                     <div class="col-12 comment-replies">
                                         @foreach (var reply in comment.ReplyComment)
                                         {
-                                            <div class="row comment">
+                                            <div class="row comment" id="comment-@reply.Comment.ID">
                                                 <div class="col-auto">
                                                     <img src="@Url.Content("~/"+reply.Image)" alt="Alternate Text" class="rounded-circle comment-image d-block" />
                                                 </div>
@@ -213,7 +213,7 @@
 
                                                         </div>
                                                         <div class="col-auto ml-auto">
-                                                            <a href="" class="text-decoration-none text-dark">x</a>
+                                                            <a href="/Product/DeleteComment/?id=@reply.Comment.ID&&idProduct=@Model.MainProduct.ID" class="text-decoration-none text-dark">x</a>
                                                         </div>
                                                         <div class="col-12 comment-text">
                                                             <p>@reply.Comment.Content</p>

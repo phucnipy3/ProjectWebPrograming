@@ -52,7 +52,7 @@ namespace MVC.Controllers
             if(recentProducts.Where(x => x.ProductID==id).Count()==0)
             recentProducts.Add(ProductHelper.GetProductOnPages().Where(x => x.ProductID == id).SingleOrDefault());
             HttpContext.Session["RecentProducts"] = recentProducts;
-            return View(ProductHelper.GetProductDetail(id));
+            return View(ProductHelper.GetProductDetail(id, HttpContext.User.Identity.Name));
         }
 
         [Authorize]
@@ -82,5 +82,18 @@ namespace MVC.Controllers
             CommentHelper.AddComment(cmt);
             return Redirect("/Product/Detail/" + idProduct.ToString() + "#newComment");
         }
+        [Authorize]
+        [HttpPost]
+        public ActionResult Edit(int idComment, string content)
+        {
+            //CommentHelper.UpdateComment()
+            return View();
+        }
+        [Authorize]
+        public ActionResult DeleteComment(int? id, int? idProduct)
+        {
+            CommentHelper.DeleteComment((int)id);
+            return Redirect("/Product/Detail/" + idProduct.ToString() + "#newComment");
+        }
     }
-}
+} 
