@@ -52,6 +52,10 @@ namespace MVC.Models
 
         public string Image { get; set; }
 
+        public bool Manager { get; set; }
+
+        public bool Modify { get; set; }
+
         public Comment Comment { get; set; }
 
         public List<CommentView> ReplyComment { get; set; }
