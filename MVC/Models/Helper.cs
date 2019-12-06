@@ -1624,5 +1624,26 @@ namespace MVC.Models
                 return false;
             }
         }
+
+        public static bool UpdateComment(int id, string content)
+        {
+            try
+            {
+                var oldComment = GetCommentByID(id);
+                if (oldComment != null)
+                {
+                    oldComment.Content = content;
+                    oldComment.LastModify = DateTime.Now;
+                    db.Comments.AddOrUpdate(x => x.ID, oldComment);
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
