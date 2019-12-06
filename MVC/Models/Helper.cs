@@ -87,7 +87,7 @@ namespace MVC.Models
         private static IEnumerable<ChartData> AmountSoldAndRevenueByMonth()
         {
             List<ChartData> chartDatas = new List<ChartData>();
-            var data = OrderHelper.GetOrders().Where(x => x.Complete != null).OrderBy(x => x.Complete)
+            var data = OrderHelper.GetOrders().Where(x => x.Complete.HasValue).OrderBy(x => x.Complete)
                 .GroupBy(x => Convert.ToDateTime(x.Complete).ToString("\"Tháng \"MM/yyyy")).Select(x => new
                 {
                     TimeLine = x.Key,
@@ -114,7 +114,7 @@ namespace MVC.Models
         private static IEnumerable<ChartData> AmountSoldAndRevenueByYear()
         {
             List<ChartData> chartDatas = new List<ChartData>();
-            var data = OrderHelper.GetOrders().Where(x => x.Complete != null).OrderBy(x => x.Complete)
+            var data = OrderHelper.GetOrders().Where(x => x.Complete.HasValue).OrderBy(x => x.Complete)
                 .GroupBy(x => Convert.ToDateTime(x.Complete).ToString("\"Năm \"yyyy")).Select(x => new
                 {
                     TimeLine = x.Key,
@@ -141,7 +141,7 @@ namespace MVC.Models
         private static IEnumerable<ChartData> AmountSoldAndRevenueByQuarters()
         {
             List<ChartData> chartDatas = new List<ChartData>();
-            var data = OrderHelper.GetOrders().Where(x => x.Complete != null).OrderBy(x => x.Complete)
+            var data = OrderHelper.GetOrders().Where(x => x.Complete.HasValue).OrderBy(x => x.Complete)
                 .GroupBy(x => ConvertToQuarters(x.Complete)).Select(x => new
                 {
                     TimeLine = x.Key,
@@ -181,7 +181,7 @@ namespace MVC.Models
         private static ChartData AmountBillByMonth()
         {
             ChartData chartData = new ChartData();
-            var data = OrderHelper.GetOrders().Where(x => x.Complete != null).OrderBy(x => x.Complete)
+            var data = OrderHelper.GetOrders().Where(x => x.Complete.HasValue).OrderBy(x => x.Complete)
                 .GroupBy(x => Convert.ToDateTime(x.Complete).ToString("\"Tháng \"MM/yyyy")).Select(x => new
                 {
                     TimeLine = x.Key,
@@ -199,7 +199,7 @@ namespace MVC.Models
         private static ChartData AmountBillByYear()
         {
             ChartData chartData = new ChartData();
-            var data = OrderHelper.GetOrders().Where(x => x.Complete != null).OrderBy(x => x.Complete)
+            var data = OrderHelper.GetOrders().Where(x => x.Complete.HasValue).OrderBy(x => x.Complete)
                 .GroupBy(x => Convert.ToDateTime(x.Complete).ToString("\"Năm \"yyyy")).Select(x => new
                 {
                     TimeLine = x.Key,
@@ -217,7 +217,7 @@ namespace MVC.Models
         private static ChartData AmountBillByQuarters()
         {
             ChartData chartData = new ChartData();
-            var data = OrderHelper.GetOrders().Where(x => x.Complete != null).OrderBy(x => x.Complete)
+            var data = OrderHelper.GetOrders().Where(x => x.Complete.HasValue).OrderBy(x => x.Complete)
                 .GroupBy(x => ConvertToQuarters(x.Complete)).Select(x => new
                 {
                     TimeLine = x.Key,
