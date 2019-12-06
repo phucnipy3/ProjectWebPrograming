@@ -1521,7 +1521,7 @@ namespace MVC.Models
                 Image = UserHelper.GetPropertyValue((int)x.CreateBy, y => y.Image),
                 Manager = !String.IsNullOrEmpty(userId) && UserHelper.GetUserRole(userId).ToLower() != "customer",
                 Modify = !String.IsNullOrEmpty(userId) && (UserHelper.GetUserRole(userId).ToLower() != "customer" || UserHelper.GetPropertyValue((int)x.CreateBy, y => y.UserID) == userId),
-                ReplyComment = GetComments().Where(y => y.ProductID == productId && y.ParentID == x.ID).OrderByDescending(y => y.CreateDate).Select(y => new CommentView()
+                ReplyComment = GetComments().Where(y => y.ProductID == productId && y.ParentID == x.ID).OrderBy(y => y.CreateDate).Select(y => new CommentView()
                 {
                     Comment = y,
                     Name = UserHelper.GetPropertyValue((int)y.CreateBy, z => z.Name),
