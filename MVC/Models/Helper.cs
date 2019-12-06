@@ -1634,7 +1634,6 @@ namespace MVC.Models
                 {
                     oldComment.Content = content;
                     oldComment.LastModify = DateTime.Now;
-                    db.Comments.AddOrUpdate(x => x.ID, oldComment);
                     db.SaveChanges();
                     return true;
                 }
