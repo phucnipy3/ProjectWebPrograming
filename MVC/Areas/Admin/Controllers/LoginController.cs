@@ -36,6 +36,7 @@ namespace MVC.Areas.Admin.Controllers
                     FormsAuthentication.SetAuthCookie(model.Username, true);
                     return Redirect(ReturnUrl);
                 }
+                ModelState.AddModelError("", "Wrong information, Employee please contact to Administrator when forgot infomation!");
             }
             
             return View(model);

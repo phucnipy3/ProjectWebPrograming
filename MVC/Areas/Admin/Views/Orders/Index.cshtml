@@ -102,13 +102,28 @@
                             Ship Email
                         </th>
                         <th class="text-center">
+                            PaymentMethods
+                        </th>
+                        <th class="text-center">
+                            Transport
+                        </th>
+                        <th class="text-center">
+                            TransportFee
+                        </th>
+                        <th class="text-center">
                             Ordered
                         </th>
                         <th class="text-center">
-                            Complete
+                            Confirmed
                         </th>
                         <th class="text-center">
-                            Status
+                            TookProducts
+                        </th>
+                        <th class="text-center">
+                            Canceled
+                        </th>
+                        <th class="text-center">
+                            Complete
                         </th>
                         <th></th>
                     </tr>
@@ -117,64 +132,90 @@
 
                 @foreach (var item in Model)
                 {
-            <tr>
-                <td>
-                    <nobr>
-                        @Html.DisplayFor(modelItem => item.ID)
-                    </nobr>
-                </td>
-                <td>
-                    <nobr>
-                        @Html.DisplayFor(modelItem => item.CreateDate)
-                    </nobr>
-                </td>
-                <td class="text-center">
-                    <nobr>
-                        @Html.DisplayFor(modelItem => item.CreateBy)
-                    </nobr>
-                </td>
-                <td class="text-center">
-                    <nobr>
-                        @Html.DisplayFor(modelItem => item.ShipName)
-                    </nobr>
-                </td>
-                <td class="text-center">
-                    <nobr>
-                        @Html.DisplayFor(modelItem => item.ShipMobile)
-                    </nobr>
-                </td>
-                <td class="text-center">
-                    <nobr>
-                        @Html.DisplayFor(modelItem => item.ShipAddress)
-                    </nobr>
-                </td>
-                <td class="text-center">
-                    <nobr>
-                        @Html.DisplayFor(modelItem => item.ShipEmail)
-                    </nobr>
-                </td>
-                <td class="text-center">
-                    <nobr>
-                        @Html.DisplayFor(modelItem => item.Ordered)
-                    </nobr>
-                </td>
-                <td class="text-center">
-                    <nobr>
-                        @Html.DisplayFor(modelItem => item.Complete)
-                    </nobr>
-                </td>
-                <td class="text-center">
-                    <nobr>
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </nobr>
-                </td>
-                <td>
-                    <nobr>
-                        <a href="#" onclick="UpdateItem(@item.ID)"><i class="far fa-edit"></i></a> |
-                        <a href="#" onclick="DeleteItem(@item.ID)" class="Delete-Item"><i class="fas fa-trash-alt"></i></a>
-                    </nobr>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.ID)
+                        </nobr>
+                    </td>
+                    <td>
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.CreateDate)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.CreateBy)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.ShipName)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.ShipMobile)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.ShipAddress)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.ShipEmail)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.PaymentMethods)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Transport)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.TransportationFee)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Ordered)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Confirmed)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.TookProducts)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Canceled)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Complete)
+                        </nobr>
+                    </td>
+
+                    <td>
+                        <nobr>
+                            <a href="#" onclick="UpdateItem(@item.ID)"><i class="far fa-edit"></i></a> |
+                            <a href="#" onclick="DeleteItem(@item.ID)" class="Delete-Item"><i class="fas fa-trash-alt"></i></a>
+                        </nobr>
+                    </td>
+                </tr>
                 }
 
 

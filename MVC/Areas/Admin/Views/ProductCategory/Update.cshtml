@@ -8,7 +8,7 @@
         <div class="col-8 offset-2">
             <div class="form-group">
                 <label for="InputNameAPC">ID</label>
-                @Html.TextBoxFor(model => model.ID, new { @class = "form-control", id = "InputNameAPC", @readonly = true})
+                @Html.TextBoxFor(model => model.ID, new { @class = "form-control", id = "InputNameAPC", @readonly = true })
             </div>
         </div>
     </div>
@@ -48,15 +48,10 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-8 offset-2">
-            <div class="form-group">
-                <label for="InputSeoTitleAPC">Seo Title</label>
-                @Html.TextBoxFor(model => model.SeoTitle, new { @class = "form-control", id = "InputSeoTitleAPC", placeholder = "Enter SEO title" })
-                @Html.ValidationMessageFor(model => model.SeoTitle, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
+    @Html.HiddenFor(model => model.CreatedBy);
+    @Html.HiddenFor(model => model.CreatedDate);
+    @Html.HiddenFor(model => model.ModifiedBy);
+    @Html.HiddenFor(model => model.ModifiedDate);
     <div class="row">
         <div class="col-5 offset-6">
             <button type="submit" class="btn btn-primary">Update</button>

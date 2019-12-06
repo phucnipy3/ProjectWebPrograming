@@ -93,7 +93,16 @@
                             Parent's ID
                         </th>
                         <th class="text-center">
-                            Display Order
+                            Created Date
+                        </th>
+                        <th class="text-center">
+                            Created By
+                        </th>
+                        <th class="text-center">
+                            Modified Date
+                        </th>
+                        <th class="text-center">
+                            Modified By
                         </th>
                         <th></th>
                     </tr>
@@ -102,39 +111,60 @@
 
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            <nobr>
-                                @Html.DisplayFor(modelItem => item.ID)
-                            </nobr>
-                        </td>
-                        <td class="text-center">
-                            <nobr>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </nobr>
-                        </td>
-                        <td class="text-center">
-                            <nobr>
-                                @Html.DisplayFor(modelItem => item.MetaTitle)
-                            </nobr>
-                        </td>
-                        <td class="text-center">
-                            <nobr>
-                                @Html.DisplayFor(modelItem => item.ParentID)
-                            </nobr>
-                        </td>
-                        <td class="text-center">
-                            <nobr>
-                                @Html.DisplayFor(modelItem => item.DisplayOrder)
-                            </nobr>
-                        </td>
-                        <td>
-                            <nobr>
-                                <a href="#" onclick="UpdateItem(@item.ID)"><i class="far fa-edit"></i></a> |
-                                <a href="#" onclick="DeleteItem(@item.ID)" class="Delete-Item"><i class="fas fa-trash-alt"></i></a>
-                            </nobr>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.ID)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.MetaTitle)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.ParentID)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.DisplayOrder)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.CreatedBy)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.ModifiedDate)
+                        </nobr>
+                    </td>
+                    <td class="text-center">
+                        <nobr>
+                            @Html.DisplayFor(modelItem => item.ModifiedBy)
+                        </nobr>
+                    </td>
+
+                    <td>
+                        <nobr>
+                            <a href="#" onclick="UpdateItem(@item.ID)"><i class="far fa-edit"></i></a> |
+                            <a href="#" onclick="DeleteItem(@item.ID)" class="Delete-Item"><i class="fas fa-trash-alt"></i></a>
+                        </nobr>
+                    </td>
+                </tr>
                 }
 
 
