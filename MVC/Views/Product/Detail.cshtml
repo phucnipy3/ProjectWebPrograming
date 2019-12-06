@@ -460,8 +460,12 @@ else
         $('.multi-item-carousel').carousel({
             interval: 3000
         });
+        var count = $('.multi-item-carousel .carousel-item').length;
         $('.multi-item-carousel .carousel-item').each(function () {
-            appendSlide(($(this)), ($(this)).next(), 5);
+            var x = 5;
+            if (count < x)
+                x = count;
+            appendSlide(($(this)), ($(this)).next(), x);
         });
         function appendSlide(node, next, n) {
             if (n == 0)
