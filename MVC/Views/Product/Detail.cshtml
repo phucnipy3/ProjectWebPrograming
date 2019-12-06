@@ -246,7 +246,7 @@
                                             <div class="row comment-create collapse pb-2 " id="edit-reply-@reply.Comment.ID">
                                                 <form action="/Product/Edit" method="post" class="w-100">
                                                     <input type="text" name="idComment" value="@comment.Comment.ID" hidden />
-                                                    <input type="text" name="idProduct" value="@Model.MainProduct" hidden />
+                                                    <input type="text" name="idProduct" value="@Model.MainProduct.ID" hidden />
                                                     <div class="col-12">
                                                         <textarea style="width:100%" rows="4" name="content"></textarea>
                                                     </div>
@@ -282,7 +282,7 @@
                         <div class="row comment-create collapse pt-2" id="edit-@comment.Comment.ID">
                             <form action="/Product/Edit" method="post" class="w-100">
                                 <input type="text" name="idComment" value="@comment.Comment.ID" hidden />
-                                <input type="text" name="idProduct" value="@Model.MainProduct" hidden />
+                                <input type="text" name="idProduct" value="@Model.MainProduct.ID" hidden />
                                 <div class="col-12">
                                     <textarea style="width:100%" rows="4" name="content"></textarea>
                                 </div>
