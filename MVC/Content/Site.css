@@ -610,3 +610,11 @@ ul li{
     font-weight:700;
 }
 
+.text-qtv{
+    font-size:12px;
+    background-color:#f7ea6f;
+    padding:5px;
+}
+.text-qtv-reply{
+    font-size:10px;
+}
