@@ -170,20 +170,23 @@
                     @foreach (var comment in Model.Comments)
                     {
 
-                        <div class="row comment">
+                        <div class="row comment" id="comment-@comment.Comment.ID">
                             <div class="col-auto">
                                 <img src="@Url.Content("~/"+comment.Image)" alt="Alternate Text" class="rounded-circle comment-image d-block" />
                             </div>
-                            <div class="col pl-0 comment-body">
+                            <div class="col pl-0 comment-body" >
                                 <div class="row">
                                     <div class="col-12 ">
                                         <div class="row">
                                             <div class="col-auto comment-name">
-                                                <span class="">@comment.Name</span>
+                                                <span class="">@comment.Name 
+                                                    @if (comment.Manager)
+                                                    {<span>- QTV</span>}
+                                                </span>
 
                                             </div>
                                             <div class="col-auto ml-auto">
-                                                <a href="" class="text-decoration-none text-dark">x</a>
+                                                <a href="/Product/DeleteComment/?id=@comment.Comment.ID&&idProduct=@Model.MainProduct.ID" class="text-decoration-none text-dark">x</a>
                                             </div>
                                         </div>
 
@@ -196,24 +199,30 @@
                                             <li class="d-inline-block"><i class="fa fa-clock-o"></i> @comment.Comment.CreateDate.Value.ToShortTimeString() &emsp;</li>
                                             <li class="d-inline-block"><i class="fa fa-calendar"></i> @comment.Comment.CreateDate.Value.Date.ToShortDateString() &emsp;</li>
                                             <li class="d-inline-block"><a href="#create-new-@comment.Comment.ID" class="text-decoration-none text-info" data-parent-id="@comment.Comment.ID" data-toggle="collapse">reply</a> &emsp;</li>
-                                            <li class="d-inline-block"><a href="#edit-@comment.Comment.ID" class="text-decoration-none text-info" data-toggle="collapse">edit</a></li>
+                                            @if (comment.Modify)
+                                            {
+                                                <li class="d-inline-block"><a href="#edit-@comment.Comment.ID" class="text-decoration-none text-info edit" data-toggle="collapse" data-id="@comment.Comment.ID">edit</a></li>
+                                            }
                                         </ul>
                                     </div>
                                     <div class="col-12 comment-replies">
                                         @foreach (var reply in comment.ReplyComment)
                                         {
-                                            <div class="row comment">
+                                            <div class="row comment" id="comment-@reply.Comment.ID">
                                                 <div class="col-auto">
                                                     <img src="@Url.Content("~/"+reply.Image)" alt="Alternate Text" class="rounded-circle comment-image d-block" />
                                                 </div>
                                                 <div class="col pl-0 comment-body">
                                                     <div class="row">
                                                         <div class="col-auto comment-name">
-                                                            <span class="">@reply.Name</span>
+                                                            <span class="">@reply.Name
+                                                                @if (reply.Manager)
+                                                                {<span>- QTV</span>}
+                                                            </span>
 
                                                         </div>
                                                         <div class="col-auto ml-auto">
-                                                            <a href="" class="text-decoration-none text-dark">x</a>
+                                                            <a href="/Product/DeleteComment/?id=@reply.Comment.ID&&idProduct=@Model.MainProduct.ID" class="text-decoration-none text-dark">x</a>
                                                         </div>
                                                         <div class="col-12 comment-text">
                                                             <p>@reply.Comment.Content</p>
@@ -223,7 +232,10 @@
                                                                 <li class="d-inline-block"><i class="fa fa-clock-o"></i> @reply.Comment.CreateDate.Value.ToShortTimeString() &emsp;</li>
                                                                 <li class="d-inline-block"><i class="fa fa-calendar"></i> @reply.Comment.CreateDate.Value.Date.ToShortDateString() &emsp;</li>
                                                                 <li class="d-inline-block"><a href="#create-new-@comment.Comment.ID" class="text-decoration-none text-info" data-parent-id="@comment.Comment.ID" data-toggle="collapse">reply</a> &emsp;</li>
-                                                                <li class="d-inline-block"><a href="#edit-reply-@reply.Comment.ID" class="text-decoration-none text-info" data-toggle="collapse">edit</a></li>
+                                                                @if (reply.Modify)
+                                                                {
+                                                                    <li class="d-inline-block"><a href="#edit-reply-@reply.Comment.ID" class="text-decoration-none text-info edit-reply" data-toggle="collapse" data-id="@reply.Comment.ID">edit</a></li>
+                                                                }
 
                                                             </ul>
                                                         </div>
@@ -234,6 +246,7 @@
                                             <div class="row comment-create collapse pb-2 " id="edit-reply-@reply.Comment.ID">
                                                 <form action="/Product/Edit" method="post" class="w-100">
                                                     <input type="text" name="idComment" value="@comment.Comment.ID" hidden />
+                                                    <input type="text" name="idProduct" value="@Model.MainProduct" hidden />
                                                     <div class="col-12">
                                                         <textarea style="width:100%" rows="4" name="content"></textarea>
                                                     </div>
@@ -269,6 +282,7 @@
                         <div class="row comment-create collapse pt-2" id="edit-@comment.Comment.ID">
                             <form action="/Product/Edit" method="post" class="w-100">
                                 <input type="text" name="idComment" value="@comment.Comment.ID" hidden />
+                                <input type="text" name="idProduct" value="@Model.MainProduct" hidden />
                                 <div class="col-12">
                                     <textarea style="width:100%" rows="4" name="content"></textarea>
                                 </div>
@@ -609,7 +623,14 @@ else
 
                 }
             });
-
+            $("a.edit").click(function () {
+                var id = $(this).attr("data-id");
+                $("#edit-" + id + " textarea").val($("#comment-" + id + " .comment-text p").html());
+            });
+            $("a.edit-reply").click(function () {
+                var id = $(this).attr("data-id");
+                $("#edit-reply-" + id + " textarea").val($("#comment-" + id + " .comment-text p").html());
+            });
         });
 
     </script>
