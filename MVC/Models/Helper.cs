@@ -1519,15 +1519,15 @@ namespace MVC.Models
                 Comment = x,
                 Name = UserHelper.GetPropertyValue((int)x.CreateBy, y => y.Name),
                 Image = UserHelper.GetPropertyValue((int)x.CreateBy, y => y.Image),
-                Manager = UserHelper.GetUserRole(userId).ToLower() != "customer",
-                Modify = UserHelper.GetUserRole(userId).ToLower() != "customer" || UserHelper.GetPropertyValue((int)x.CreateBy, y => y.UserID) == userId,
+                Manager = !String.IsNullOrEmpty(userId) && UserHelper.GetUserRole(userId).ToLower() != "customer",
+                Modify = !String.IsNullOrEmpty(userId) && (UserHelper.GetUserRole(userId).ToLower() != "customer" || UserHelper.GetPropertyValue((int)x.CreateBy, y => y.UserID) == userId),
                 ReplyComment = GetComments().Where(y => y.ProductID == productId && y.ParentID == x.ID).OrderByDescending(y => y.CreateDate).Select(y => new CommentView()
                 {
                     Comment = y,
                     Name = UserHelper.GetPropertyValue((int)y.CreateBy, z => z.Name),
                     Image = UserHelper.GetPropertyValue((int)y.CreateBy, z => z.Image),
-                    Manager = UserHelper.GetUserRole(userId).ToLower() != "customer",
-                    Modify = UserHelper.GetUserRole(userId).ToLower() != "customer" || UserHelper.GetPropertyValue((int)y.CreateBy, z => z.UserID) == userId
+                    Manager = !String.IsNullOrEmpty(userId) && UserHelper.GetUserRole(userId).ToLower() != "customer",
+                    Modify = !String.IsNullOrEmpty(userId) && (UserHelper.GetUserRole(userId).ToLower() != "customer" || UserHelper.GetPropertyValue((int)y.CreateBy, z => z.UserID) == userId)
                 }).ToList()
             });
         }
