@@ -62,7 +62,10 @@
                 yAxes: [{
                     id: 'first-y-axis',
                     type: 'linear',
-                    position: 'left'
+                    position: 'left',
+                    ticks: {
+                        beginAtZero: true
+                    }
                 },
                 {
                     id: 'second-y-axis',
@@ -246,17 +249,17 @@
                 backgroundColor: 'rgb(150, 180, 250)',
                 borderColor: 'rgb(150, 180, 250))',
                 fill: false,
-                data:  @Html.Raw(Json.Encode(@Model.AmountBillByMonth.Values))
+                data:  @Html.Raw(Json.Encode(@Model.AmountBillByMonth.Values)),
             }]
             
         },
         options: {
             scales: {
-                yAxes: {
+                yAxes: [{
                     ticks: {
                         beginAtZero: true
                     }
-                }
+                }]
             },
             title: {
                 display: true,
@@ -276,17 +279,17 @@
                 backgroundColor: 'rgb(190, 30, 250)',
                 borderColor: 'rgb(190, 30, 250)',
                 fill: false,
-                data:  @Html.Raw(Json.Encode(@Model.AmountBillByQuarters.Values))
+                data:  @Html.Raw(Json.Encode(@Model.AmountBillByQuarters.Values)),
             }]
             
         },
         options: {
             scales: {
-                yAxes: {
+                yAxes: [{
                     ticks: {
                         beginAtZero: true
                     }
-                }
+                }]
             },
             title: {
                 display: true,
@@ -306,17 +309,17 @@
                 backgroundColor: 'rgb(90, 0, 250)',
                 borderColor: 'rgb(90, 0, 250)',
                 fill: false,
-                data:  @Html.Raw(Json.Encode(@Model.AmountBillByYear.Values))
+                data:  @Html.Raw(Json.Encode(@Model.AmountBillByYear.Values)),
             }]
             
         },
         options: {
             scales: {
-                yAxes: {
+                yAxes: [{
                     ticks: {
                         beginAtZero: true
                     }
-                }
+                }]
             },
             title: {
                 display: true,
