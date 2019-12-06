@@ -1370,7 +1370,7 @@ namespace MVC.Models
         public static RateView GetRateView(int productId)
         {
             RateView rateView = new RateView();
-            rateView.RatePoint = GetRatePoint(productId);
+            rateView.RatePoint = (int?)(GetRatePoint(productId) * 10) / (double)10;
             rateView.PercentPoint = new List<int>();
             for (int i = 0; i < 5; i++)
                 rateView.PercentPoint.Add(GetRatePoint(i + 1, productId));
