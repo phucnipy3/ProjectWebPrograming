@@ -45,12 +45,12 @@ namespace MVC.Controllers
         public ActionResult Detail(int id = 1)
         {
 
-            ViewBag.RatePoint = RateHelper.GetRatePoint(HttpContext.User.Identity.Name,id);
+            ViewBag.RatePoint = RateHelper.GetRatePoint(HttpContext.User.Identity.Name, id);
             List<ProductOnPage> recentProducts = HttpContext.Session["RecentProducts"] as List<ProductOnPage>;
             if (recentProducts == null)
                 recentProducts = new List<ProductOnPage>();
-            if(recentProducts.Where(x => x.ProductID==id).Count()==0)
-            recentProducts.Add(ProductHelper.GetProductOnPages().Where(x => x.ProductID == id).SingleOrDefault());
+            if (recentProducts.Where(x => x.ProductID == id).Count() == 0)
+                recentProducts.Add(ProductHelper.GetProductOnPages().Where(x => x.ProductID == id).SingleOrDefault());
             HttpContext.Session["RecentProducts"] = recentProducts;
             return View(ProductHelper.GetProductDetail(id, HttpContext.User.Identity.Name));
         }
@@ -69,8 +69,7 @@ namespace MVC.Controllers
         public ActionResult Comment(int idProduct, string content)
         {
             int id = UserHelper.GetUserByUserID(HttpContext.User.Identity.Name).ID;
-            Comment cmt = new Comment() { ProductID = idProduct, Content = content, CreateBy = id };
-            CommentHelper.AddComment(cmt);
+            CommentHelper.AddComment(idProduct, id, content);
             return Redirect("/Product/Detail/" + idProduct.ToString()+"#newComment");
         }
         [Authorize]
@@ -78,8 +77,7 @@ namespace MVC.Controllers
         public ActionResult Reply(int idProduct, string content,int idParent)
         {
             int id = UserHelper.GetUserByUserID(HttpContext.User.Identity.Name).ID;
-            Comment cmt = new Comment() { ProductID = idProduct, Content = content, ParentID = idParent, CreateBy = id };
-            CommentHelper.AddComment(cmt);
+            CommentHelper.AddComment(idProduct, id, content, idParent);
             return Redirect("/Product/Detail/" + idProduct.ToString() + "#newComment");
         }
         [Authorize]
