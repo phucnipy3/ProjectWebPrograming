@@ -12,7 +12,7 @@ namespace MVC.Areas.Admin.Controllers
         // GET: Admin/Home
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "Statistical");
+            return RedirectToAction("Index", "ManageOrders");
         }
     }
 }
