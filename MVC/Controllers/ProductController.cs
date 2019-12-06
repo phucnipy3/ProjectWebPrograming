@@ -80,14 +80,14 @@ namespace MVC.Controllers
             int id = UserHelper.GetUserByUserID(HttpContext.User.Identity.Name).ID;
             Comment cmt = new Comment() { ProductID = idProduct, Content = content, ParentID = idParent, CreateBy = id };
             CommentHelper.AddComment(cmt);
-            return Redirect("/Product/Detail/" + idProduct.ToString() + "#newComment");
+            return Redirect("/Product/Detail/" + idProduct.ToString() + "#comment-" + idParent.ToString());
         }
         [Authorize]
-        [HttpPost]
-        public ActionResult Edit(int idComment, string content)
+       
+        public ActionResult Edit(int idComment, string content, int? idProduct)
         {
-            //CommentHelper.UpdateComment()
-            return View();
+            CommentHelper.UpdateComment(idComment, content);
+            return Redirect("/Product/Detail/" + idProduct.ToString() + "#comment-"+idComment.ToString());
         }
         [Authorize]
         public ActionResult DeleteComment(int? id, int? idProduct)
