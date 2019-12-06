@@ -315,10 +315,22 @@
                 e.preventDefault();  // prevent standard form submission
 
                 var form = $(this);
+                var dataForm = new FormData();
+                var other_data = $(this).serializeArray();
+                $.each(other_data, function (key, input) {
+                    dataForm.append(input.name, input.value);
+                });
+                var x = $("#Hinh")[0].files[0];
+                //dataForm.append("Hinh",x );
                 $.ajax({
                     url: form.attr("action"),
                     method: form.attr("method"),  // post 
-                    data: form.serialize(),
+                    data: dataForm,
+                    enctype: "multipart/form-data",
+                   
+                    contentType: false,
+                    cache: false,
+                    processData: false,
                     success: function (partialResult) {
                         $("#modalUpdate").modal('hide');
                         if (partialResult == "success") {
