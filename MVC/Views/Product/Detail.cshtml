@@ -186,7 +186,10 @@
 
                                             </div>
                                             <div class="col-auto ml-auto">
-                                                <a href="/Product/DeleteComment/?id=@comment.Comment.ID&&idProduct=@Model.MainProduct.ID" class="text-decoration-none text-dark">x</a>
+                                                @if (comment.Modify)
+                                                {
+                                                    <a href="/Product/DeleteComment/?id=@comment.Comment.ID&&idProduct=@Model.MainProduct.ID" class="text-decoration-none text-dark">x</a>
+                                                }
                                             </div>
                                         </div>
 
@@ -222,7 +225,10 @@
 
                                                         </div>
                                                         <div class="col-auto ml-auto">
-                                                            <a href="/Product/DeleteComment/?id=@reply.Comment.ID&&idProduct=@Model.MainProduct.ID" class="text-decoration-none text-dark">x</a>
+                                                            @if (reply.Modify)
+                                                            {
+                                                                <a href="/Product/DeleteComment/?id=@reply.Comment.ID&&idProduct=@Model.MainProduct.ID" class="text-decoration-none text-dark">x</a>
+                                                            }
                                                         </div>
                                                         <div class="col-12 comment-text">
                                                             <p>@reply.Comment.Content</p>
@@ -245,7 +251,7 @@
                                             </div>
                                             <div class="row comment-create collapse pb-2 " id="edit-reply-@reply.Comment.ID">
                                                 <form action="/Product/Edit" method="post" class="w-100">
-                                                    <input type="text" name="idComment" value="@comment.Comment.ID" hidden />
+                                                    <input type="text" name="idComment" value="@reply.Comment.ID" hidden />
                                                     <input type="text" name="idProduct" value="@Model.MainProduct.ID" hidden />
                                                     <div class="col-12">
                                                         <textarea style="width:100%" rows="4" name="content"></textarea>
