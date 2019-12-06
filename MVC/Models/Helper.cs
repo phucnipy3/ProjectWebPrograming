@@ -931,25 +931,25 @@ namespace MVC.Models
                 var order = GetOrderByID(orderId);
                 if (order != null)
                 {
-                    if (order.Ordered == null)
+                    if (!order.Ordered.HasValue)
                     {
                         order.Ordered = DateTime.Now;
                         db.SaveChanges();
                         return true;
                     }
-                    if (order.Confirmed == null)
+                    if (!order.Confirmed.HasValue)
                     {
                         order.Confirmed = DateTime.Now;
                         db.SaveChanges();
                         return true;
                     }
-                    if (order.TookProducts == null)
+                    if (!order.TookProducts.HasValue)
                     {
                         order.TookProducts = DateTime.Now;
                         db.SaveChanges();
                         return true;
                     }
-                    if (order.Complete == null)
+                    if (!order.Complete.HasValue)
                     {
                         order.Complete = DateTime.Now;
                         db.SaveChanges();
@@ -987,30 +987,30 @@ namespace MVC.Models
         private static IEnumerable<TimeLogs> GetTimeLogs(int orderId)
         {
             var order = GetOrderByID(orderId);
-            if (order.Canceled != null)
+            if (order.Canceled.HasValue)
                 yield return new TimeLogs() { Timeline = order.Canceled, Event = "Đã hủy đơn hàng" };
-            if (order.Complete != null)
+            if (order.Complete.HasValue)
                 yield return new TimeLogs() { Timeline = order.Complete, Event = "Đã giao đơn hàng" };
-            if (order.TookProducts != null)
+            if (order.TookProducts.HasValue)
                 yield return new TimeLogs() { Timeline = order.TookProducts, Event = "Đã lấy hàng" };
-            if (order.Confirmed != null)
+            if (order.Confirmed.HasValue)
                 yield return new TimeLogs() { Timeline = order.Confirmed, Event = "Đã xác nhận đơn hàng" };
-            if (order.Ordered != null)
+            if (order.Ordered.HasValue)
                 yield return new TimeLogs() { Timeline = order.Ordered, Event = "Đã đặt hàng" };
         }
 
         private static string GetTag(int orderId)
         {
             var order = GetOrderByID(orderId);
-            if (order.Canceled != null)
+            if (order.Canceled.HasValue)
                 return "Canceled";
-            if (order.Complete != null)
+            if (order.Complete.HasValue)
                 return "Complete";
-            if (order.TookProducts != null)
+            if (order.TookProducts.HasValue)
                 return "TookProducts";
-            if (order.Confirmed != null)
+            if (order.Confirmed.HasValue)
                 return "Confirmed";
-            if (order.Ordered != null)
+            if (order.Ordered.HasValue)
                 return "Ordered";
             return "";
         }
